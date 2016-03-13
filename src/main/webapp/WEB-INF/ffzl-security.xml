@@ -2,18 +2,40 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-    <security:http  auto-config="true" use-expressions="false">
-        <security:intercept-url pattern="/*" access="ROLE_USER"/>
-    </security:http>
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+    <security:http  auto-config="true" use-expressions="true">
+        <security:csrf disabled="true"></security:csrf>
+        <security:intercept-url pattern="/home/login.do" access="permitAll"></security:intercept-url>
+        <security:intercept-url pattern="/login" access="permitAll"></security:intercept-url>
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"></security:intercept-url>
+        <security:form-login  login-page="/home/login.do"></security:form-login>
+        <security:logout invalidate-session="true" logout-success-url="/"
+                         logout-url="/j_spring_security_logout"></security:logout>
 
+
+        <!--<security:remember-me key="ffzlreme" user-service-ref="test" remember-me-parameter="re"/>-->
+    </security:http>
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="user" authorities="ROLE_USER" password="user"/>
-            </security:user-service>
+        <security:authentication-provider user-service-ref="jdbcUserService">
+
+            <!--<security:jdbc-user-service data-source-ref="dataSource"/>-->
+            <!--<security:user-service id="test">-->
+                <!--<security:user name="user" authorities="ROLE_USER" password="user"/>-->
+            <!--</security:user-service>-->
         </security:authentication-provider>
     </security:authentication-manager>
+    <jdbc:embedded-database id="dataSource"  type="HSQL">
+        <jdbc:script location="classpath*:security-schema.sql"></jdbc:script>
+    </jdbc:embedded-database>
+    <!--<bean id="jdbcUserService1" class="org.dragonfei.web.CustomJdbcaoImpl">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+    <!--</bean>-->
+    <bean id="jdbcUserService" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+    </bean>
 
 </beans>
