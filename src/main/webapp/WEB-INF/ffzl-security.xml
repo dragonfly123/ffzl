@@ -20,7 +20,9 @@
     </security:http>
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider user-service-ref="jdbcUserService">
-
+            <security:password-encoder ref="passwordEncoder">
+                <security:salt-source ref="saltSource"/>
+            </security:password-encoder>
             <!--<security:jdbc-user-service data-source-ref="dataSource"/>-->
             <!--<security:user-service id="test">-->
                 <!--<security:user name="user" authorities="ROLE_USER" password="user"/>-->
@@ -30,12 +32,37 @@
     <jdbc:embedded-database id="dataSource"  type="HSQL">
         <jdbc:script location="classpath*:security-schema.sql"></jdbc:script>
     </jdbc:embedded-database>
+
+    <!--<bean id="saltSource" class="org.springframework.security.authentication.dao.ReflectionSaltSource">-->
+        <!--<property name="userPropertyToUse" value="username"/>-->
+    <!--</bean>-->
+    <bean id="saltSource" class="org.dragonfei.web.RandomSalt"/>
     <!--<bean id="jdbcUserService1" class="org.dragonfei.web.CustomJdbcaoImpl">-->
         <!--<property name="dataSource" ref="dataSource"></property>-->
     <!--</bean>-->
-    <bean id="jdbcUserService" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+    <bean class="org.dragonfei.web.DatabasePasswordSecureerBean" init-method="secureDatabase" depends-on="dataSource">
+        <property name="dataSource"  ref="dataSource"/>
+    </bean>
+    <!--<bean id="jdbcUserService" class="org.springframework.security.provisioning.JdbcUserDetailsManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="authenticationManager" ref="authenticationManager"/>-->
+        <!--<property name="enableGroups" value="true"></property>-->
+        <!--<property name="enableAuthorities" value="false"></property>-->
+        <!--<property name="usersByUsernameQuery">-->
+            <!--<value>select username,passwordmenabled,salt from users where username = ?</value>-->
+        <!--</property>-->
+        <!--<property name="changePasswordSql">-->
+            <!--<value></value>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder"></bean>
+    <bean id="jdbcUserService" class="org.dragonfei.web.CustomJdbcaoImpl">
         <property name="dataSource" ref="dataSource"/>
-        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="enableGroups" value="true"></property>
+        <property name="enableAuthorities" value="false"></property>
+        <property name="usersByUsernameQuery">
+            <value>select username,password,enabled,salt from users where username = ?</value>
+        </property>
     </bean>
 
 </beans>

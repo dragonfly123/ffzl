@@ -3,6 +3,7 @@ package org.dragonfei.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/home")
 public class Home {
-    @Autowired private UserDetailsManager userDetailsManager;
+    @Autowired private CustomJdbcaoImpl customJdbcao ;
     @RequestMapping("index2")
     public String index(){
         return "test2";
@@ -27,7 +28,7 @@ public class Home {
     @RequestMapping(value = "changepassword",method = RequestMethod.POST)
     public String submitChangePasswordPage(@RequestParam("oldpassword") String oldPassword,
     @RequestParam("password") String newpassword){
-        userDetailsManager.changePassword(oldPassword,newpassword);
+        customJdbcao.changePassword(oldPassword,newpassword);
         SecurityContextHolder.clearContext();
         return "redirect:/home/login.do";
     }
