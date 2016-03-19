@@ -47,3 +47,10 @@
     INSERT INTO group_members(group_id, username) SELECT id,'guest' FROM groups WHERE group_name = 'Users';
     INSERT INTO group_members(group_id, username) SELECT id,'admin' FROM groups WHERE group_name = 'Administrators';
 
+    create table persistent_logins(
+    username varchar(50) not null,
+    series varchar(64) PRIMARY key,
+    token varchar(64) not null,
+    last_used TIMESTAMP not null
+    );
+

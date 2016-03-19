@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/home")
 public class Home {
     @Autowired private CustomJdbcaoImpl customJdbcao ;
+    @Autowired private IUserService userService;
     @RequestMapping("index2")
     public String index(){
         return "test2";
@@ -28,8 +29,8 @@ public class Home {
     @RequestMapping(value = "changepassword",method = RequestMethod.POST)
     public String submitChangePasswordPage(@RequestParam("oldpassword") String oldPassword,
     @RequestParam("password") String newpassword){
-        customJdbcao.changePassword(oldPassword,newpassword);
+        userService.changePassword(oldPassword,newpassword);
         SecurityContextHolder.clearContext();
-        return "redirect:/home/login.do";
+        return "redirect:/";
     }
 }
