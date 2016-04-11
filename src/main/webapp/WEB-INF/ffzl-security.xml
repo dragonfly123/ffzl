@@ -9,7 +9,7 @@
     <security:http  auto-config="true" use-expressions="true">
         <security:csrf disabled="true"></security:csrf>
         <security:intercept-url pattern="/home/login.do" access="permitAll" requires-channel="https"/>
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"></security:intercept-url>
+        <security:intercept-url pattern="/home/**" access="hasRole('ROLE_USER')" requires-channel="https"></security:intercept-url>
         <security:form-login  login-page="/home/login.do"></security:form-login>
         <security:logout invalidate-session="true" logout-success-url="/"
                          logout-url="/j_spring_security_logout"></security:logout>

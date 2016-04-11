@@ -3,9 +3,20 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.dragonfei</groupId>
   <artifactId>ffzl</artifactId>
-  <packaging>war</packaging>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>ffzl Maven Webapp</name>
+    <modules>
+        <module>ffzl-web</module>
+        <module>ffzl-controller</module>
+        <module>ffzl-service</module>
+        <module>ffzl-dao</module>
+        <module>ffzl-utils</module>
+        <module>ffzl-params</module>
+        <module>ffzl-domain</module>
+        <module>ffzl-anotaition</module>
+        <module>ffzl-exception</module>
+    </modules>
+    <name>ffzl Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
       <dependency>
@@ -20,13 +31,6 @@
           <version>2.2</version>
           <scope>provided</scope>
       </dependency>
-
-      <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
       <dependency>
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-config</artifactId>
@@ -76,6 +80,23 @@
           <groupId>org.hsqldb</groupId>
           <artifactId>hsqldb</artifactId>
           <version>2.3.3</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+          <version>2.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+          <version>2.5</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-slf4j-impl</artifactId>
+          <version>2.5</version>
       </dependency>
   </dependencies>
   <build>
