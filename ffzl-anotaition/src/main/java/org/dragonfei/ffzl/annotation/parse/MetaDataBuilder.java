@@ -6,6 +6,7 @@ import org.dragonfei.ffzl.utils.annotation.AnnotationUtils;
 import org.dragonfei.ffzl.annotation.domain.Column;
 import org.dragonfei.ffzl.annotation.domain.Foreign;
 import org.dragonfei.ffzl.annotation.domain.Table;
+import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.number.Numberutils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 
@@ -15,6 +16,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -38,15 +40,17 @@ public class MetaDataBuilder {
 
     public <T> MetaData build(T object){
         Objects.requireNonNull(object);
-        Class clzz = object.getClass();
-        TableMeta tm = buildTable(clzz);
+        Class clazz = object.getClass();
+        TableMeta tm = buildTable(clazz);
 
-        Field[] fields =  clzz.getDeclaredFields();
+        List<FieldMeta> fieldMetaList = Lists.newArrayList();
+        Field[] fields =  clazz.getDeclaredFields();
         for(Field field : fields){
             FieldMeta fieldMeta = buildField(field);
+            fieldMetaList.add(fieldMeta);
         }
-
-        return null;
+        MetaData metaData =  new MetaData(tm,fieldMetaList);
+        return metaData;
     }
 
     private FieldMeta buildField(final Field field){

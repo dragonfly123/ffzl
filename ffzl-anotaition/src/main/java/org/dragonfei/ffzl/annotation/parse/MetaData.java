@@ -11,5 +11,16 @@ public class MetaData {
 
     private List<FieldMeta> filedMetaList;
 
+    public MetaData(TableMeta tableMeta, List<FieldMeta> filedMetaList) {
+        this.tableMeta = tableMeta;
+        this.filedMetaList = filedMetaList;
+    }
 
+    public TableMeta getTableMeta() {
+        return tableMeta;
+    }
+
+    public List<FieldMeta> getFiledMetaList() {
+        return filedMetaList;
+    }
 }
