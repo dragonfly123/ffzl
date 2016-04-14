@@ -4,7 +4,6 @@ package org.dragonfei.web;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-
 import java.util.List;
 
 /**

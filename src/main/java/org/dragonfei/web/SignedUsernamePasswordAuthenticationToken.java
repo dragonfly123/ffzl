@@ -2,8 +2,6 @@ package org.dragonfei.web;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import javax.security.auth.Subject;
-
 /**
  * Created by longfei on 16-3-19.
  */

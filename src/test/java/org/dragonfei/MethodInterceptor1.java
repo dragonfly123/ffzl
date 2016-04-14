@@ -9,6 +9,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class MethodInterceptor1 implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
+        System.out.println( invocation.getMethod());
         System.out.println("before");
         Object obj  = invocation.proceed();
         System.out.println("after");

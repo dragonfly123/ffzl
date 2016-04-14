@@ -24,7 +24,15 @@ public class TestPointCut implements Pointcut {
 class MyMethodMatcher implements MethodMatcher{
     @Override
     public boolean matches(Method method, Class<?> targetClass) {
-        return true;
+        Class<?> reallyClass = targetClass;
+        if(reallyClass  == null){
+            reallyClass = method.getDeclaringClass();
+        }
+        if(HelloAop.class.isAssignableFrom(reallyClass)){
+            return true;
+        }
+        return false;
+
     }
 
     @Override

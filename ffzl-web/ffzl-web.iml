@@ -57,6 +57,7 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.8.9" level="project" />
     <orderEntry type="module" module-name="ffzl-service" />
     <orderEntry type="module" module-name="ffzl-dao" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.18" level="project" />
