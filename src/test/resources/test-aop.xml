@@ -13,8 +13,14 @@
             <array>
                 <value>intorceptor1</value>
                 <value>intorceptor2</value>
+                <value>myPointCut</value>
                 <value>helloAop</value>
             </array>
         </property>
+    </bean>
+    <bean id="myPoint" class="org.dragonfei.TestPointCut"></bean>
+    <bean id="myPointCut" class="org.dragonfei.TestPointCutAdvisor">
+        <property name="pointcut" ref="myPoint"/>
+        <property name="advice" ref="intorceptor1"></property>
     </bean>
 </beans>
