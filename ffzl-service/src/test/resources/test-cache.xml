@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+<!--
+        <bean id="simpleCacheManager" class="org.springframework.cache.support.SimpleCacheManager"></bean>
+-->
+        <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+            <property name="cacheNames">
+                <list>
+                    <value>test</value>
+                </list>
+            </property>
+        </bean>
+        <bean id="noopCacheManager" class="org.springframework.cache.support.NoOpCacheManager"></bean>
+
+        <bean id="cacheManager" class="org.springframework.cache.support.CompositeCacheManager">
+                <property name="cacheManagers">
+                        <list>
+                            <!--<ref bean="simpleCacheManager"></ref>-->
+                                <ref bean="guavaCacheManager"></ref>
+                            <ref bean="noopCacheManager"></ref>
+                        </list>
+                </property>
+        </bean>
+        <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>
+
+</beans>

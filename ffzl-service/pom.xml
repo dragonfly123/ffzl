@@ -19,10 +19,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-annotation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-cache</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
