@@ -23,9 +23,17 @@ public class AopTest {
     public void testAop(){
         ApplicationContext ac =  new ClassPathXmlApplicationContext("test-aop.xml");
         HelloAop helloAop =  ac.getBean("helloAop",HelloAop.class);
-        helloAop.sayHello();
+        helloAop.sayHello("test");
+        /*IHelloTest test = ac.getBean("helloAop",IHelloTest.class);
+        test.bb();*/
        /* System.out.println("================================");
         HelloAop helloAop1 = ac.getBean("proxyhelloAop",HelloAop.class);
         helloAop1.sayHello();*/
+        /*helloAop.sayHello("test2");
+        helloAop.sayHello("test3","test3_1");
+        System.out.println("##############################");
+        helloAop.sayHello(new TestType());
+
+        helloAop.sayHello(new TestTypeSub());*/
     }
 }

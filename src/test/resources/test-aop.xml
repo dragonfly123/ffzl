@@ -25,7 +25,23 @@
         <property name="advice" ref="intorceptor1"></property>
     </bean>-->
 
-    <aop:config proxy-target-class="true">
+  <!--  <aop:config proxy-target-class="true">
         <aop:advisor advice-ref="intorceptor1" pointcut-ref="myPoint"/>
     </aop:config>
+  -->
+    <!--<aop:config proxy-target-class="true">
+        <aop:advisor advice-ref="intorceptor1"
+                     pointcut="args((org.dragonfei.TestType))"/>
+    </aop:config>-->
+    <bean id="aspectTest"  class="org.dragonfei.AspectTest"></bean>
+   <aop:config proxy-target-class="true">
+       <aop:aspect ref="aspectTest">
+           <!--<aop:declare-parents types-matching="org.dragonfei.HelloAop" implement-interface="org.dragonfei.IHelloTest" default-impl="org.dragonfei.HelloTest"/>-->
+           <aop:before method="before" pointcut-ref="tst" arg-names="jp"/>
+           <!--<aop:after-returning method="" pointcut="" returning=""></aop:after-returning>
+           <aop:around method="" pointcut=""/>-->
+           <aop:pointcut id="tst" expression="execution(* org.dragonfei.*.sayHello(java.lang.String))"/>
+       </aop:aspect>
+
+   </aop:config>
 </beans>

@@ -1,7 +1,7 @@
 package org.dragonfei.ffzl.annotation.parse;
 
-//import org.dragonfei.ffzl.exception.SystemExcption;
-//import org.dragonfei.ffzl.exception.Type;
+import org.dragonfei.ffzl.exception.SystemExcption;
+import org.dragonfei.ffzl.exception.Type;
 import org.dragonfei.ffzl.utils.annotation.AnnotationUtils;
 import org.dragonfei.ffzl.annotation.domain.Column;
 import org.dragonfei.ffzl.annotation.domain.Foreign;
@@ -77,7 +77,7 @@ public class MetaDataBuilder {
                     fieldMeta.setPk(column.pk());
                     fieldMeta.setBk(column.bk());
                 } else {
-                    //throw new SystemExcption(Type.SYSTEM);
+                    throw new SystemExcption(Type.SYSTEM);
                 }
             }
 
@@ -113,7 +113,7 @@ public class MetaDataBuilder {
                     foreignMeta.setDefaults(Numberutils.newBigInter(defaults));
                     foreignMeta.setField(field);
                 } else {
-                   // throw new SystemExcption(Type.SYSTEM);
+                   throw new SystemExcption(Type.SYSTEM);
                 }
             }
 
@@ -141,8 +141,6 @@ public class MetaDataBuilder {
  */
 interface FieldParseCommand<T extends Annotation>{
     T annotation(final AccessibleObject accessibleObject);
-//    T annotationField(final Field field);
-//    T annotationMethod(final Method method);
 
     void parseAnnotation(final T annotation);
     void parseDefault(final Field field);
@@ -169,7 +167,7 @@ class FieldParser<T extends Annotation>{
                 }
 
             } catch (IntrospectionException e){
-                //throw new SystemExcption(e, Type.SYSTEM);
+                throw new SystemExcption(e, Type.SYSTEM);
             }
         }
         command.parseAnnotation(annotation);
