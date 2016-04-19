@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.Calendar;
 
 /**
+ * don't use primative type
  * Created by longfei on 16-4-9.
  */
 @Table(value = "T_MENU",desc = "菜单")

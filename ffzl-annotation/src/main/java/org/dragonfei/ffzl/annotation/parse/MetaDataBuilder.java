@@ -16,8 +16,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by longfei on 16-4-10.
@@ -41,14 +43,11 @@ public class MetaDataBuilder {
     public <T> MetaData build(Class<T> clazz){
         Objects.requireNonNull(clazz);
         TableMeta tm = buildTable(clazz);
-
-        List<FieldMeta> fieldMetaList = Lists.newArrayList();
-        Field[] fields =  clazz.getDeclaredFields();
-        for(Field field : fields){
-            FieldMeta fieldMeta = buildField(field);
-            fieldMetaList.add(fieldMeta);
-        }
+        List<FieldMeta> fieldMetaList = Arrays.asList(clazz.getDeclaredFields()).
+                parallelStream().map(field -> buildField(field)).
+                collect(Collectors.toList());
         MetaData metaData =  new MetaData(tm,fieldMetaList);
+
         return metaData;
     }
 
@@ -75,6 +74,7 @@ public class MetaDataBuilder {
                     fieldMeta.setUnique(column.unique());
                     fieldMeta.setPk(column.pk());
                     fieldMeta.setBk(column.bk());
+                    fieldMeta.setField(field);
                 } else {
                     throw new SystemExcption(Type.SYSTEM);
                 }

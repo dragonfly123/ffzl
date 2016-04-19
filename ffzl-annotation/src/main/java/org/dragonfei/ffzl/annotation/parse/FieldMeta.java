@@ -1,9 +1,13 @@
 package org.dragonfei.ffzl.annotation.parse;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by longfei on 16-4-10.
  */
 public class FieldMeta {
+
+    private Field field;
 
     private String columnName;
 
@@ -28,7 +32,9 @@ public class FieldMeta {
     public FieldMeta() {
     }
 
-    public FieldMeta(String columnName, String desc, boolean required, boolean unique, boolean notNull, boolean pk, boolean bk, ForeignMeta foreignMeta) {
+    public FieldMeta(Field field,String columnName, String desc, boolean required, boolean unique, boolean notNull, boolean pk, boolean bk, ForeignMeta foreignMeta) {
+
+        this.field = field;
         this.columnName = columnName;
         this.desc = desc;
         this.required = required;
@@ -97,5 +103,13 @@ public class FieldMeta {
 
     public void setForeignMeta(ForeignMeta foreignMeta) {
         this.foreignMeta = foreignMeta;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 }

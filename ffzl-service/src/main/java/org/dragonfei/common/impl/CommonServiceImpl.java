@@ -15,6 +15,6 @@ public class CommonServiceImpl implements CommonService {
     @Autowired private CommonMetaDataService commonMetaDataService;
     @Override
     public <T> void insert(T object) {
-        MetaData metaData = commonMetaDataService.getMetaData(object);
+        MetaData metaData = commonMetaDataService.getMetaData(object.getClass());
     }
 }
