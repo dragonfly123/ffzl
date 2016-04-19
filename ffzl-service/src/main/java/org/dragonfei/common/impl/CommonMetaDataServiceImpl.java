@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommonMetaDataServiceImpl implements CommonMetaDataService {
 
-    @Cacheable(cacheNames ={"test"},key = "#object.getId()")
+    @Cacheable(cacheNames ={"metadata"},key = "#object.getId()")
     @Override
-    public <T> MetaData getMetaData(T object) {
+    public <T> MetaData getMetaData(Class<T> clazz) {
         System.out.println("test ---");
-        return MetaDataBuilder.instance().build(object);
+        return MetaDataBuilder.instance().build(clazz);
     }
 }

@@ -5,14 +5,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-        <bean id="simpleCacheManager" class="org.springframework.cache.support.SimpleCacheManager"></bean>
-        <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager"></bean>
+       <!-- <bean id="simpleCacheManager" class="org.springframework.cache.support.SimpleCacheManager"></bean>-->
+        <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
+            <property name="cacheSpecification" value="concurrencyLevel=4,expireAfterAccess=100s,expireAfterWrite=100s"/>
+            <property name="cacheNames">
+                <array>
+                    <value>metadata</value>
+                    <value>dict</value>
+                </array>
+            </property>
+        </bean>
         <bean id="noopCacheManager" class="org.springframework.cache.support.NoOpCacheManager"></bean>
 
         <bean id="cacheManager" class="org.springframework.cache.support.CompositeCacheManager">
                 <property name="cacheManagers">
                         <list>
+<!--
                             <ref bean="simpleCacheManager"></ref>
+-->
                                 <ref bean="guavaCacheManager"></ref>
                             <ref bean="noopCacheManager"></ref>
                         </list>

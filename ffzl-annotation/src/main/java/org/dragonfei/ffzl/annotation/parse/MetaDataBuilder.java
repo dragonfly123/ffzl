@@ -38,9 +38,8 @@ public class MetaDataBuilder {
         return INSTANCE;
     }
 
-    public <T> MetaData build(T object){
-        Objects.requireNonNull(object);
-        Class clazz = object.getClass();
+    public <T> MetaData build(Class<T> clazz){
+        Objects.requireNonNull(clazz);
         TableMeta tm = buildTable(clazz);
 
         List<FieldMeta> fieldMetaList = Lists.newArrayList();
@@ -124,7 +123,7 @@ public class MetaDataBuilder {
         });
         return foreignMeta;
     }
-    private TableMeta buildTable(Class clazz){
+    private TableMeta  buildTable(Class clazz){
         Table table = AnnotationUtils.findAnnotation(clazz, Table.class);
         TableMeta tm;
         if(Objects.nonNull(table)){

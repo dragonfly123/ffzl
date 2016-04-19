@@ -1,4 +1,4 @@
-package com.dragonfei;
+package org.dragonfei;
 
 import org.dragonfei.common.CommonMetaDataService;
 import org.dragonfei.ffzl.domain.Menu;
@@ -21,7 +21,7 @@ public class TestMetaData {
     public void testMetaData(){
         Menu menu = new Menu();
         menu.setId(new BigInteger("1"));
-        System.out.println(commonMetaDataService.getMetaData(menu));
-        System.out.print(commonMetaDataService.getMetaData(menu));
+        System.out.println(commonMetaDataService.getMetaData(Menu.class));
+        System.out.print(commonMetaDataService.getMetaData(Menu.class));
     }
 }

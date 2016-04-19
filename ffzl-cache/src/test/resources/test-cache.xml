@@ -20,7 +20,7 @@
     <bean id="cacheManager" class="org.springframework.cache.support.CompositeCacheManager">
         <property name="cacheManagers">
             <list>
-               <!-- <ref bean="simpleCacheManager"></ref>-->
+                <ref bean="simpleCacheManager"></ref>
                 <ref bean="guavaCacheManager"></ref>
                 <ref bean="noopCacheManager"></ref>
             </list>
