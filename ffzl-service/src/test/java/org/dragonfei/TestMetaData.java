@@ -2,6 +2,7 @@ package org.dragonfei;
 
 import org.dragonfei.common.CommonMetaDataService;
 import org.dragonfei.ffzl.annotation.domain.SqlParam;
+import org.dragonfei.ffzl.annotation.parse.MetaData;
 import org.dragonfei.ffzl.domain.Menu;
 import org.dragonfei.ffzl.utils.number.Numberutils;
 import org.junit.Assert;
@@ -27,7 +28,6 @@ public class TestMetaData {
     public void testMetaData(){
         Menu menu = new Menu();
         menu.setId(new BigInteger("1"));
-
         Assert.assertEquals(commonMetaDataService.getMetaData(Menu.class),
                 commonMetaDataService.getMetaData(Menu.class));
     }
@@ -37,19 +37,34 @@ public class TestMetaData {
         Menu menu = new Menu();
         menu.setId(Numberutils.newBigInter(1));
         menu.setText("text");
-        long time = Calendar.getInstance().getTimeInMillis();
-        SqlParam sqlParam = commonMetaDataService.getSqlParam(menu);
+        menu.setAddr("http://www.baidu.com");
+        menu.setPid(Numberutils.newBigInter(5));
+        MetaData metaData = commonMetaDataService.getMetaData(Menu.class);
+        SqlParam sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.INSERT);
         System.out.println(sqlParam.toString());
 
-        long time2 = Calendar.getInstance().getTimeInMillis();
-        System.out.println(time2-time);
-
-
-        sqlParam = commonMetaDataService.getSqlParam(menu);
+        metaData = commonMetaDataService.getMetaData(Menu.class);
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.INSERT);
 
         System.out.println(sqlParam.toString());
 
-        System.out.println(Calendar.getInstance().getTimeInMillis()-time2);
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.DELETE);
+        System.out.println(sqlParam.toString());
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.DELETE);
+        System.out.println(sqlParam.toString());
+
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.SELECT);
+        System.out.println(sqlParam.toString());
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.SELECT);
+        System.out.println(sqlParam.toString());
+
+
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.UPDATE);
+        System.out.println(sqlParam.toString());
+        sqlParam = commonMetaDataService.getSqlParam(menu,metaData, CommonMetaDataService.SqlType.UPDATE);
+        System.out.println(sqlParam.toString());
+
+
     }
 
     public void testFilter(){

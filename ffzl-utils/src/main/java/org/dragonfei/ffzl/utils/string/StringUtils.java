@@ -3,9 +3,10 @@ package org.dragonfei.ffzl.utils.string;
 
 import com.google.common.base.Strings;
 import org.dragonfei.ffzl.utils.collections.Lists;
+import org.springframework.util.CollectionUtils;
 
-import java.lang.annotation.Documented;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,6 +46,29 @@ public abstract class StringUtils {
     }
 
     /**
+     * @see org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String, String, String)
+     * @param collection
+     * @param commaa
+     * @param prefix
+     * @param sufferix
+     * @return
+     */
+    public static String toCommaDelimitedString(Collection collection,String commaa,String prefix,String sufferix){
+        return org.springframework.util.StringUtils.collectionToDelimitedString(collection,commaa,prefix,sufferix);
+    }
+
+    /**
+     * @see #toCommaDelimitedString(Collection, String, String, String)
+     * @param collection
+     * @param prefix
+     * @param sufferix
+     * @return
+     */
+    public static String toCommaDelimitedString(Collection collection,String prefix,String sufferix){
+        return org.springframework.util.StringUtils.collectionToDelimitedString(collection,",",prefix,sufferix);
+    }
+
+    /**
      * @see #toCommaDelimitedString(Collection, String)
      * @param collection
      * @return
@@ -53,6 +77,23 @@ public abstract class StringUtils {
         return org.springframework.util.StringUtils.collectionToDelimitedString(collection,",");
     }
 
+    /**
+     * 自定义集合的每一项处理
+     * @param collection
+     * @param handle
+     * @return
+     */
+    public static String toCommaDelimitedString(Collection collection,StringHandle handle){
+        if (CollectionUtils.isEmpty(collection)) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        Iterator<?> it = collection.iterator();
+        while (it.hasNext()) {
+            sb.append(handle.handle(it.next()).toString());
+        }
+        return sb.toString();
+    }
     /**
      * @see org.springframework.util.StringUtils#arrayToDelimitedString(Object[], String)
      * @param obj
@@ -100,4 +141,6 @@ public abstract class StringUtils {
         }
         return toCommaDelimitedString(list,",");
     }
+
+
 }
