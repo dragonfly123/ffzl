@@ -7,7 +7,7 @@
 
     <!-- <bean id="simpleCacheManager" class="org.springframework.cache.support.SimpleCacheManager"></bean>-->
     <bean id="guavaCacheManager" class="org.springframework.cache.guava.GuavaCacheManager">
-        <property name="cacheSpecification" value="concurrencyLevel=4,expireAfterAccess=100s,expireAfterWrite=100s"/>
+        <!--<property name="cacheSpecification" value="concurrencyLevel=4,expireAfterAccess=100s,expireAfterWrite=100s"/>-->
         <property name="cacheNames">
             <array>
                 <value>metadata</value>
@@ -22,7 +22,7 @@
             <list>
                <!-- <ref bean="simpleCacheManager"></ref>-->
                 <ref bean="guavaCacheManager"></ref>
-                <ref bean="noopCacheManager"></ref>
+                <!--<ref bean="noopCacheManager"></ref>-->
             </list>
         </property>
     </bean>
