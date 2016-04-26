@@ -49,6 +49,20 @@
             <artifactId>jackson-core</artifactId>
             <version>2.7.3</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dragonfei</groupId>
+            <artifactId>ffzl-params</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

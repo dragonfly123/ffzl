@@ -143,4 +143,10 @@ public abstract class StringUtils {
     }
 
 
+    public static String[] split(String str,String comma){
+
+        return org.springframework.util.StringUtils.tokenizeToStringArray(str,comma);
+    }
+
+
 }

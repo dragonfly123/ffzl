@@ -27,9 +27,10 @@ public class SimpleSqlCreator implements SqlCreator {
     @Override
     public <T> SqlParam createInsert(T object, MetaData metaData) {
         SqlParam sqlParam = new SqlParam();
-        Map<String,String> map = Maps.newHashMap();
-        List<FieldMeta> list = achiveNotNull(
-                object,metaData,(obj,fieldMeta)->map.put(fieldMeta.getColumnName(),obj.toString()),
+        Map<String,String> map = Maps.newConcurrentHashMap();
+        List<FieldMeta> list = achieveNotNull(
+                object,metaData,(obj,fieldMeta)->
+                    map.put(fieldMeta.getColumnName(),obj.toString()),
                 ((obj, fieldMeta) ->map.put(fieldMeta.getColumnName(), DateUtils.datetimeNow())),
                 (obj, fieldMeta) ->map.put(fieldMeta.getColumnName(), DateUtils.datetimeNow()));
 
@@ -43,51 +44,12 @@ public class SimpleSqlCreator implements SqlCreator {
         return sqlParam;
     }
 
-    private <T> List<FieldMeta> achiveNotNull(T object,MetaData metaData,FieldHandle handle){
-        return achiveNotNull(object,metaData,handle,null,null);
-    }
-    private <T> List<FieldMeta> achiveNotNull(T object,MetaData metaData,FieldHandle handle, FieldHandle creattimeHandle,FieldHandle modifytimeHandle){
-        return  metaData.getFiledMetaList().parallelStream().filter(fieldMeta -> {
-            Object obj = getValue(fieldMeta,object);
-            if(!ObjectUtils.isEmpty(obj)){
-                if(handle != null) {
-                    synchronized (this) {
-                        handle.handle(obj, fieldMeta);
-                    }
-                }
-                return true;
-            } else if(creattimeHandle != null && "createtime".equals(fieldMeta.getField().getName().toLowerCase())){
-                creattimeHandle.handle(object,fieldMeta);
-                return true;
-            } else if(modifytimeHandle != null && "lastmodifytime".equals(fieldMeta.getField().getName().toLowerCase())){
-                modifytimeHandle.handle(object,fieldMeta);
-                return true;
-            }
-            return false;
-        }).collect(Collectors.toList());
-    }
-
-    private  List<FieldMeta> achiveByCondition(MetaData metaData, Condition condition, FieldHandle handle){
-        return metaData.getFiledMetaList().stream().filter(
-                fieldMeta -> condition.pass(fieldMeta, handle)).collect(Collectors.toList());
-    }
-    private<T> Object getValue(FieldMeta fieldMeta,T object){
-        Field field =  fieldMeta.getField();
-        try {
-            PropertyDescriptor pd = new PropertyDescriptor(field.getName(), object.getClass());
-            Method method = pd.getReadMethod();
-            //原生数据类型如何处理
-            return method.invoke(object);
-        } catch (Exception e){
-            throw new SystemExcption(e,Type.SYSTEM);
-        }
-    }
     @Override
     public <T> SqlParam createUpdate(T object, MetaData metaData) {
         SqlParam sqlParam = new SqlParam();
-        Map<String,String> map = Maps.newHashMap();
+        Map<String,String> map = Maps.newConcurrentHashMap();
         List<FieldMeta> listPrimary = Lists.newArrayList();
-        List<FieldMeta> fieldMetaList = achiveByCondition(metaData,
+        List<FieldMeta> fieldMetaList = achieveByCondition(metaData,
                 ((fieldMeta, handle) -> {
                     if(fieldMeta.isBk() || fieldMeta.isPk()){
                         listPrimary.add(fieldMeta);
@@ -122,9 +84,9 @@ public class SimpleSqlCreator implements SqlCreator {
     @Override
     public <T> SqlParam createDelete(T object, MetaData metaData) {
         SqlParam sqlParam = new SqlParam();
-        Map<String,String> map = Maps.newHashMap();
+        Map<String,String> map = Maps.newConcurrentHashMap();
 
-        List<FieldMeta> fieldMetaList = achiveNotNull(object,metaData,
+        List<FieldMeta> fieldMetaList = achieveNotNull(object,metaData,
                 (obj,fieldMeta)->map.put(fieldMeta.getColumnName(),obj.toString()));
         sqlParam.sql = "DELETE FROM " +
                 metaData.getTableMeta().getName() +
@@ -140,8 +102,8 @@ public class SimpleSqlCreator implements SqlCreator {
     @Override
     public <T> SqlParam createSelect(T object, MetaData metaData) {
         SqlParam sqlParam = new SqlParam();
-        Map<String,String> map = Maps.newHashMap();
-        List<FieldMeta> fieldMetaList = achiveByCondition(metaData,
+        Map<String,String> map = Maps.newConcurrentHashMap();
+        List<FieldMeta> fieldMetaList = achieveByCondition(metaData,
                 (fieldMeta,handle)->{
                     if(fieldMeta.isBk() || fieldMeta.isPk()){
                         Object obj = getValue(fieldMeta,object);
@@ -162,6 +124,44 @@ public class SimpleSqlCreator implements SqlCreator {
                     return "`" + fieldMeta.getColumnName() + "`";
                 }).collect(Collectors.toList()), "", " AND ", " = ? ");
         return sqlParam;
+    }
+
+    private <T> List<FieldMeta> achieveNotNull(T object,MetaData metaData,FieldHandle handle){
+        return achieveNotNull(object,metaData,handle,null,null);
+    }
+    private <T> List<FieldMeta> achieveNotNull(T object,MetaData metaData,FieldHandle handle, FieldHandle createtimeHandle,FieldHandle modifytimeHandle){
+        return  metaData.getFiledMetaList().parallelStream().filter(fieldMeta -> {
+            Object obj = getValue(fieldMeta,object);
+            if(!ObjectUtils.isEmpty(obj)){
+                if(handle != null) {
+                    handle.handle(obj, fieldMeta);
+                }
+                return true;
+            } else if(createtimeHandle != null && "createtime".equals(fieldMeta.getField().getName().toLowerCase())){
+                createtimeHandle.handle(object,fieldMeta);
+                return true;
+            } else if(modifytimeHandle != null && "lastmodifytime".equals(fieldMeta.getField().getName().toLowerCase())){
+                modifytimeHandle.handle(object,fieldMeta);
+                return true;
+            }
+            return false;
+        }).collect(Collectors.toList());
+    }
+
+    private  List<FieldMeta> achieveByCondition(MetaData metaData, Condition condition, FieldHandle handle){
+        return metaData.getFiledMetaList().stream().filter(
+                fieldMeta -> condition.pass(fieldMeta, handle)).collect(Collectors.toList());
+    }
+    private<T> Object getValue(FieldMeta fieldMeta,T object){
+        Field field =  fieldMeta.getField();
+        try {
+            PropertyDescriptor pd = new PropertyDescriptor(field.getName(), object.getClass());
+            Method method = pd.getReadMethod();
+            //原生数据类型如何处理
+            return method.invoke(object);
+        } catch (Exception e){
+            throw new SystemExcption(e,Type.SYSTEM);
+        }
     }
 }
 
