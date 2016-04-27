@@ -19,17 +19,10 @@ public class FileWrap {
         this.namespace = namespace;
     }
 
-    public FileParse getFileParse() {
-        return fileParse;
-    }
-
     public FutureTask<String> getFutureTask() {
         return futureTask;
     }
 
-    public String getFutureResult() throws Exception{
-        return futureTask.get();
-    }
 
     public <T> T parse(ReportException re){
         try {

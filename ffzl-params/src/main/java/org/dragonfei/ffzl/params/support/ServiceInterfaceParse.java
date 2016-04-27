@@ -1,5 +1,10 @@
 package org.dragonfei.ffzl.params.support;
 
+import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.json.JsonUtils;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
+import org.dragonfei.ffzl.utils.string.StringUtils;
+
 import java.util.Map;
 
 /**
@@ -13,14 +18,25 @@ public class ServiceInterfaceParse extends AbstractFileParse{
     }
 
     @Override
-    public <T, E> T parse(E object, String namespace) {
-        this.fileParse.parse(object,namespace);
+    public Object parse(Object object, String namespace) {
         return super.parse(this.fileParse.parse(object,namespace),namespace);
     }
 
     @Override
-    <T, E> T supportedParse(E object,String namespace) {
-        return null;
+    ServiceContext supportedParse(Object object,String namespace) {
+        ServiceContext sc = ServiceContexts.getServiceContext(namespace);
+        if(sc == null){
+            sc = new ServiceContext();
+            sc.setNamespace(namespace);
+            ServiceContexts.add(sc);
+        }
+        Map<String,Object> map = sc.getServiceinterfaces();
+        if(map == null){
+            map = Maps.newConcurrentHashMap();
+            sc.setServiceinterfaces(map);
+        }
+        map.putAll((Map)object);
+        return  sc;
     }
 
     @Override

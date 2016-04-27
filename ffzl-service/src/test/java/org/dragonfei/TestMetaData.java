@@ -74,14 +74,7 @@ public class TestMetaData {
 
     }
 
-    @Test
-    public void testResource() throws IOException{
-        Resource[] resources  = ResourceUtils.getResource("ffzl/base");
-        for(Resource resource : resources){
-            System.out.println(resource.getFile().isDirectory());
-        }
-        System.out.println(resources);
-    }
+
     @Test
     public void testResource2(){
         ServiceContext context = org.dragonfei.ffzl.params.support.ResourceUtils.loadResource("ffzl_base_test");
@@ -98,5 +91,13 @@ public class TestMetaData {
     @Test
     public void testServiceImpl(){
         System.out.println(commonService.select(new Menu()));
+    }
+
+    @Test
+    public void testResource(){
+        for (int i =0; i < 100; i++) {
+            ServiceContext sc = org.dragonfei.ffzl.params.support.ResourceUtils.loadResource("ffzl.base");
+            System.out.println(sc);
+        }
     }
 }

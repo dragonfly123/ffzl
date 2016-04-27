@@ -5,11 +5,11 @@ package org.dragonfei.ffzl.params.support;
  */
 public abstract class AbstractFileParse implements FileParse {
     @Override
-    public <T, E> T parse(E object,String namespace) {
+    public Object parse(Object object,String namespace) {
         if(supported(object)){
             return supportedParse(object,namespace);
         }
-        return null;
+        return object;
     }
 
     @Override
@@ -17,5 +17,5 @@ public abstract class AbstractFileParse implements FileParse {
         return false;
     }
 
-    abstract  <T,E> T supportedParse(E object,String namespace);
+    abstract  Object supportedParse(Object object,String namespace);
 }

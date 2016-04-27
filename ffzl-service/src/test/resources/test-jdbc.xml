@@ -7,4 +7,12 @@
     <bean id="ffzltemplate"  class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg name="dataSource" ref="ffzldataSource"></constructor-arg>
     </bean>
+    <bean id="taskpThreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
+        <property name="corePoolSize" value="20"/>
+        <property name="keepAliveSeconds" value="60"/>
+        <property name="maxPoolSize" value="50"/>
+        <property name="awaitTerminationSeconds" value="300"/>
+        <property name="queueCapacity" value="30"/>
+        <property name="threadNamePrefix" value="spring_"/>
+    </bean>
 </beans>

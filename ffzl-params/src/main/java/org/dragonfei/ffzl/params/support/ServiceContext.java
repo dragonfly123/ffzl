@@ -50,4 +50,13 @@ public class ServiceContext {
     public int hashCode() {
         return namespace.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "ServiceContext{" +
+                "namespace='" + namespace + '\'' +
+                ", serviceinterfaces=" + serviceinterfaces +
+                ", sqlResources=" + sqlResources +
+                '}';
+    }
 }

@@ -5,7 +5,7 @@ package org.dragonfei.ffzl.params.support;
  */
 public class XmlFileParse extends AbstractFileParse {
     @Override
-    <T, E> T supportedParse(E object,String namespace) {
+    Object supportedParse(Object object,String namespace) {
         //test
         return null;
     }
