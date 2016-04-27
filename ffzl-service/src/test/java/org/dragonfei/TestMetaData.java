@@ -5,22 +5,18 @@ import org.dragonfei.common.CommonService;
 import org.dragonfei.ffzl.annotation.domain.SqlParam;
 import org.dragonfei.ffzl.annotation.parse.MetaData;
 import org.dragonfei.ffzl.domain.Menu;
+import org.dragonfei.ffzl.params.support.ResourceLoader;
 import org.dragonfei.ffzl.params.support.ServiceContext;
 import org.dragonfei.ffzl.utils.number.Numberutils;
-import org.dragonfei.ffzl.utils.resource.ResourceUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.sql.CommonDataSource;
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.stream.Collectors;
 
 /**
@@ -77,7 +73,7 @@ public class TestMetaData {
 
     @Test
     public void testResource2(){
-        ServiceContext context = org.dragonfei.ffzl.params.support.ResourceUtils.loadResource("ffzl_base_test");
+        ServiceContext context = ResourceLoader.load("ffzl_base_test");
 
         System.out.println(context);
     }
@@ -96,7 +92,7 @@ public class TestMetaData {
     @Test
     public void testResource(){
         for (int i =0; i < 100; i++) {
-            ServiceContext sc = org.dragonfei.ffzl.params.support.ResourceUtils.loadResource("ffzl.base");
+            ServiceContext sc = ResourceLoader.load("ffzl.base");
             System.out.println(sc);
         }
     }

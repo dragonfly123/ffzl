@@ -16,6 +16,10 @@ import java.util.List;
 public abstract class StringUtils {
 
     /**
+     * emty String
+     */
+    public static final String EMTY = "";
+    /**
      * @see Strings#isNullOrEmpty(String)
      * @param str
      * @param defalts
@@ -148,5 +152,14 @@ public abstract class StringUtils {
         return org.springframework.util.StringUtils.tokenizeToStringArray(str,comma);
     }
 
+    public static boolean  equals(String str,String str2){
+        if(str == str2){
+            return true;
+        } else if(str == null || str2 == null){
+            return false;
+        } else {
+            return str.trim().equals(str2.trim());
+        }
+    }
 
 }
