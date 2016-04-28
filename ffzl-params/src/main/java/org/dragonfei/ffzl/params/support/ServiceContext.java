@@ -1,5 +1,8 @@
 package org.dragonfei.ffzl.params.support;
 
+import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.string.StringUtils;
+
 import java.util.Map;
 
 /**
@@ -7,9 +10,9 @@ import java.util.Map;
  */
 public class ServiceContext {
 
-    private String namespace;
-    private Map<String,Object> serviceinterfaces;
-    private Map<String,Object>  sqlResources;
+    private String namespace = "";
+    private Map<String,Object> serviceinterfaces = Maps.newConcurrentHashMap();
+    private Map<String,Object>  sqlResources = Maps.newConcurrentHashMap();
 
     public Map<String, Object> getServiceinterfaces() {
         return serviceinterfaces;
@@ -35,6 +38,13 @@ public class ServiceContext {
         this.sqlResources = sqlResources;
     }
 
+    public Map<String,?> getServiceInterface(String servicename){
+        return (Map<String, ?>) serviceinterfaces.get(StringUtils.nvl(servicename,""));
+    }
+
+    public Map<String,?> getSqlResource(String servicename){
+        return (Map<String, ?>) sqlResources.get(StringUtils.nvl(servicename,""));
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

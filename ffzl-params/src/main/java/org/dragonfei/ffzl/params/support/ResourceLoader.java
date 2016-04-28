@@ -4,6 +4,7 @@ package org.dragonfei.ffzl.params.support;
 import com.google.common.io.Files;
 import org.dragonfei.ffzl.utils.collections.ArrayUtils;
 import org.dragonfei.ffzl.utils.collections.Lists;
+import org.dragonfei.ffzl.utils.resource.ResourceUtils;
 import org.dragonfei.ffzl.utils.spring.SpringContextUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.springframework.core.io.Resource;
@@ -22,9 +23,9 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  *Created by longfei on 16-4-24.
  */
-public class ResourceUtils {
+public class ResourceLoader {
     private static ExecutorService ex = SpringContextUtils.getBean("taskpThreadPool",ExecutorService.class);
-    public static ServiceContext  loadResource(String reallyNamespace){
+    public static ServiceContext load(String reallyNamespace){
         reallyNamespace = StringUtils.nvl(reallyNamespace,"");
         if (ServiceContexts.getServiceContext(reallyNamespace) != null) {
             return ServiceContexts.getServiceContext(reallyNamespace);
@@ -35,7 +36,7 @@ public class ResourceUtils {
                 return ServiceContexts.getServiceContext(reallyNamespace);
             }
             try {
-                Resource[] resources = org.dragonfei.ffzl.utils.resource.ResourceUtils.getResource(reallyNamespace.replaceAll("\\.", "/"));
+                Resource[] resources = ResourceUtils.getResource(reallyNamespace.replaceAll("\\.", "/"));
                 List<FileWrap> fileWraps = Lists.newArrayList();
                 for (Resource resource : resources) {
                     if (resource.getFile().isDirectory() && !ArrayUtils.isEmpty(resource.getFile().listFiles())) {
