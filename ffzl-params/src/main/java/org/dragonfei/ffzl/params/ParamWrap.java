@@ -1,6 +1,7 @@
 package org.dragonfei.ffzl.params;
 
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.string.StringUtils;
 
 
 import java.util.Map;
@@ -15,6 +16,10 @@ public class ParamWrap {
     private int page = 1;
     private int pageSize  = 10;
     private boolean ignore_page = false;
+
+    public boolean isIgnore_page() {
+        return ignore_page;
+    }
 
     private  ParamWrap paramWrap;
 
@@ -33,6 +38,15 @@ public class ParamWrap {
     public String getServicename() {
         return servicename;
     }
+
+    public Map<String, String> getParams() {
+        return params;
+    }
+
+    public String getParam(String key){
+        return StringUtils.nvl(params.get(key),StringUtils.EMTY);
+    }
+
 
     private ParamWrap(){
 
