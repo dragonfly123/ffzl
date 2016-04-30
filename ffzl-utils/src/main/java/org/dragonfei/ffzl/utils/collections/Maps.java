@@ -1,5 +1,7 @@
 package org.dragonfei.ffzl.utils.collections;
 
+import org.springframework.util.*;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,5 +16,15 @@ public abstract class Maps {
 
     public static<K,V> Map<K,V> newConcurrentHashMap(){
         return new ConcurrentHashMap<K,V>();
+    }
+
+    public static <K,V> Map<K,V>  nvl(Map<K,V> map ,Map<K,V> defaults){
+        if(map == null){
+            return defaults;
+        } else return map;
+    }
+
+    public static <K,V> boolean isEmpty(Map<K,V>map){
+        return org.springframework.util.CollectionUtils.isEmpty(map);
     }
 }

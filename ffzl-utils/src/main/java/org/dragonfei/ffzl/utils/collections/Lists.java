@@ -9,10 +9,13 @@ import java.util.List;
  * Created by longfei on 16-4-11.
  */
 public abstract class Lists {
-	public static  <T> List<T>  newArrayList(){
-				return com.google.common.collect.Lists.newArrayList();
-		}
+	public static<T> List<T>  newArrayList(){
+		return com.google.common.collect.Lists.newArrayList();
+	}
 
+	public static<T> boolean isEmpty(List<T> list){
+		return org.springframework.util.CollectionUtils.isEmpty(list);
+	}
 
 	public static <T> List<T> newArrayList(int num){
 		return com.google.common.collect.Lists.newArrayListWithCapacity(num);

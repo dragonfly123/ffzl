@@ -1,13 +1,14 @@
-package org.dragonfei.ffzl.params.support;
+package org.dragonfei.ffzl.params.resource;
+
 
 /**
  * Created by longfei on 16-4-25.
  */
 public abstract class AbstractFileParse implements FileParse {
     @Override
-    public Object parse(Object object,String namespace) {
+    public Object parse(Object object) {
         if(supported(object)){
-            return supportedParse(object,namespace);
+            return supportedParse(object);
         }
         return object;
     }
@@ -17,5 +18,5 @@ public abstract class AbstractFileParse implements FileParse {
         return false;
     }
 
-    abstract  Object supportedParse(Object object,String namespace);
+    abstract  Object supportedParse(Object object);
 }

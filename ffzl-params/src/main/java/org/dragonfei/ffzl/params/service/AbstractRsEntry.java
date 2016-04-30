@@ -2,10 +2,11 @@ package org.dragonfei.ffzl.params.service;
 
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
+import org.dragonfei.ffzl.params.resource.ResourceLoader;
+import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.params.sql.SqlParam;
-import org.dragonfei.ffzl.params.support.ResourceLoader;
-import org.dragonfei.ffzl.params.support.ServiceContext;
 import org.dragonfei.ffzl.utils.collections.Lists;
+import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 
 import java.util.List;
@@ -17,14 +18,18 @@ import java.util.Map;
 public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     @Override
     public RecordSet execute(ParamWrap pw) {
-        ServiceContext serviceContext = getServiceContext(pw);
         RecordSet rs = new RecordSet();
         try {
-            wrapPage(rs, pw, serviceContext);
-            wrapColumn(rs, pw, serviceContext);
-            wrapData(rs, pw, serviceContext);
-            wrapTotalRecordds(rs, pw, serviceContext);
-            wrapTotal(rs, pw, serviceContext);
+            wrapPage(rs, pw);
+            ServiceResource serviceResource = getServiceResource(pw,"serviceinterface");
+            ServiceResource sqlResource = null;
+            if(isNeedLoadSqlResouce(pw,serviceResource)){
+                sqlResource = getServiceResource(pw,"sql");
+            }
+            wrapColumn(rs, pw, serviceResource);
+            wrapData(rs, pw, serviceResource,sqlResource);
+            wrapTotalRecordds(rs, pw, serviceResource,sqlResource);
+            wrapTotal(rs, pw, serviceResource,sqlResource);
         } catch (Exception e){
             rs.setE(e);
             rs.setCode(RecordSet.FAIL_CODE);
@@ -33,10 +38,21 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         return rs;
     }
 
-    protected void wrapMessage(RecordSet rs,ParamWrap pw,ServiceContext serviceContext,Exception e){
+    protected boolean isNeedLoadSqlResouce(ParamWrap pw,ServiceResource serviceinterfaceResource){
+        String servicename = pw.getServicename();
+        if(serviceinterfaceResource != null){
+            Map<String,?> map =serviceinterfaceResource.getResourceMap(servicename);
+            if(map != null){
+                return StringUtils.isNullOrEmpty(String.valueOf(map.get("sqlsource")));
+            }
+        }
+        return false;
+    }
+    protected void wrapMessage(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,
+                               ServiceResource sqlresource,Exception e){
         rs.setMsg(e.getMessage());
     }
-    protected void wrapPage(RecordSet rs,ParamWrap pw,ServiceContext serviceContext){
+    protected void wrapPage(RecordSet rs,ParamWrap pw){
         if(pw.isIgnore_page()){
             rs.setPage(1);
             rs.setPageSize(10000);
@@ -45,34 +61,38 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             rs.setPageSize(pw.getPageSize());
         }
     }
-    protected void wrapColumn(RecordSet rs,ParamWrap pw,ServiceContext serviceContext){
-        rs.setColumns(getOutputs(serviceContext,pw.getServicename()));
+    protected void wrapColumn(RecordSet rs,ParamWrap pw,ServiceResource serviceResource){
+        List<Map<String,String>> list = Lists.newArrayList();
+        if(serviceResource != null) {
+            Map<String,?> map =serviceResource.getResourceMap(pw.getServicename());
+            if(Maps.isEmpty(map)){
+                list = (List)map.get("output");
+            }
+        }
+        rs.setColumns(Lists.nvl(list,Lists.newArrayList()));
     }
 
-    protected void wrapData(RecordSet rs,ParamWrap pw,ServiceContext serviceContext){
+    protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource){
 
     }
 
-    protected void wrapTotalRecordds(RecordSet rs,ParamWrap pw,ServiceContext serviceContext){
+    protected void wrapTotalRecordds(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource){
         rs.setTotalRecords(rs.getData().size());
     }
-    protected void wrapTotal(RecordSet rs,ParamWrap pw,ServiceContext serviceContext){
+    protected void wrapTotal(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource){
         SqlParam sqlParam = rs.getSqlParam();
         sqlParam.sql = "select count(*) from (" + sqlParam.sql + ")t";
     }
-    private ServiceContext getServiceContext(ParamWrap pw){
+
+    private ServiceResource getServiceResource(ParamWrap pw,String resourceName){
         String servicename  = pw.getServicename();
         String[] paths = StringUtils.split(servicename,"_");
         String namespace = StringUtils.toCommaDelimitedString(paths,".");
         String reallyNamespace = namespace.substring(0,namespace.lastIndexOf("."));
-        return ResourceLoader.load(reallyNamespace);
+        ResourceLoader resourceLoader = new ResourceLoader.Builder().type("json").name(resourceName).build();
+        return resourceLoader.load(reallyNamespace);
+
     }
 
-    private List<Map<String,String>> getOutputs(ServiceContext serviceContext, String servicename){
-        if(serviceContext != null){
-            return Lists.nvl((List<Map<String,String>>) serviceContext.getServiceInterface(servicename).get("input"),Lists.newArrayList());
-        } else {
-            return Lists.newArrayList();
-        }
-    }
+
 }

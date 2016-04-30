@@ -1,4 +1,4 @@
-package org.dragonfei.ffzl.params.support;
+package org.dragonfei.ffzl.params.resource;
 
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.json.JsonUtils;
@@ -15,7 +15,7 @@ public class JsonFileParse extends AbstractFileParse {
     }
 
     @Override
-    Map<String,?> supportedParse(Object object,String namespace) {
+    Map<String,?> supportedParse(Object object) {
         if(StringUtils.isNullOrEmpty((String)object)){
             return Maps.newConcurrentHashMap();
         }

@@ -5,8 +5,8 @@ import org.dragonfei.common.CommonService;
 import org.dragonfei.ffzl.annotation.domain.SqlParam;
 import org.dragonfei.ffzl.annotation.parse.MetaData;
 import org.dragonfei.ffzl.domain.Menu;
-import org.dragonfei.ffzl.params.support.ResourceLoader;
-import org.dragonfei.ffzl.params.support.ServiceContext;
+import org.dragonfei.ffzl.params.resource.ResourceLoader;
+import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.utils.number.Numberutils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -73,9 +73,7 @@ public class TestMetaData {
 
     @Test
     public void testResource2(){
-        ServiceContext context = ResourceLoader.load("ffzl_base_test");
 
-        System.out.println(context);
     }
     public void testFilter(){
 
@@ -91,9 +89,16 @@ public class TestMetaData {
 
     @Test
     public void testResource(){
-        for (int i =0; i < 100; i++) {
-            ServiceContext sc = ResourceLoader.load("ffzl.base");
-            System.out.println(sc);
+        ServiceResource serviceResource = new ResourceLoader.Builder().
+                type("json").name("serviceinterface").build().load("ffzl.base");
+        ServiceResource serviceResource1 = new ResourceLoader.Builder().
+                type("json").name("sql").build().load("ffzl.base");
+        for(int i =0 ; i < 100;i++) {
+
+            System.out.println(serviceResource.getResourceMap("test"));
+
+
+            System.out.println(serviceResource1.getResourceMap("test"));
         }
     }
 }
