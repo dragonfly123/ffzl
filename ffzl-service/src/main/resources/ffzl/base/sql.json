@@ -1,6 +1,6 @@
 {
   "test":{
-    "sql":"select @column from T_MENU WHERE 1=1 @A",
+    "sql":"select @column from T_MENU WHERE 1=1 @A @B",
     "param":{
       "@A" :"createtime",
       "@B" :"createtime"

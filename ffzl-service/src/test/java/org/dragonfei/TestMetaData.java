@@ -5,8 +5,11 @@ import org.dragonfei.common.CommonService;
 import org.dragonfei.ffzl.annotation.domain.SqlParam;
 import org.dragonfei.ffzl.annotation.parse.MetaData;
 import org.dragonfei.ffzl.domain.Menu;
+import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.resource.ResourceLoader;
+import org.dragonfei.ffzl.params.resource.ResourceLoaderFactory;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
+import org.dragonfei.ffzl.params.service.CommonRecordSetEntry;
 import org.dragonfei.ffzl.utils.number.Numberutils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -89,10 +92,8 @@ public class TestMetaData {
 
     @Test
     public void testResource(){
-        ServiceResource serviceResource = new ResourceLoader.Builder().
-                type("json").name("serviceinterface").build().load("ffzl.base");
-        ServiceResource serviceResource1 = new ResourceLoader.Builder().
-                type("json").name("sql").build().load("ffzl.base");
+        ServiceResource serviceResource = ResourceLoaderFactory.getResourceLoader("json","serviceinterface").load("ffzl.base");
+        ServiceResource serviceResource1 = ResourceLoaderFactory.getResourceLoader("json","sql").load("ffzl.base");
         for(int i =0 ; i < 100;i++) {
 
             System.out.println(serviceResource.getResourceMap("test"));
@@ -100,5 +101,11 @@ public class TestMetaData {
 
             System.out.println(serviceResource1.getResourceMap("test"));
         }
+    }
+
+    @Test
+    public  void testRecordSet(){
+       ParamWrap pw = ParamWrap.newInstance().new Builder().servicename("ffzl_base_test").param("createtime","2015-06-06").build();
+        new CommonRecordSetEntry().execute(pw);
     }
 }

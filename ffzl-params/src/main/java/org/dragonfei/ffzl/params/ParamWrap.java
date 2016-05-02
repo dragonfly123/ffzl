@@ -12,7 +12,7 @@ import java.util.Map;
 public class ParamWrap {
     private Map<String,String>  params = Maps.newHashMap();
     private String servicename;
-
+    private String fullservicename;
     private int page = 1;
     private int pageSize  = 10;
     private boolean ignore_page = false;
@@ -39,6 +39,10 @@ public class ParamWrap {
         return servicename;
     }
 
+    public String getFullservicename() {
+        return fullservicename;
+    }
+
     public Map<String, String> getParams() {
         return params;
     }
@@ -47,7 +51,9 @@ public class ParamWrap {
         return StringUtils.nvl(params.get(key),StringUtils.EMTY);
     }
 
-
+    public boolean containParam(String key){
+        return params.containsKey(key);
+    }
     private ParamWrap(){
 
     }
@@ -94,7 +100,8 @@ public class ParamWrap {
         }
 
         public Builder servicename(String  servicename){
-            paramWrap.servicename =  servicename;
+            paramWrap.fullservicename = servicename;
+            paramWrap.servicename = servicename.substring(servicename.lastIndexOf("_")+1);
             return this;
         }
         public  Builder param(Map<String,String> param){

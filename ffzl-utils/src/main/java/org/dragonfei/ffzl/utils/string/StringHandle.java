@@ -11,8 +11,7 @@ public interface StringHandle {
      * @see StringUtils#toCommaDelimitedString(Collection, StringHandle)
      * @param obj
      * @param <T>
-     * @param <E>
      * @return
      */
-    <T,E> E handle(T obj);
+    <T> String handle(T obj);
 }

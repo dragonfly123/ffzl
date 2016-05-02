@@ -4,10 +4,14 @@ package org.dragonfei.ffzl.utils.string;
 import com.google.common.base.Strings;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * the utils of String
@@ -19,6 +23,10 @@ public abstract class StringUtils {
      * emty String
      */
     public static final String EMTY = "";
+
+    public static final String BLANK = " ";
+
+    public static final String COMMA = ",";
     /**
      * @see Strings#isNullOrEmpty(String)
      * @param str
@@ -98,6 +106,42 @@ public abstract class StringUtils {
         }
         return sb.toString();
     }
+
+    /**
+     * 自定义集合的每一项处理
+     * @param collection
+     * @param handle
+     * @return
+     */
+    public static String toCommaDelimitedString(Collection collection,String delim,StringHandle handle){
+        if (ObjectUtils.isEmpty(collection)) {
+            return "";
+        }
+        Object  [] objects = collection.toArray();
+        return toCommaDelimitedString(objects,delim,handle);
+    }
+
+    public static String toCommaDelimitedString(Map map, String delim, StringHandle handle){
+        if (ObjectUtils.isEmpty(map)) {
+            return "";
+        }
+        Object  [] objects = map.entrySet().toArray();
+        return toCommaDelimitedString(objects,delim,handle);
+    }
+
+    public static String toCommaDelimitedString(Object[] objects,String delim,StringHandle handle){
+        if (ObjectUtils.isEmpty(objects)) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < objects.length; i++) {
+            if (i > 0) {
+                sb.append(delim);
+            }
+            sb.append(handle.handle(objects[i]));
+        }
+        return sb.toString();
+    }
     /**
      * @see org.springframework.util.StringUtils#arrayToDelimitedString(Object[], String)
      * @param obj
@@ -162,4 +206,21 @@ public abstract class StringUtils {
         }
     }
 
+    public static boolean  equalsIngoreCase(String str,String str2){
+        if(str == str2){
+            return true;
+        } else if(str == null || str2 == null){
+            return false;
+        } else {
+            return str.trim().equalsIgnoreCase(str2.trim());
+        }
+    }
+    public static void handle(String str,String  pattern,StringHandle stringHandle){
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(str);
+        while(m.find()){
+            stringHandle.handle(m.group());
+        }
+
+    }
 }
