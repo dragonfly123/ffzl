@@ -5,7 +5,6 @@ import org.dragonfei.ffzl.params.RecordSet;
 import org.dragonfei.ffzl.params.resource.ResourceLoader;
 import org.dragonfei.ffzl.params.resource.ResourceLoaderFactory;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
-import org.dragonfei.ffzl.params.sql.SqlParam;
 import org.dragonfei.ffzl.params.sql.SqlPool;
 import org.dragonfei.ffzl.params.sql.SqlSeed;
 import org.dragonfei.ffzl.utils.collections.Lists;
@@ -57,10 +56,12 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             inputs.addAll(Lists.nvl((List)mapServiceInterface.get("input"),Lists.newArrayList()));
         }
         List<Map<String,String>> resultInputs =  getRealyInputs(pw,inputs);
-        if(SqlPool.getInstance().getByPw(pw,resultInputs) != null){
-            return SqlPool.getInstance().getByPw(pw,resultInputs);
+        SqlSeed.Entry entry = SqlSeed.getEntry();
+        entry.inputs = resultInputs;
+        if(SqlPool.getInstance().getSqlSeed(pw,null,entry) != null){
+            return SqlPool.getInstance().getSqlSeed(pw,null,entry);
         }
-
+        entry.outputs = getColumns(mapServiceInterface);
         Map<String,?> mapSqlResource  =  Maps.nvl(sqlresource.getResourceMap(serviceName),Maps.newHashMap());
         String preSql = StringUtils.nvl(String.valueOf(mapSqlResource.get("sql")),StringUtils.EMTY);
         preSql =  preSql.replace("@column",StringUtils.BLANK+buildColumn(mapServiceInterface)+StringUtils.BLANK);
@@ -75,7 +76,11 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         }
         final String pageSql = buildPageSql(preSql);
         final String totalSql = buildTotalSql(preSql);
-        return SqlPool.getInstance().getSqlSeed(pw,resultInputs,paramsNames,pageSql,totalSql);
+
+        entry.querySql = pageSql;
+        entry.totalSql = totalSql;
+
+        return SqlPool.getInstance().getSqlSeed(pw,paramsNames,entry);
 
     }
 
@@ -88,7 +93,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     }
 
     private  String  buildColumn(Map<String,?> mapServiceInterface){
-        List<Map<String,String>> list  =Lists.nvl((List<Map<String,String>>)mapServiceInterface.get("output"),Lists.newArrayList());
+        List<Map<String,String>> list  = getColumns(mapServiceInterface);
         return StringUtils.toCommaDelimitedString(list, StringUtils.COMMA, new StringHandle() {
             @Override
             public <T> String handle(T obj) {
@@ -98,6 +103,10 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
                 return StringUtils.EMTY;
             }
         });
+    }
+
+    private List<Map<String,String>> getColumns(Map<String,?> mapServiceInterface){
+        return Lists.nvl((List<Map<String,String>>)mapServiceInterface.get("output"),Lists.newArrayList());
     }
     /**
      *

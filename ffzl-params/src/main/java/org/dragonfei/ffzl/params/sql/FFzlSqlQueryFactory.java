@@ -1,5 +1,6 @@
 package org.dragonfei.ffzl.params.sql;
 
+import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.spring.SpringContextUtils;
 
@@ -18,13 +19,14 @@ public abstract class FFzlSqlQueryFactory {
 
     private static Map<String,QueryEntry> map = Maps.newHashMap();
 
-    public static QueryEntry getQueryEntry(String key,String querysql,String totalSql){
+    public static QueryEntry getQueryEntry(ParamWrap pw, SqlSeed.Entry entry){
+        String key = entry.buildKey(pw);
         if(map.containsKey(key)){
             return map.get(key);
         }
         QueryEntry queryEntry = new QueryEntry();
-        queryEntry.ffzlSqlQuery = new FfzlSqlQuery(dataSource,querysql);
-        queryEntry.ffzlSqlQueryTotal = new FfzlSqlQueryTotal(dataSource,totalSql);
+        queryEntry.ffzlSqlQuery = new FfzlSqlQuery(dataSource,entry.querySql,entry.outputs);
+        queryEntry.ffzlSqlQueryTotal = new FfzlSqlQueryTotal(dataSource,entry.totalSql);
         map.put(key,queryEntry);
         return queryEntry;
     }

@@ -1,11 +1,13 @@
 package org.dragonfei.ffzl.params.sql;
 
+import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.object.SqlQuery;
 
 import javax.sql.DataSource;
 import java.sql.ResultSetMetaData;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,8 +15,10 @@ import java.util.Map;
  */
 public class FfzlSqlQuery extends SqlQuery<Map<String,String>> {
 
-    public FfzlSqlQuery(DataSource ds, String sql){
+    private List<Map<String,String>> outputs = Lists.newArrayList();
+    public FfzlSqlQuery(DataSource ds, String sql,List<Map<String,String>> outputs){
         super(ds,sql);
+        this.outputs = outputs;
     }
     @Override
     protected RowMapper<Map<String, String>> newRowMapper(Object[] parameters, Map<?, ?> context) {
