@@ -62,6 +62,19 @@ public class ParamWrap {
         return new ParamWrap();
     }
 
+    @Override
+    public String toString() {
+        return "ParamWrap{" +
+                "params=" + params +
+                ", servicename='" + servicename + '\'' +
+                ", fullservicename='" + fullservicename + '\'' +
+                ", page=" + page +
+                ", pageSize=" + pageSize +
+                ", ignore_page=" + ignore_page +
+                ", paramWrap=" + paramWrap +
+                '}';
+    }
+
     public  class Builder{
         public Builder(){
           paramWrap = new ParamWrap();

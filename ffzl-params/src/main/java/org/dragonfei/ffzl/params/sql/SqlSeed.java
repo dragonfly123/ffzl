@@ -3,11 +3,15 @@ package org.dragonfei.ffzl.params.sql;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.service.DataService;
 import org.dragonfei.ffzl.utils.collections.ArrayUtils;
+import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.string.StringHandle;
 import org.dragonfei.ffzl.utils.string.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.object.SqlQuery;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -16,7 +20,8 @@ import java.util.Objects;
  * Created by longfei on 16-5-2.
  */
 public class SqlSeed implements DataService {
-    private List<String> params;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private List<String> params = Lists.newArrayList();
     private FfzlSqlQuery pageSqlQuery;
     private FfzlSqlQueryTotal totalSqlQuery;
 
@@ -29,23 +34,30 @@ public class SqlSeed implements DataService {
     }
 
     public List<Map<String,String>> executeQuery(ParamWrap pw){
-        Object[] objects = caculateParams(pw);
+        List list = caculateParams(pw);
         int page = pw.getPage();
         int pageSize = pw.getPageSize();
-        return pageSqlQuery.execute(ArrayUtils.copof(objects,(page-1)*pageSize,pageSize));
+        list.add((page-1)*pageSize);
+        list.add(pageSize);
+        pageSqlQuery.setType(list);
+        logger.info("page param {}",list.toString());
+        return pageSqlQuery.execute(list.toArray());
     }
 
     public Integer executeTotal(ParamWrap pw){
-        Object[] objects = caculateParams(pw);
-        return totalSqlQuery.findObject(objects);
+        List list = caculateParams(pw);
+        totalSqlQuery.setType(list);
+        logger.info("total param {}",list.toString());
+        return totalSqlQuery.findObject(list.toArray());
     }
 
-    private Object[] caculateParams(ParamWrap pw){
-        Object[] objects = new Object[params.size()];
+    private List caculateParams(ParamWrap pw){
+        List list = Lists.newArrayList(params.size());
         for(int i = 0; i < params.size();i++){
-            objects[i] = pw.getParam(params.get(i));
+            list.add(pw.getParam(params.get(i)));
         }
-        return objects;
+        logger.info("parameter is {}",list);
+        return list;
     }
 
     public static Entry getEntry(){

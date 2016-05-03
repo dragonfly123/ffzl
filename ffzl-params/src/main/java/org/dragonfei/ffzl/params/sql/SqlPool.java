@@ -29,6 +29,9 @@ public class SqlPool {
 
     public SqlSeed getSqlSeed(ParamWrap pw,List<String> params, SqlSeed.Entry entry){
         String key = entry.buildKey(pw);
+        if(entry.querySql == null && entry.totalSql == null){
+            return null;
+        }
         if(!pools.containsKey(key)){
             synchronized (this){
                 if(!pools.containsKey(key)){

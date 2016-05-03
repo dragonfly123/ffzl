@@ -8,6 +8,8 @@ import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.string.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -16,8 +18,10 @@ import java.util.Map;
  *Created by longfei on 16-4-28.
  */
 public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public RecordSet execute(ParamWrap pw) {
+        logger.trace("parameter is {}",pw.toString());
         RecordSet rs = new RecordSet();
         ServiceResource serviceResource = getServiceResource(pw,"serviceinterface");
         ServiceResource sqlResource = null;
@@ -29,6 +33,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             wrapPage(rs, pw);
             wrapColumn(rs, pw, serviceResource);
             DataService dataService = buildDataService(rs,pw,serviceResource,sqlResource);
+            logger.trace("dataservice is {}",dataService);
             wrapData(rs, pw, serviceResource,sqlResource,dataService);
             wrapTotalRecords(rs, pw, serviceResource,sqlResource);
             wrapTotal(rs, pw, serviceResource,sqlResource,dataService);
@@ -37,6 +42,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             rs.setE(e);
             rs.setCode(RecordSet.FAIL_CODE);
             wrapMessage(rs,pw,serviceResource,sqlResource,e);
+            logger.error(e.getMessage());
         }
 
         return rs;
@@ -48,7 +54,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     }
 
     public String buildPageSql(String preSql){
-        return preSql + StringUtils.BLANK + "limt ?,?";
+        return preSql + StringUtils.BLANK + "limit ?,?";
     }
 
     public String  buildTotalSql(String preSql){
@@ -83,6 +89,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         List<Map<String,String>> list = Lists.newArrayList();
         if(serviceResource != null) {
             Map<String,?> map =serviceResource.getResourceMap(pw.getServicename());
+            logger.trace("serviceinterface :{}",map.toString());
             if(!Maps.isEmpty(map)){
                 list = (List)map.get("output");
             }
@@ -95,6 +102,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         if(dataService != null){
             list.addAll(Lists.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
         }
+        logger.info("then result is {}",list);
         rs.setData(list);
     }
 
