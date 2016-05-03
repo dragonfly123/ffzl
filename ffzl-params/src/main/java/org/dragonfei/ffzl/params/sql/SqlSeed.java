@@ -1,6 +1,7 @@
 package org.dragonfei.ffzl.params.sql;
 
 import org.dragonfei.ffzl.params.ParamWrap;
+import org.dragonfei.ffzl.params.service.DataService;
 import org.dragonfei.ffzl.utils.collections.ArrayUtils;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.string.StringHandle;
@@ -14,7 +15,7 @@ import java.util.Objects;
 /**
  * Created by longfei on 16-5-2.
  */
-public class SqlSeed {
+public class SqlSeed implements DataService {
     private List<String> params;
     private FfzlSqlQuery pageSqlQuery;
     private FfzlSqlQueryTotal totalSqlQuery;
@@ -51,6 +52,9 @@ public class SqlSeed {
         return new Entry();
     }
 
+    /**
+     * 包装相关参数
+     */
     public static class Entry {
         public List<Map<String,String>> inputs;
         public List<Map<String,String>> outputs;

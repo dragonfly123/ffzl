@@ -6,10 +6,9 @@ import org.dragonfei.ffzl.annotation.domain.SqlParam;
 import org.dragonfei.ffzl.annotation.parse.MetaData;
 import org.dragonfei.ffzl.domain.Menu;
 import org.dragonfei.ffzl.params.ParamWrap;
-import org.dragonfei.ffzl.params.resource.ResourceLoader;
 import org.dragonfei.ffzl.params.resource.ResourceLoaderFactory;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
-import org.dragonfei.ffzl.params.service.CommonRecordSetEntry;
+import org.dragonfei.ffzl.params.service.CommonRsEntry;
 import org.dragonfei.ffzl.utils.number.Numberutils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -106,6 +105,6 @@ public class TestMetaData {
     @Test
     public  void testRecordSet(){
        ParamWrap pw = ParamWrap.newInstance().new Builder().servicename("ffzl_base_test").param("createtime","2015-06-06").build();
-        new CommonRecordSetEntry().execute(pw);
+        new CommonRsEntry().execute(pw);
     }
 }
