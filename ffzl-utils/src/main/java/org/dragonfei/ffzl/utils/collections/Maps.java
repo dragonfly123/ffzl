@@ -24,7 +24,5 @@ public abstract class Maps {
         } else return map;
     }
 
-    public static <K,V> boolean isEmpty(Map<K,V>map){
-        return org.springframework.util.CollectionUtils.isEmpty(map);
-    }
+
 }

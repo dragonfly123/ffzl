@@ -3,6 +3,7 @@ package org.dragonfei.ffzl.params.sql;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringHandle;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 
@@ -37,7 +38,7 @@ public class SqlPool {
                 if(!pools.containsKey(key)){
                     FFzlSqlQueryFactory.QueryEntry  queryEntry  = FFzlSqlQueryFactory.getQueryEntry(pw,entry);
                     SqlSeed sqlSeed = new SqlSeed(queryEntry);
-                    if(!Lists.isEmpty(params)) {
+                    if(!ObjectUtils.isEmpty(params)) {
                         sqlSeed.setParams(params);
                     }
                     pools.put(key,sqlSeed);

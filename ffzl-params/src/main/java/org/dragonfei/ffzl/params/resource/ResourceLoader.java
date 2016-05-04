@@ -2,6 +2,7 @@ package org.dragonfei.ffzl.params.resource;
 
 import org.dragonfei.ffzl.utils.collections.ArrayUtils;
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.resource.ResourceUtils;
 import org.dragonfei.ffzl.utils.spring.SpringContextUtils;
 import org.springframework.core.io.Resource;
@@ -56,7 +57,7 @@ public class ResourceLoader {
                 try {
                     Resource[] resources = ResourceUtils.getResource(namespace.replaceAll("\\.", "/"));
                     for (Resource resource : resources) {
-                        if (resource.getFile().isDirectory() && !ArrayUtils.isEmpty(resource.getFile().listFiles())) {
+                        if (resource.getFile().isDirectory() && !ObjectUtils.isEmpty(resource.getFile().listFiles())) {
                             for (File file : ArrayUtils.nvl(resource.getFile().listFiles(), new File[0])) {
                                 if (resourceType.equals(file.getName().substring(0, file.getName().lastIndexOf(".")))) {
                                     if (resourceContext.getServiceResource(resourceType) == null) {

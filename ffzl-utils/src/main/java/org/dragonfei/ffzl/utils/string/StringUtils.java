@@ -37,15 +37,6 @@ public abstract class StringUtils {
         return Strings.isNullOrEmpty(str)?defalts:str;
     }
 
-    /**
-     * @see Strings#isNullOrEmpty(String)
-     * @param str
-     * @return
-     */
-    public static boolean isNullOrEmpty(String  str){
-
-        return Strings.isNullOrEmpty(str);
-    }
 
     /**
      * @see org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String)
@@ -121,6 +112,13 @@ public abstract class StringUtils {
         return toCommaDelimitedString(objects,delim,handle);
     }
 
+    /**
+     *
+     * @param map
+     * @param delim
+     * @param handle
+     * @return
+     */
     public static String toCommaDelimitedString(Map map, String delim, StringHandle handle){
         if (ObjectUtils.isEmpty(map)) {
             return "";
@@ -129,6 +127,13 @@ public abstract class StringUtils {
         return toCommaDelimitedString(objects,delim,handle);
     }
 
+    /**
+     *
+     * @param objects
+     * @param delim
+     * @param handle
+     * @return
+     */
     public static String toCommaDelimitedString(Object[] objects,String delim,StringHandle handle){
         if (ObjectUtils.isEmpty(objects)) {
             return "";
@@ -191,11 +196,23 @@ public abstract class StringUtils {
     }
 
 
+    /**
+     *
+     * @param str
+     * @param comma
+     * @return
+     */
     public static String[] split(String str,String comma){
 
         return org.springframework.util.StringUtils.tokenizeToStringArray(str,comma);
     }
 
+    /**
+     *
+     * @param str
+     * @param str2
+     * @return
+     */
     public static boolean  equals(String str,String str2){
         if(str == str2){
             return true;
@@ -206,6 +223,12 @@ public abstract class StringUtils {
         }
     }
 
+    /**
+     *
+     * @param str
+     * @param str2
+     * @return
+     */
     public static boolean  equalsIngoreCase(String str,String str2){
         if(str == str2){
             return true;
@@ -215,6 +238,13 @@ public abstract class StringUtils {
             return str.trim().equalsIgnoreCase(str2.trim());
         }
     }
+
+    /**
+     *
+     * @param str
+     * @param pattern
+     * @param stringHandle
+     */
     public static void handle(String str,String  pattern,StringHandle stringHandle){
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(str);

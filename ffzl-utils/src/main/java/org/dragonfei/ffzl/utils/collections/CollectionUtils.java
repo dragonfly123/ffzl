@@ -11,7 +11,4 @@ public abstract class CollectionUtils {
         return org.springframework.util.CollectionUtils.arrayToList(objects);
     }
 
-    public static <T> boolean isEmpty(Collection<T> collection){
-        return org.springframework.util.CollectionUtils.isEmpty(collection);
-    }
 }

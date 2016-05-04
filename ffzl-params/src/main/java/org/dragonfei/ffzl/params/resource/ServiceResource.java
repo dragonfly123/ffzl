@@ -3,6 +3,7 @@ package org.dragonfei.ffzl.params.resource;
 import com.google.common.io.Files;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class ServiceResource {
         } else {
             await();
         }
-        if(!Lists.isEmpty(files) && Maps.isEmpty(serviceMap)) {
+        if(!ObjectUtils.isEmpty(files) && ObjectUtils.isEmpty(serviceMap)) {
             files.forEach(file -> ex.submit(() -> {
                 try {
                     StringBuilder sb = new StringBuilder();
@@ -68,10 +69,10 @@ public class ServiceResource {
     }
 
     public void clear(){
-        if(!Maps.isEmpty(serviceMap)) {
+        if(!ObjectUtils.isEmpty(serviceMap)) {
             await();
             synchronized (this) {
-                if(!Maps.isEmpty(serviceMap)) {
+                if(!ObjectUtils.isEmpty(serviceMap)) {
                     await();
                     serviceMap.clear();
                     countDownLatch = new CountDownLatch(files.size());

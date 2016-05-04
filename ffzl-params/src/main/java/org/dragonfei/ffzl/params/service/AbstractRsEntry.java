@@ -7,6 +7,7 @@ import org.dragonfei.ffzl.params.resource.ResourceLoaderFactory;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public RecordSet execute(ParamWrap pw) {
-        logger.trace("parameter is {}",pw.toString());
+        logger.debug("parameter is {}",pw.toString());
         RecordSet rs = new RecordSet();
         ServiceResource serviceResource = getServiceResource(pw,"serviceinterface");
         ServiceResource sqlResource = null;
@@ -33,7 +34,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             wrapPage(rs, pw);
             wrapColumn(rs, pw, serviceResource);
             DataService dataService = buildDataService(rs,pw,serviceResource,sqlResource);
-            logger.trace("dataservice is {}",dataService);
+            logger.debug("dataservice is {}",dataService);
             wrapData(rs, pw, serviceResource,sqlResource,dataService);
             wrapTotalRecords(rs, pw, serviceResource,sqlResource);
             wrapTotal(rs, pw, serviceResource,sqlResource,dataService);
@@ -67,7 +68,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         if(serviceinterfaceResource != null){
             Map<String,?> map =serviceinterfaceResource.getResourceMap(servicename);
             if(map != null){
-                return !StringUtils.isNullOrEmpty(String.valueOf(map.get("sqlsource")));
+                return !ObjectUtils.isEmpty(map.get("sqlsource"));
             }
         }
         return false;
@@ -90,7 +91,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         if(serviceResource != null) {
             Map<String,?> map =serviceResource.getResourceMap(pw.getServicename());
             logger.trace("serviceinterface :{}",map.toString());
-            if(!Maps.isEmpty(map)){
+            if(!ObjectUtils.isEmpty(map)){
                 list = (List)map.get("output");
             }
         }

@@ -13,10 +13,6 @@ public abstract class Lists {
 		return com.google.common.collect.Lists.newArrayList();
 	}
 
-	public static<T> boolean isEmpty(List<T> list){
-		return org.springframework.util.CollectionUtils.isEmpty(list);
-	}
-
 	public static <T> List<T> newArrayList(int num){
 		return com.google.common.collect.Lists.newArrayListWithCapacity(num);
 	}
@@ -36,6 +32,8 @@ public abstract class Lists {
 		} else
 			return result;
 	}
+
+
 
 
 
