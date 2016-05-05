@@ -2,6 +2,9 @@ package org.dragonfei.ffzl.utils.date;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 /**
@@ -19,6 +22,11 @@ public abstract class DateUtils {
     public static String now(String pattern){
         return DateFormatUtils.format(Calendar.getInstance(),pattern);
     }
+
+    public static LocalDate dateNow(){
+        return LocalDate.now();
+    }
+
 
     /**
      * the date of now

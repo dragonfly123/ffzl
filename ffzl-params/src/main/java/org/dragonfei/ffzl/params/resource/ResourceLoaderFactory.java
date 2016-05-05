@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-5-2.
+ * 缓存资源加载器
  */
 public abstract class ResourceLoaderFactory {
     private static Map<LoaderType,ResourceLoader> loaderMap =Maps.newHashMap();
@@ -46,6 +47,12 @@ public abstract class ResourceLoaderFactory {
         }
     }
 
+    /**
+     * @param fileType 文件的格式
+     * @param resourceType 资源类型
+     * @return
+     * 获取加载器
+     */
     public static ResourceLoader getResourceLoader(String fileType,String resourceType){
         FileParse fileParse = null;
         if ("json".equals(fileType)) {

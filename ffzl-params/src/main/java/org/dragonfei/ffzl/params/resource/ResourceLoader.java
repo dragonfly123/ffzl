@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * Created by longfei on 16-4-24.
+ * 资源加载器
  */
 public class ResourceLoader {
 
@@ -44,6 +45,11 @@ public class ResourceLoader {
 
     private ExecutorService ex = SpringContextUtils.getBean("taskpThreadPool",ExecutorService.class);
 
+    /**
+     * 加载命名空间下的资源
+     * @param namespace
+     * @return
+     */
     public ServiceResource load(String namespace){
         synchronized (namespace.intern()) {
             if (ResourceContexts.getInstance().get(namespace) == null) {

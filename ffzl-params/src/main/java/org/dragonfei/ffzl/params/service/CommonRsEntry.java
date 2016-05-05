@@ -25,6 +25,14 @@ import java.util.stream.Collectors;
  */
 public class CommonRsEntry extends AbstractRsEntry {
 
+    /**
+     * 数据库的DataService 对象构建
+     * @param rs
+     * @param pw
+     * @param serviceResource
+     * @param sqlresource
+     * @return
+     */
     @Override
     public DataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
         String serviceName = pw.getServicename();

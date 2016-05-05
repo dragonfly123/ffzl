@@ -18,6 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *Created by longfei on 16-4-29.
+ * 加载配置文件的类,支持按需加载
  */
 public class ServiceResource {
     private ExecutorService ex;
@@ -36,6 +37,9 @@ public class ServiceResource {
         files.add(file);
     }
 
+    /**
+     * 具体加载资源文件
+     */
     public void load(){
         if((countDownLatch == null || countDownLatch.getCount() == files.size()) && lock.tryLock()){
             countDownLatch = new CountDownLatch(files.size());
@@ -68,6 +72,9 @@ public class ServiceResource {
         }
     }
 
+    /**
+     * 清除缓存
+     */
     public void clear(){
         if(!ObjectUtils.isEmpty(serviceMap)) {
             await();
@@ -86,6 +93,11 @@ public class ServiceResource {
         load();
     }
 
+    /**
+     * @param servicename
+     * @return
+     * 获取资源文件下对应servicename下配置
+     */
     public Map<String,?> getResourceMap(String servicename){
         if(serviceMap.containsKey(servicename)){
             return serviceMap.get(servicename);

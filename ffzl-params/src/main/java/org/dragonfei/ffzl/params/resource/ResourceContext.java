@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-4-29.
+ * 资源文件上下文
  */
 public class ResourceContext {
     private String namespace;

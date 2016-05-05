@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  *Created by longfei on 16-4-24.
+ * 结果集包装
  */
 public class RecordSet implements Serializable {
     public static final int SUCCE_CODE = 0;

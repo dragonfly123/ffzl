@@ -3,6 +3,7 @@ package org.dragonfei.ffzl.params.resource;
 
 /**
  * Created by longfei on 16-4-25.
+ * xml格式文件解析,未实现
  */
 public class XmlFileParse extends AbstractFileParse {
     @Override

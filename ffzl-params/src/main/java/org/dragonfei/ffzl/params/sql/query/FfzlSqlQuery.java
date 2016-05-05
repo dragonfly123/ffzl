@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-5-2.
+ * 查询以前
  */
 public class FfzlSqlQuery extends SqlQuery<Map<String,String>> {
 

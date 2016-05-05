@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-4-29.
+ * 包含多个上下文,每个命名空间都包含一个
  */
 public class ResourceContexts {
     private ResourceContexts(){

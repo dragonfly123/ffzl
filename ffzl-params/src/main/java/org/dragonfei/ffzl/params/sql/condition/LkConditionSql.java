@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-5-4.
+ * like处理
  */
 public class LkConditionSql implements ConditionSql {
     @Override

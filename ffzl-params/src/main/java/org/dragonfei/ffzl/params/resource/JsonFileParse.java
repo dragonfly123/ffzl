@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-4-25.
+ * json格式文件解析
  */
 public class JsonFileParse extends AbstractFileParse {
     public JsonFileParse(){

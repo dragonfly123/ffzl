@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-4-25.
+ * serviceinterface 资源文件解析
  */
 public class ServiceInterfaceParse extends AbstractFileParse {
 

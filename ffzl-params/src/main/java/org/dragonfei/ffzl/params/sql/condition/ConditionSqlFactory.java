@@ -7,6 +7,7 @@ import java.util.Optional;
 
 /**
  * Created by longfei on 16-5-4.
+ * 注册cond类型
  */
 public class ConditionSqlFactory {
     static {

@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-5-2.
+ * sql语句与参数包装
  */
 public class SqlSeed implements DataService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());

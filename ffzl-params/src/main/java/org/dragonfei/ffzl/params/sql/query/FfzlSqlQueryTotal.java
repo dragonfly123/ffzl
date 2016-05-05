@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-5-2.
+ * 查询total的sql引
  */
 public class FfzlSqlQueryTotal extends SqlQuery<Integer> {
 

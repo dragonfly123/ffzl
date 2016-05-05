@@ -20,6 +20,7 @@ import java.util.Map;
  */
 public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Override
     public RecordSet execute(ParamWrap pw) {
         logger.debug("parameter is {}",pw.toString());
@@ -49,15 +50,34 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         return rs;
     }
 
+    /**
+     *
+     * @param rs
+     * @param pw
+     * @param serviceResource
+     * @param sqlresource
+     * @return
+     * 数据服务
+     */
     protected DataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
 
         return null;
     }
 
+    /**
+     * 查询数据接口
+     * @param preSql
+     * @return
+     */
     public String buildPageSql(String preSql){
         return preSql + StringUtils.BLANK + "limit ?,?";
     }
 
+    /**
+     * 查询总记录数
+     * @param preSql
+     * @return
+     */
     public String  buildTotalSql(String preSql){
         return "Select count(*) from ("+preSql+")t";
     }
@@ -73,10 +93,17 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         }
         return false;
     }
+
     protected void wrapMessage(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,
                                ServiceResource sqlresource,Exception e){
         rs.setMsg(e.getMessage());
     }
+
+    /**
+     * 页码
+     * @param rs
+     * @param pw
+     */
     protected void wrapPage(RecordSet rs,ParamWrap pw){
         if(pw.isIgnore_page()){
             rs.setPage(1);
@@ -86,6 +113,13 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             rs.setPageSize(pw.getPageSize());
         }
     }
+
+    /**
+     * 列名称
+     * @param rs
+     * @param pw
+     * @param serviceResource
+     */
     protected void wrapColumn(RecordSet rs,ParamWrap pw,ServiceResource serviceResource){
         List<Map<String,String>> list = Lists.newArrayList();
         if(serviceResource != null) {
@@ -98,6 +132,14 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         rs.setColumns(ObjectUtils.nvl(list,Lists.newArrayList()));
     }
 
+    /**
+     * 包装数据
+     * @param rs
+     * @param pw
+     * @param serviceResource
+     * @param sqlresource
+     * @param dataService
+     */
     protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,DataService dataService){
         List<Map<String,String>> list  =Lists.newArrayList(pw.getPageSize());
         if(dataService != null){

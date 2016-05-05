@@ -9,6 +9,7 @@ import java.util.Map;
 
 /**
  * Created by longfei on 16-4-23.
+ * 参数封装
  */
 public class ParamWrap {
     private Map<String,String>  params = Maps.newHashMap();
