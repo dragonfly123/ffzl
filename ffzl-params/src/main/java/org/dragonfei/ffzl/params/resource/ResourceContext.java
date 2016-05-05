@@ -1,6 +1,7 @@
 package org.dragonfei.ffzl.params.resource;
 
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class ResourceContext {
         if (serviceResource != null) {
             map = serviceResource.getResourceMap(servicename);
         }
-        return Maps.nvl(map,Maps.newConcurrentHashMap());
+        return ObjectUtils.nvl(map,Maps.newConcurrentHashMap());
 
     }
 }

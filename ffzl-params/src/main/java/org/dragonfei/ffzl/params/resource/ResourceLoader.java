@@ -58,7 +58,7 @@ public class ResourceLoader {
                     Resource[] resources = ResourceUtils.getResource(namespace.replaceAll("\\.", "/"));
                     for (Resource resource : resources) {
                         if (resource.getFile().isDirectory() && !ObjectUtils.isEmpty(resource.getFile().listFiles())) {
-                            for (File file : ArrayUtils.nvl(resource.getFile().listFiles(), new File[0])) {
+                            for (File file : ObjectUtils.nvl(resource.getFile().listFiles(), new File[0])) {
                                 if (resourceType.equals(file.getName().substring(0, file.getName().lastIndexOf(".")))) {
                                     if (resourceContext.getServiceResource(resourceType) == null) {
                                         ServiceResource sr = new ServiceResource(ex, fileParse);

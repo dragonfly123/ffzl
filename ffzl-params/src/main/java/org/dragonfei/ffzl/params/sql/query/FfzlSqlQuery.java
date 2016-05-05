@@ -1,4 +1,4 @@
-package org.dragonfei.ffzl.params.sql;
+package org.dragonfei.ffzl.params.sql.query;
 
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;

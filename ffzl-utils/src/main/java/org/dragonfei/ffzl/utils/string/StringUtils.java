@@ -27,16 +27,6 @@ public abstract class StringUtils {
     public static final String BLANK = " ";
 
     public static final String COMMA = ",";
-    /**
-     * @see Strings#isNullOrEmpty(String)
-     * @param str
-     * @param defalts
-     * @return
-     */
-    public static String nvl(String str,String defalts){
-        return Strings.isNullOrEmpty(str)?defalts:str;
-    }
-
 
     /**
      * @see org.springframework.util.StringUtils#collectionToDelimitedString(Collection, String)

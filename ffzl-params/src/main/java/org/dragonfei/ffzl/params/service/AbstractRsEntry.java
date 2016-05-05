@@ -95,13 +95,13 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
                 list = (List)map.get("output");
             }
         }
-        rs.setColumns(Lists.nvl(list,Lists.newArrayList()));
+        rs.setColumns(ObjectUtils.nvl(list,Lists.newArrayList()));
     }
 
     protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,DataService dataService){
         List<Map<String,String>> list  =Lists.newArrayList(pw.getPageSize());
         if(dataService != null){
-            list.addAll(Lists.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
+            list.addAll(ObjectUtils.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
         }
         logger.info("then result is {}",list);
         rs.setData(list);

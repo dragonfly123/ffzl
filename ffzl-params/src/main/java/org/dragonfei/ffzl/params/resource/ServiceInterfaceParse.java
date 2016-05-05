@@ -1,6 +1,7 @@
 package org.dragonfei.ffzl.params.resource;
 
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class ServiceInterfaceParse extends AbstractFileParse {
 
     @Override
     Map<String,Map<String,?>> supportedParse(Object object) {
-        return Maps.nvl((Map)object,Maps.newHashMap());
+        return ObjectUtils.nvl((Map)object,Maps.newHashMap());
     }
 
     @Override

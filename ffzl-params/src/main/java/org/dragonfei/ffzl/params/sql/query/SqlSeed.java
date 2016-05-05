@@ -1,27 +1,26 @@
-package org.dragonfei.ffzl.params.sql;
+package org.dragonfei.ffzl.params.sql.query;
 
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.service.DataService;
-import org.dragonfei.ffzl.utils.collections.ArrayUtils;
+import org.dragonfei.ffzl.params.sql.condition.ParameterEntry;
+import org.dragonfei.ffzl.params.sql.query.FFzlSqlQueryFactory;
+import org.dragonfei.ffzl.params.sql.query.FfzlSqlQuery;
+import org.dragonfei.ffzl.params.sql.query.FfzlSqlQueryTotal;
 import org.dragonfei.ffzl.utils.collections.Lists;
-import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.string.StringHandle;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.object.SqlQuery;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by longfei on 16-5-2.
  */
 public class SqlSeed implements DataService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private List<String> params = Lists.newArrayList();
+    private List<ParameterEntry> params = Lists.newArrayList();
     private FfzlSqlQuery pageSqlQuery;
     private FfzlSqlQueryTotal totalSqlQuery;
 
@@ -29,7 +28,7 @@ public class SqlSeed implements DataService {
         this.pageSqlQuery = entry.ffzlSqlQuery;
         this.totalSqlQuery = entry.ffzlSqlQueryTotal;
     }
-    public void setParams(List<String> params) {
+    public void setParams(List<ParameterEntry> params) {
         this.params = params;
     }
 
@@ -51,10 +50,11 @@ public class SqlSeed implements DataService {
         return totalSqlQuery.findObject(list.toArray());
     }
 
-    private List caculateParams(ParamWrap pw){
-        List list = Lists.newArrayList(params.size());
+    private List<String> caculateParams(ParamWrap pw){
+        List<String> list = Lists.newArrayList(params.size());
         for(int i = 0; i < params.size();i++){
-            list.add(pw.getParam(params.get(i)));
+            ParameterEntry parameterEntry = params.get(i);
+            list.add(parameterEntry.conditionSql.getParamValues(parameterEntry.prameterName,pw));
         }
         logger.info("parameter is {}",list);
         return list;

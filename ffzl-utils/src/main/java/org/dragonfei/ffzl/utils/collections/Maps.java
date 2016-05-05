@@ -18,11 +18,5 @@ public abstract class Maps {
         return new ConcurrentHashMap<K,V>();
     }
 
-    public static <K,V> Map<K,V>  nvl(Map<K,V> map ,Map<K,V> defaults){
-        if(map == null){
-            return defaults;
-        } else return map;
-    }
-
 
 }

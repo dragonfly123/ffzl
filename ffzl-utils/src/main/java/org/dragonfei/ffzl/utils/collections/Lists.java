@@ -26,16 +26,5 @@ public abstract class Lists {
 		return  result;
 	}
 
-	public static <T> List<T> nvl(List<T> result,List<T> defaultList){
-		if(result == null){
-			return defaultList;
-		} else
-			return result;
-	}
-
-
-
-
-
 
 }

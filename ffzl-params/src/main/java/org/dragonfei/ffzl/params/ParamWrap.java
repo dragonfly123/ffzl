@@ -1,6 +1,7 @@
 package org.dragonfei.ffzl.params;
 
 import org.dragonfei.ffzl.utils.collections.Maps;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 
 
@@ -48,7 +49,7 @@ public class ParamWrap {
     }
 
     public String getParam(String key){
-        return StringUtils.nvl(params.get(key),StringUtils.EMTY);
+        return ObjectUtils.nvl(params.get(key),StringUtils.EMTY);
     }
 
     public boolean containParam(String key){

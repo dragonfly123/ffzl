@@ -7,11 +7,5 @@ import java.util.Arrays;
  */
 public class ArrayUtils {
 
-    public static <T> T[] nvl(T[] array,T[] defaults){
-        if(array == null){
-            array = defaults;
-        }
-        return  array;
-    }
 
 }

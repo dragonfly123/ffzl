@@ -8,6 +8,7 @@ import org.dragonfei.ffzl.annotation.domain.Foreign;
 import org.dragonfei.ffzl.annotation.domain.Table;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.number.Numberutils;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 
 import java.beans.IntrospectionException;
@@ -67,8 +68,8 @@ public class MetaDataBuilder {
             public void parseAnnotation(Annotation annotation) {
                 if(Column.class.isAssignableFrom(annotation.getClass())){
                     Column column =  (Column) annotation;
-                    fieldMeta.setColumnName(StringUtils.nvl(column.value(),field.getName()));
-                    fieldMeta.setDesc(StringUtils.nvl(column.desc(),field.getName()));
+                    fieldMeta.setColumnName(ObjectUtils.nvl(column.value(),field.getName()));
+                    fieldMeta.setDesc(ObjectUtils.nvl(column.desc(),field.getName()));
                     fieldMeta.setRequired(column.required());
                     fieldMeta.setNotNull(column.notNull());
                     fieldMeta.setUnique(column.unique());

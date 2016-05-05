@@ -1,11 +1,9 @@
-package org.dragonfei.ffzl.params.sql;
+package org.dragonfei.ffzl.params.sql.query;
 
 import org.dragonfei.ffzl.params.ParamWrap;
-import org.dragonfei.ffzl.utils.collections.Lists;
+import org.dragonfei.ffzl.params.sql.condition.ParameterEntry;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
-import org.dragonfei.ffzl.utils.string.StringHandle;
-import org.dragonfei.ffzl.utils.string.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +26,7 @@ public class SqlPool {
     }
     private Map<String,SqlSeed> pools = Maps.newHashMap();
 
-    public SqlSeed getSqlSeed(ParamWrap pw,List<String> params, SqlSeed.Entry entry){
+    public SqlSeed getSqlSeed(ParamWrap pw, List<ParameterEntry> params, SqlSeed.Entry entry){
         String key = entry.buildKey(pw);
         if(entry.querySql == null && entry.totalSql == null){
             return null;
