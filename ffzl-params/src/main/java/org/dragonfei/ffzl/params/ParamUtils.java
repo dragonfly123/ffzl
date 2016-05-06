@@ -9,7 +9,7 @@ import java.util.Enumeration;
  */
 public abstract class ParamUtils {
 
-    public ParamWrap buildParams(HttpServletRequest request){
+    public static ParamWrap buildParams(HttpServletRequest request){
         Enumeration<String>  enumeration = request.getParameterNames();
         ParamWrap.Builder pbuilder= ParamWrap.newInstance().new Builder();
 

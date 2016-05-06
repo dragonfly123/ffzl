@@ -105,7 +105,7 @@ public class TestMetaData {
 
     @Test
     public  void testRecordSet(){
-        ParamWrap pw = ParamWrap.newInstance().new Builder().servicename("ffzl_base_test").param("createtime","2016-05-03").param("pageSize","4").build();
+        ParamWrap pw = ParamWrap.newInstance().new Builder().servicename("ffzl_base_test").param("createtimeb","2016-05-03").param("createtimee","2016-05-06").param("pageSize","4").param("page","3").build();
         RecordSet rs = new CommonRsEntry().execute(pw);
         System.out.println(rs);
     }

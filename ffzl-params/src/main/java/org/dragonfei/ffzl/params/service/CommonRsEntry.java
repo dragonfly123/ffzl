@@ -13,6 +13,7 @@ import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringHandle;
 import org.dragonfei.ffzl.utils.string.StringUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Created by longfei on 16-4-30.
  */
+@Service
 public class CommonRsEntry extends AbstractRsEntry {
 
     /**
@@ -72,7 +74,7 @@ public class CommonRsEntry extends AbstractRsEntry {
 
     private List<Map<String,String>> getRealyInputs(ParamWrap pw,List<Map<String,String>> inputs){
         return ObjectUtils.nvl(inputs.stream().
-                filter(input->pw.containParam(input.get("name"))).
+                filter(input->!ConditionSqlFactory.getByType(input.get("cond")).shouldSkip(pw,input)).
                 collect(Collectors.toList()),Lists.newArrayList());
     }
 
@@ -118,7 +120,7 @@ public class CommonRsEntry extends AbstractRsEntry {
                         if(StringUtils.equalsIngoreCase(val,input.get("column"))){
                             ConditionSql conditionSql  = ConditionSqlFactory.getByType(input.get("cond"));
                             appenSql.append(conditionSql.getAppendSql(val,input,pw));
-                            preParamName.addAll(conditionSql.getParamEntrys(val,input,pw));
+                            preParamName.addAll(conditionSql.getParamEntrys(input.get("name"),input,pw));
                         }
                     } else {
                         if(StringUtils.equalsIngoreCase(val,input.get("name"))){

@@ -10,6 +10,7 @@ import java.util.Optional;
  * 注册cond类型
  */
 public class ConditionSqlFactory {
+    private static Map<String,ConditionSql> conditionMap = Maps.newHashMap();
     static {
         registerConditionSqlHandle("=",new EqualConditionSql());
         registerConditionSqlHandle("equal",new EqualConditionSql());
@@ -18,7 +19,7 @@ public class ConditionSqlFactory {
         registerConditionSqlHandle("lrLike",new LkConditionSql());
     }
 
-    private static Map<String,ConditionSql> conditionMap = Maps.newHashMap();
+
 
     private static void registerConditionSqlHandle(String type,ConditionSql conditionSql){
         conditionMap.put(type,conditionSql);

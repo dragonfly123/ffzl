@@ -28,6 +28,14 @@ public class BConditionSql implements ConditionSql {
     }
 
     @Override
+    public boolean shouldSkip(ParamWrap pw, Map<String, String> input) {
+        if(pw.containParam(input.get("name")+"b") || pw.containParam(input.get("name")+"e")){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public List<ParameterEntry> getParamEntrys(String column, Map<String, String> input, ParamWrap pw) {
         List<ParameterEntry> list  = Lists.newArrayList();
         if(pw.containParam(input.get("name")+"b")){

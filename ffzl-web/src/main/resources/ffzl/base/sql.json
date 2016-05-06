@@ -2,8 +2,8 @@
   "test":{
     "sql":"select @column from T_MENU WHERE 1=1 @A",
     "param":{
-      "@A" :"date(createtime)",
-      "@B" :"date(createtime)"
+      "@A" :"createtime",
+      "@B" :"createtime"
     },
     "desc":"test"
   }

@@ -41,4 +41,6 @@ public interface ConditionSql {
         }
         return StringUtils.EMTY;
     }
+
+    boolean shouldSkip(ParamWrap pw,Map<String,String> input);
 }

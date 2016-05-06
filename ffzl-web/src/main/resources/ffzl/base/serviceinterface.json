@@ -1,7 +1,7 @@
 {
   "test":{
     "input":[
-      {"name":"createtime","type":"D","cond":"b","column":"date(CREATETIME)","default":"m"}
+      {"name":"createtime","type":"D","cond":"bt","column":"CREATETIME","default":"m"}
     ],
     "output":[
       {"name":"id","column":"ID","desc":"序号"},

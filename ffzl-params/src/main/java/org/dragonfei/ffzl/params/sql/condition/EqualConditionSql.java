@@ -15,7 +15,7 @@ import java.util.Map;
 public class EqualConditionSql implements ConditionSql {
     @Override
     public String getAppendSql(String column, Map<String, String> input, ParamWrap pw) {
-        if(pw.containParam(input.get("name"))) {
+        if(!shouldSkip(pw,input)) {
             StringBuilder sb = new StringBuilder();
             sb.append(StringUtils.BLANK).append("AND").append(StringUtils.BLANK).
                     append(column.toUpperCase()).append("= ?").append(StringUtils.BLANK);
@@ -27,9 +27,17 @@ public class EqualConditionSql implements ConditionSql {
     @Override
     public List<ParameterEntry> getParamEntrys(String column, Map<String, String> input, ParamWrap pw) {
         List<ParameterEntry> list = Lists.newArrayList(1);
-        if(pw.containParam(input.get("name"))) {
+        if(!shouldSkip(pw,input)) {
             list.add(new ParameterEntry(input.get("name"),this));
         }
         return list;
+    }
+
+    @Override
+    public boolean shouldSkip(ParamWrap pw, Map<String, String> input) {
+        if(pw.containParam(input.get("name"))){
+            return false;
+        }
+        return true;
     }
 }

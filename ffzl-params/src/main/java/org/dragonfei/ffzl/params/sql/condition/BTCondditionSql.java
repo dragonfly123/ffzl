@@ -30,7 +30,7 @@ public class BTCondditionSql extends BConditionSql {
     @Override
     public String getParamValues(String parameterName, ParamWrap pw) {
         if(parameterName.endsWith("e")){
-            String value = pw.getParam(parameterName+"e");
+            String value = pw.getParam(parameterName);
             return LocalDateUtils.addDay(value,1).toString();
         } else {
             return super.getParamValues(parameterName,pw);
