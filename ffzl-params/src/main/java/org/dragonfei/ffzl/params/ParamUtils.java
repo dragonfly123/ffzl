@@ -11,14 +11,14 @@ public abstract class ParamUtils {
 
     public static ParamWrap buildParams(HttpServletRequest request){
         Enumeration<String>  enumeration = request.getParameterNames();
-        ParamWrap.Builder pbuilder= ParamWrap.newInstance().new Builder();
+        ParamWrap pw = new ParamWrap();
 
         while(enumeration.hasMoreElements()){
             String name = enumeration.nextElement();
             String value =  request.getParameter(name);
-            pbuilder.param(name,value);
+            pw.param(name,value);
         }
 
-        return pbuilder.build();
+        return pw;
     }
 }

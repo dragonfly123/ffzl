@@ -1,5 +1,6 @@
 package org.dragonfei.ffzl.params.resource;
 
+import com.google.common.base.Throwables;
 import org.dragonfei.ffzl.utils.collections.ArrayUtils;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
@@ -63,21 +64,17 @@ public class ResourceLoader {
                 try {
                     Resource[] resources = ResourceUtils.getResource(namespace.replaceAll("\\.", "/"));
                     for (Resource resource : resources) {
-                        if (resource.getFile().isDirectory() && !ObjectUtils.isEmpty(resource.getFile().listFiles())) {
-                            for (File file : ObjectUtils.nvl(resource.getFile().listFiles(), new File[0])) {
-                                if (resourceType.equals(file.getName().substring(0, file.getName().lastIndexOf(".")))) {
-                                    if (resourceContext.getServiceResource(resourceType) == null) {
-                                        ServiceResource sr = new ServiceResource(ex, fileParse);
-                                        resourceContext.addServiceResource(resourceType, sr);
-                                    }
-                                    ServiceResource sr = resourceContext.getServiceResource(resourceType);
-                                    sr.addFile(file);
-                                }
+                        if(resource.exists() && resourceType.equals(resource.getFilename().substring(0,resource.getFilename().lastIndexOf(".")))){
+                            if (resourceContext.getServiceResource(resourceType) == null) {
+                                ServiceResource sr = new ServiceResource(ex, fileParse);
+                                resourceContext.addServiceResource(resourceType, sr);
                             }
+                            ServiceResource sr = resourceContext.getServiceResource(resourceType);
+                            sr.addResource(resource);
                         }
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Throwables.propagate(e);
                 }
             }
             return resourceContext.getServiceResource(resourceType);

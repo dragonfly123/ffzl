@@ -3,6 +3,7 @@ package org.dragonfei.ffzl.utils.resource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.IOException;
 
@@ -19,6 +20,6 @@ public abstract class ResourceUtils {
      * @throws IOException
      */
     public static Resource[] getResource(String classpath) throws IOException{
-        return resourcePatternResolver.getResources(ResourceLoader.CLASSPATH_URL_PREFIX+classpath);
+        return resourcePatternResolver.getResources(ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX+classpath+"/*");
     }
 }

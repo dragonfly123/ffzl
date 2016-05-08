@@ -23,12 +23,6 @@ public class ParamWrap {
         return ignore_page;
     }
 
-    private  ParamWrap paramWrap;
-
-    public ParamWrap getParamWrap() {
-        return paramWrap;
-    }
-
     public int getPage() {
         return page;
     }
@@ -56,13 +50,30 @@ public class ParamWrap {
     public boolean containParam(String key){
         return params.containsKey(key);
     }
-    private ParamWrap(){
 
+
+    public void setParams(Map<String, String> params) {
+        this.params = params;
     }
 
-    public  static ParamWrap newInstance(){
-        return new ParamWrap();
+    public void setServicename(String servicename) {
+        this.fullservicename = servicename;
+        this.servicename = servicename.substring(servicename.lastIndexOf("_")+1);
     }
+
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public void setIgnore_page(boolean ignore_page) {
+        this.ignore_page = ignore_page;
+    }
+
 
     @Override
     public String toString() {
@@ -72,60 +83,24 @@ public class ParamWrap {
                 ", fullservicename='" + fullservicename + '\'' +
                 ", page=" + page +
                 ", pageSize=" + pageSize +
-                ", ignore_page=" + ignore_page +
-                ", paramWrap=" + paramWrap +
-                '}';
+                ", ignore_page=" + ignore_page +"}";
     }
-
-    public  class Builder{
-        public Builder(){
-          paramWrap = new ParamWrap();
-        }
-
-        public Builder page(int page){
-            paramWrap.page = page;
-            return this;
-        }
-
-        public Builder pageSize(int pageSize){
-            paramWrap.pageSize  =  pageSize;
-            return  this;
-        }
-
-        public Builder ignorePage(boolean ignorePage){
-            paramWrap.ignore_page = ignorePage;
-            return this;
-        }
-
-        public Builder param(String key,String value){
+        public ParamWrap param(String key,String value){
             if("page".equals(key)){
-                page(Integer.parseInt(value));
+                setPage(Integer.parseInt(value));
             }  else if("pageSize".equals(key)){
-                pageSize(Integer.parseInt(value));
+                setPageSize(Integer.parseInt(value));
             } else if("servicename".equals(key)){
-                servicename(value);
+                setServicename(value);
             }  else if("ignore_page".equals(key)){
                 if("1".equals(value)  || "true".equals(value)){
-                    ignorePage(true);
+                    setIgnore_page(true);
                 }
             } else {
-                paramWrap.params.put(key, value);
+                this.params.put(key, value);
             }
             return this;
         }
 
-        public Builder servicename(String  servicename){
-            paramWrap.fullservicename = servicename;
-            paramWrap.servicename = servicename.substring(servicename.lastIndexOf("_")+1);
-            return this;
-        }
-        public  Builder param(Map<String,String> param){
-            paramWrap.params.putAll(param);
-            return this;
-        }
 
-        public ParamWrap build(){
-            return paramWrap;
-        }
-    }
 }

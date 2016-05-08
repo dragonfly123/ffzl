@@ -1,12 +1,17 @@
 package org.dragonfei.ffzl.params.resource;
 
+import com.google.common.base.Throwables;
+import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
+import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -16,13 +21,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 /**
  *Created by longfei on 16-4-29.
  * 加载配置文件的类,支持按需加载
  */
 public class ServiceResource {
     private ExecutorService ex;
-    private List<File> files = Lists.newArrayList();
+    private List<Resource> resources = Lists.newArrayList();
     private FileParse fileParse;
     private Map<String,Map<String,?>> serviceMap = Maps.newConcurrentHashMap();
     private CountDownLatch countDownLatch;
@@ -33,29 +40,28 @@ public class ServiceResource {
         this.fileParse = fileParse;
     }
 
-    public void addFile(File file){
-        files.add(file);
+    public void addResource(Resource file){
+        resources.add(file);
     }
 
     /**
      * 具体加载资源文件
      */
     public void load(){
-        if((countDownLatch == null || countDownLatch.getCount() == files.size()) && lock.tryLock()){
-            countDownLatch = new CountDownLatch(files.size());
+        if((countDownLatch == null || countDownLatch.getCount() == resources.size()) && lock.tryLock()){
+            countDownLatch = new CountDownLatch(resources.size());
             lock.unlock();
         } else {
             await();
         }
-        if(!ObjectUtils.isEmpty(files) && ObjectUtils.isEmpty(serviceMap)) {
-            files.forEach(file -> ex.submit(() -> {
+        if(!ObjectUtils.isEmpty(resources) && ObjectUtils.isEmpty(serviceMap)) {
+            resources.forEach(resource -> ex.submit(() -> {
                 try {
-                    StringBuilder sb = new StringBuilder();
-                    Files.readLines(file, StandardCharsets.UTF_8).forEach(sb::append);
-                    serviceMap.putAll(fileParse.parse(sb.toString()));
+                    InputStream inputStream = resource.getInputStream();
+                    serviceMap.putAll(fileParse.parse(CharStreams.toString(new InputStreamReader(inputStream,UTF_8))));
                     countDownLatch.countDown();
                 } catch (IOException e) {
-
+                    Throwables.propagate(e);
                 }
             }));
             await();
@@ -82,7 +88,7 @@ public class ServiceResource {
                 if(!ObjectUtils.isEmpty(serviceMap)) {
                     await();
                     serviceMap.clear();
-                    countDownLatch = new CountDownLatch(files.size());
+                    countDownLatch = new CountDownLatch(resources.size());
                 }
             }
         }

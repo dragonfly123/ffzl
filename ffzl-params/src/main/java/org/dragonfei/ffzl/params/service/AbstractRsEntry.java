@@ -44,7 +44,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             rs.setE(e);
             rs.setCode(RecordSet.FAIL_CODE);
             wrapMessage(rs,pw,serviceResource,sqlResource,e);
-            logger.error(e.getMessage());
+            logger.error("",e);
         }
 
         return rs;
