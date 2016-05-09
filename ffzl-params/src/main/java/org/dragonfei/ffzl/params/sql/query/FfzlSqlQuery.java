@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by longfei on 16-5-2.
  * 查询以前
  */
-public class FfzlSqlQuery extends SqlQuery<Map<String,String>> {
+public class FfzlSqlQuery extends SqlQuery<Map<String,?>> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private List<Map<String,String>> outputs = Lists.newArrayList();
@@ -55,17 +55,17 @@ public class FfzlSqlQuery extends SqlQuery<Map<String,String>> {
         }
     }
     @Override
-    protected RowMapper<Map<String, String>> newRowMapper(Object[] parameters, Map<?, ?> context) {
-        return new RowMapper<Map<String, String>>() {
+    protected RowMapper<Map<String,?>> newRowMapper(Object[] parameters, Map<?, ?> context) {
+        return new RowMapper<Map<String, ?>>() {
             private ResultSetMetaData metaData;
             private Map<String,String> columnMap;
             @Override
-            public Map<String, String> mapRow(ResultSet rs, int rowNum) throws SQLException {
+            public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
                 if(rowNum == 0){
                     metaData = rs.getMetaData();
                     columnMap = buildColumMap();
                 }
-                Map<String,String> result = Maps.newHashMap();
+                Map<String,Object> result = Maps.newHashMap();
                 for(int i=0,j = metaData.getColumnCount();i < j;i++){
                     String columName = metaData.getColumnName(i+1);
                     result.put(String.valueOf(columnMap.get(columName.toUpperCase())),rs.getString(i+1));

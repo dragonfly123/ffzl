@@ -33,7 +33,7 @@ public class SqlSeed implements DataService {
         this.params = params;
     }
 
-    public List<Map<String,String>> executeQuery(ParamWrap pw){
+    public List<Map<String,?>> executeQuery(ParamWrap pw){
         List list = caculateParams(pw);
         int page = pw.getPage();
         int pageSize = pw.getPageSize();

@@ -20,21 +20,11 @@ public class RecordSet implements Serializable {
     private int totalRecords  = 0;
     private int pageSize  = 10;
     private Map<String,List<Map<String,String>>>  dicts = Maps.newHashMap();
-    private List<Map<String,String>>  data = Lists.newArrayList(30);
+    private List<Map<String,?>>  data = Lists.newArrayList(30);
     private List<Map<String,String>> columns = Lists.newArrayList();
     private int code = -1;
     private String msg;
     private Exception e;
-
-    private SqlParam sqlParam;
-
-    public SqlParam getSqlParam() {
-        return sqlParam;
-    }
-
-    public void setSqlParam(SqlParam sqlParam) {
-        this.sqlParam = sqlParam;
-    }
 
     public int getPage() {
         return page;
@@ -84,11 +74,11 @@ public class RecordSet implements Serializable {
         this.dicts = dicts;
     }
 
-    public List<Map<String, String>> getData() {
+    public List<Map<String, ?>> getData() {
         return data;
     }
 
-    public void setData(List<Map<String, String>> data) {
+    public void setData(List<Map<String, ?>> data) {
         this.data = data;
     }
 
@@ -129,7 +119,6 @@ public class RecordSet implements Serializable {
                 ", code=" + code +
                 ", msg='" + msg + '\'' +
                 ", e=" + e +
-                ", sqlParam=" + sqlParam +
                 '}';
     }
 }

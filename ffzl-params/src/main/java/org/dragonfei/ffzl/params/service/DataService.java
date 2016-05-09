@@ -15,7 +15,7 @@ public interface DataService {
      * @param pw
      * @return
      */
-    List<Map<String,String>> executeQuery(ParamWrap pw);
+    List<Map<String,?>> executeQuery(ParamWrap pw);
 
     /**
      * 查询总记录数

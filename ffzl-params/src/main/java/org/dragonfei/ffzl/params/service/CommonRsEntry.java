@@ -1,5 +1,6 @@
 package org.dragonfei.ffzl.params.service;
 
+import com.google.common.base.Throwables;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
@@ -50,8 +51,13 @@ public class CommonRsEntry extends AbstractRsEntry {
             return SqlPool.getInstance().getSqlSeed(pw,null,entry);
         }
         entry.outputs = getColumns(mapServiceInterface);
-        Map<String,?> mapSqlResource  =  ObjectUtils.nvl(sqlresource.getResourceMap(serviceName),Maps.newHashMap());
-        String preSql = ObjectUtils.nvl(String.valueOf(mapSqlResource.get("sql")),StringUtils.EMTY);
+        String sqlsourcename =  (String)mapServiceInterface.get("sqlsource");
+        Map<String,?> mapSqlResource  =  ObjectUtils.nvl(
+                sqlresource.getResourceMap(sqlsourcename.substring(sqlsourcename.lastIndexOf("_")+1)),Maps.newHashMap());
+        String preSql = ObjectUtils.nvl((String)(mapSqlResource.get("sql")),StringUtils.EMTY);
+        if(StringUtils.equals(preSql,StringUtils.EMTY)){
+            throw new RuntimeException("sql数据源异常");
+        }
         preSql =  preSql.replace("@column",StringUtils.BLANK+buildColumn(mapServiceInterface)+StringUtils.BLANK);
         Map<String,Map<String,Object>> sqlParam = builSqlParam(ObjectUtils.nvl((Map)mapSqlResource.get("param"),Maps.newHashMap()),resultInputs,pw);
         List<ParameterEntry> paramsNames = Lists.newArrayList();

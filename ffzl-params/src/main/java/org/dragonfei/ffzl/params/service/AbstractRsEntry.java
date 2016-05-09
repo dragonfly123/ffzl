@@ -25,10 +25,10 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     public RecordSet execute(ParamWrap pw) {
         logger.debug("parameter is {}",pw.toString());
         RecordSet rs = new RecordSet();
-        ServiceResource serviceResource = getServiceResource(pw,"serviceinterface");
+        ServiceResource serviceResource = getServiceResource(pw.getFullservicename(),"serviceinterface",StringUtils.EMTY);
         ServiceResource sqlResource = null;
         if(isNeedLoadSqlResouce(pw,serviceResource)){
-            sqlResource = getServiceResource(pw,"sql");
+            sqlResource = getServiceResource((String) serviceResource.getResourceMap(pw.getServicename()).get("sqlsource"),"sql",pw.getFullservicename());
         }
 
         try {
@@ -141,7 +141,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
      * @param dataService
      */
     protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,DataService dataService){
-        List<Map<String,String>> list  =Lists.newArrayList(pw.getPageSize());
+        List<Map<String,?>> list  =Lists.newArrayList(pw.getPageSize());
         if(dataService != null){
             list.addAll(ObjectUtils.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
         }
@@ -160,14 +160,16 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         rs.setTotal(total);
     }
 
-    private ServiceResource getServiceResource(ParamWrap pw,String resourceName){
-        String servicename  = pw.getFullservicename();
-        String[] paths = StringUtils.split(servicename,"_");
-        String namespace = StringUtils.toCommaDelimitedString(paths,".");
-        String reallyNamespace = namespace.substring(0,namespace.lastIndexOf("."));
-        ResourceLoader resourceLoader = ResourceLoaderFactory.getResourceLoader("json",resourceName);
-        return resourceLoader.load(reallyNamespace);
+    private ServiceResource getServiceResource(String servicename,String resourceName,String relative){
+        if(!servicename.contains("_")){
+            servicename = relative.substring(0,relative.lastIndexOf("_")+1)+servicename;
+        }
 
+        String[] paths = StringUtils.split(servicename, "_");
+        String namespace = StringUtils.toCommaDelimitedString(paths, ".");
+        String reallyNamespace = namespace.substring(0, namespace.lastIndexOf("."));
+        ResourceLoader resourceLoader = ResourceLoaderFactory.getResourceLoader("json", resourceName);
+        return resourceLoader.load(reallyNamespace);
     }
 
 }

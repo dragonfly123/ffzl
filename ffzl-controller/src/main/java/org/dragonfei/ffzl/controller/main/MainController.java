@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,8 +27,11 @@ public class MainController {
     @Autowired private CommonDataService commonDataService;
     @Autowired private CommonService commonService;
     @RequestMapping("/index")
-    public String main(){
-        return "main";
+    public ModelAndView main(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("main");
+        mv.addObject("menu",commonService.select(new Menu()));
+        return mv;
     }
 
 
