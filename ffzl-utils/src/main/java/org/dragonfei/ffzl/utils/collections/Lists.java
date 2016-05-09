@@ -10,11 +10,15 @@ import java.util.List;
  */
 public abstract class Lists {
 	public static<T> List<T>  newArrayList(){
-		return com.google.common.collect.Lists.newArrayList();
+		return (List<T>) com.google.common.collect.Lists.newArrayList();
+	}
+
+	public static<T> List<T>  newArrayList(Class<T> tClass){
+		return (List<T>) com.google.common.collect.Lists.newArrayList();
 	}
 
 	public static <T> List<T> newArrayList(int num){
-		return com.google.common.collect.Lists.newArrayListWithCapacity(num);
+		return (List<T>)com.google.common.collect.Lists.newArrayListWithCapacity(num);
 	}
 
 
@@ -23,7 +27,7 @@ public abstract class Lists {
 			defaultList = com.google.common.collect.Lists.newArrayList();
 		}
 		defaultList.addAll(result);
-		return  result;
+		return   result;
 	}
 
 

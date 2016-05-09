@@ -63,11 +63,10 @@ public abstract class ResourceLoaderFactory {
             throw new IllegalArgumentException("不支持的文件类型:" + fileType);
         }
 
-        if ("serviceinterface".equals(resourceType)) {
-            fileParse = new ServiceInterfaceParse(fileParse);
-        } else if ("sql".equals(resourceType)) {
-            fileParse = new SqlResourceParse(fileParse);
-        } else {
+        if ("serviceinterface".equals(resourceType) || "sql".equals(resourceType)
+                || "servicemap".equals(resourceType)) {
+            fileParse = new MapResourceParse(fileParse);
+        }  else {
             throw new IllegalArgumentException("不支持的文件名：" + resourceType);
         }
         return ResourceLoader.getInstance(resourceType,fileParse);

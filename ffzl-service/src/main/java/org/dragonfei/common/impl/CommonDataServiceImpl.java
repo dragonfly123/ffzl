@@ -1,5 +1,6 @@
 package org.dragonfei.common.impl;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.dragonfei.common.CommonDataService;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
@@ -17,11 +18,11 @@ import java.util.Map;
  *Created by longfei on 16-4-24.
  */
 @Service
-public class CommonDataServiceImpl implements CommonDataService {
-    @Autowired private CommonRsEntry commonRsEntry;
+public class CommonDataServiceImpl<T> implements CommonDataService {
+    @Autowired private ServiceDelegate<T> serviceDelegate;
     @Override
-    public RecordSet execute(ParamWrap pw) {
-        return commonRsEntry.execute(pw);
+    public T execute(ParamWrap pw) {
+        return serviceDelegate.execute(pw);
     }
 
 

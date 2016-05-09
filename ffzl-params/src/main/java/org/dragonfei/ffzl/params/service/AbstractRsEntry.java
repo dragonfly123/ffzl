@@ -25,10 +25,10 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     public RecordSet execute(ParamWrap pw) {
         logger.debug("parameter is {}",pw.toString());
         RecordSet rs = new RecordSet();
-        ServiceResource serviceResource = getServiceResource(pw.getFullservicename(),"serviceinterface",StringUtils.EMTY);
+        ServiceResource serviceResource = ServiceResource.getServiceResource(pw.getFullservicename(),"serviceinterface",StringUtils.EMTY);
         ServiceResource sqlResource = null;
         if(isNeedLoadSqlResouce(pw,serviceResource)){
-            sqlResource = getServiceResource((String) serviceResource.getResourceMap(pw.getServicename()).get("sqlsource"),"sql",pw.getFullservicename());
+            sqlResource = ServiceResource.getServiceResource((String) serviceResource.getResourceMap(pw.getServicename()).get("sqlsource"),"sql",pw.getFullservicename());
         }
 
         try {
@@ -146,9 +146,13 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
             list.addAll(ObjectUtils.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
         }
         logger.info("then result is {}",list);
-        rs.setData(list);
+
+        rs.setData(handleData(pw,serviceResource,list));
     }
 
+    protected List<Map<String,?>> handleData(ParamWrap pw, ServiceResource serviceResource,List<Map<String,?>> list){
+        return list;
+    }
     protected void wrapTotalRecords(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource){
         rs.setTotalRecords(rs.getData().size());
     }
@@ -160,16 +164,5 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         rs.setTotal(total);
     }
 
-    private ServiceResource getServiceResource(String servicename,String resourceName,String relative){
-        if(!servicename.contains("_")){
-            servicename = relative.substring(0,relative.lastIndexOf("_")+1)+servicename;
-        }
-
-        String[] paths = StringUtils.split(servicename, "_");
-        String namespace = StringUtils.toCommaDelimitedString(paths, ".");
-        String reallyNamespace = namespace.substring(0, namespace.lastIndexOf("."));
-        ResourceLoader resourceLoader = ResourceLoaderFactory.getResourceLoader("json", resourceName);
-        return resourceLoader.load(reallyNamespace);
-    }
 
 }

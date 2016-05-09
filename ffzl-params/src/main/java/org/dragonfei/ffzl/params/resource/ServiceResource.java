@@ -6,6 +6,7 @@ import com.google.common.io.Files;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
+import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.springframework.core.io.Resource;
 
 import java.io.File;
@@ -111,6 +112,19 @@ public class ServiceResource {
             reload();
             return serviceMap.get(servicename);
         }
+    }
+
+
+    public static ServiceResource getServiceResource(String servicename,String resourceName,String relative){
+        if(!servicename.contains("_")){
+            servicename = relative.substring(0,relative.lastIndexOf("_")+1)+servicename;
+        }
+
+        String[] paths = StringUtils.split(servicename, "_");
+        String namespace = StringUtils.toCommaDelimitedString(paths, ".");
+        String reallyNamespace = namespace.substring(0, namespace.lastIndexOf("."));
+        ResourceLoader resourceLoader = ResourceLoaderFactory.getResourceLoader("json", resourceName);
+        return resourceLoader.load(reallyNamespace);
     }
 
 }

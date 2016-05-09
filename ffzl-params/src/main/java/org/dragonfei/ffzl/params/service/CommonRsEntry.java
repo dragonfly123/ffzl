@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 /**
  * Created by longfei on 16-4-30.
  */
-@Service
+@Service("commonRsEntry")
 public class CommonRsEntry extends AbstractRsEntry {
 
     /**
