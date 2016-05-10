@@ -1,6 +1,6 @@
 {
-  "querymennu":{
-    "idKey":"ID",
-    "pIdKey":"pId"
+  "menu":{
+    "idKey":"id",
+    "pIdKey":"pid"
   }
 }

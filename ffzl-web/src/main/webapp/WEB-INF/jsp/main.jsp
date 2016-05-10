@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,10 +52,11 @@
             <div class="">
                 <ul class="nav navbar-nav">
                     <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <a href="#" class="dropdown-toggle" style="font-size: 20px;font-style:normal;" data-toggle="dropdown">testttttttttttttttt</a>
-                    </li>
-
+                    <c:forEach items="${menu.data}" var="item">
+                        <li class="dropdown messages-menu">
+                            <a href="${item.addr}" class="dropdown-toggle" style="font-size:16px;font-style:normal;" data-toggle="dropdown">${item.text}</a>
+                        </li>
+                    </c:forEach>
                 </ul>
             </div>
             <div class="navbar-custom-menu">

@@ -2,6 +2,7 @@ package org.dragonfei.ffzl.controller.main;
 
 import org.dragonfei.common.CommonDataService;
 import org.dragonfei.common.CommonService;
+import org.dragonfei.common.impl.ServiceDelegate;
 import org.dragonfei.ffzl.domain.Menu;
 import org.dragonfei.ffzl.params.ParamUtils;
 import org.dragonfei.ffzl.params.ParamWrap;
@@ -24,13 +25,15 @@ import java.util.Map;
 @RequestMapping("/main")
 public class MainController {
 
-    @Autowired private CommonDataService commonDataService;
+    @Autowired private ServiceDelegate serviceDelegate;
     @Autowired private CommonService commonService;
     @RequestMapping("/index")
     public ModelAndView main(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("main");
-        mv.addObject("menu",commonService.select(new Menu()));
+        ParamWrap pw = new ParamWrap();
+        pw.setServicename("ffzl_base_menu");
+        mv.addObject("menu",serviceDelegate.execute(pw));
         return mv;
     }
 
@@ -46,6 +49,6 @@ public class MainController {
     public <T> T execute(HttpServletRequest request){
         ParamWrap pw = ParamUtils.buildParams(request);
 
-        return (T)commonDataService.execute(pw);
+        return (T)serviceDelegate.execute(pw);
     }
 }

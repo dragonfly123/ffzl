@@ -1,9 +1,9 @@
 package org.dragonfei.common.impl;
 
 
-import org.dragonfei.common.ServiceEntry;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
+import org.dragonfei.ffzl.params.service.ServiceEntry;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.spring.SpringContextUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;

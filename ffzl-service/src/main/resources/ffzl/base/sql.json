@@ -1,10 +1,10 @@
 {
-  "test":{
+  "menu":{
     "sql":"select @column from T_MENU WHERE 1=1 @A",
     "param":{
       "@A" :"createtime",
       "@B" :"createtime"
     },
-    "desc":"test"
+    "desc":"菜单"
   }
 }

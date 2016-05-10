@@ -1,6 +1,6 @@
 
 {
-  "test":{
+  "menu":{
     "input":[
       {"name":"createtime","type":"D","cond":"bt","column":"CREATETIME","default":"m"}
     ],
@@ -13,6 +13,6 @@
       {"name":"lastmodifytime","column":"LASTMODIFYTIME","desc":"最后修改时间","fomat":"D"}
     ],
     "orderby":"id",
-    "sqlsource":"ffzl_base_test"
+    "sqlsource":"menu"
   }
 }
