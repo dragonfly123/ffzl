@@ -9,6 +9,12 @@
 
     <context:component-scan base-package="org.dragonfei.ffzl.main"/>
     <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:resources mapping="/bootstrap/**" location="/bootstrap"></mvc:resources>
+    <mvc:resources mapping="/build/**" location="/build"></mvc:resources>
+    <mvc:resources mapping="/dist/**" location="/dist"></mvc:resources>
+    <mvc:resources mapping="/documentation/**" location="/documentation"></mvc:resources>
+    <mvc:resources mapping="/pages/**" location="/pages"></mvc:resources>
+    <mvc:resources mapping="/plugins/**" location="/plugins"></mvc:resources>
     <mvc:view-resolvers>
         <mvc:jsp cache-views="true" prefix="/WEB-INF/jsp/"/>
     </mvc:view-resolvers>

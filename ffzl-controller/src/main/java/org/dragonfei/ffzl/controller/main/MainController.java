@@ -36,7 +36,7 @@ public class MainController {
 
     @Autowired private ServiceDelegate serviceDelegate;
     @Autowired private CommonService commonService;
-    @RequestMapping("/menu")
+    @RequestMapping("/dashboard")
     public String main(@RequestParam Map<String,String> map, Model model){
         ParamWrap pw = new ParamWrap();
         pw.setServicename("ffzl_base_menu");
@@ -48,7 +48,7 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping("/menu/{menuId}")
+    @RequestMapping("/dashboard/{menuId}")
     public String menu(@RequestParam Map<String,String> map, Model model, @PathVariable("menuId")String menuId){
 
         ParamWrap pw = new ParamWrap();
@@ -62,11 +62,12 @@ public class MainController {
         if(!ObjectUtils.isEmpty(rs.getData())){
             for(Map<String,?> item:rs.getData()){
                 if(StringUtils.equals((String)item.get(id),menuId)){
-                    model.addAttribute("children",ObjectUtils.nvl(item.get("children"), Lists.newArrayList()));
+                    model.addAttribute("children",item);
                     break;
                 }
             }
         }
+        model.addAttribute("menu",rs);
         return "main";
     }
 
