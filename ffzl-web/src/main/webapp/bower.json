@@ -1,0 +1,22 @@
+{
+  "name": "ffzl",
+  "homepage": "https://github.com/dragonfly123/ffzl",
+  "authors": [
+    "longfei <longfei@u51.com>"
+  ],
+  "description": "ffzl",
+  "main": "main",
+  "keywords": [
+    "ffzl"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "scripts/lib",
+    "test",
+    "tests"
+  ]
+}
