@@ -1,10 +1,10 @@
 {
-  "name": "ffzl-web",
+  "name": "ffzl",
   "homepage": "https://github.com/dragonfly123/ffzl",
   "authors": [
-    "longfei <18698572498@163.com>"
+    "longfei <longfei@u51.com>"
   ],
-  "description": "ffzl-web",
+  "description": "ffzl",
   "main": "main",
   "keywords": [
     "ffzl"
@@ -15,14 +15,8 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "js/lib",
+    "scripts/lib",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "angular": "angularjs#^1.5.5",
-    "bootstrap": "^3.3.6",
-    "jquery": "^2.2.3",
-    "requirejs": "^2.2.0"
-  }
+  ]
 }
