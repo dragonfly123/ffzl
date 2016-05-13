@@ -39,10 +39,40 @@ module.exports = function(grunt) {
                 dest: 'build/<%= pkg.name %>.min.js'
             }*/
         },
+        jshint: {
+            options: {
+                bitwise:true,
+                freeze:true,
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                browser: true,
+                globals: {
+                    jQuery: true,
+                    angular:true,
+                    alert:true
+                },
+                funcscope:false,
+                latedef:"nofunc",
+                noempty:true,
+                nonbsp:true,
+                undef:true,
+                unused:false
+            },
+            compile:{
+                options: {
+                    curly: true,
+                    undef: true,
+                },
+                files: {
+                    src: ['src/**/*.js']
+                },
+            }
+        },
         watch:{
             scripts:{
                 files:["src/**/*.js"],
-                tasks:["minall"],
+                tasks:["compile","minall"],
                 options:{
                     spawn:true,
                     interrupt:true
@@ -59,6 +89,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
 
     // 默认被执行的任务列表。
+    grunt.registerTask('compile', ['jshint:compile']);
     grunt.registerTask('minall', ['uglify:buildall']);
     grunt.registerTask('default', ['concat','uglify']);
 
