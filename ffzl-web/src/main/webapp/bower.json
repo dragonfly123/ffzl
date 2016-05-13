@@ -2,7 +2,7 @@
   "name": "ffzl",
   "homepage": "https://github.com/dragonfly123/ffzl",
   "authors": [
-    "longfei <longfei@u51.com>"
+    "longfei <18698572498@163.com>"
   ],
   "description": "ffzl",
   "main": "main",
@@ -18,5 +18,11 @@
     "scripts/lib",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.5.5",
+    "domReady": "^2.0.1",
+    "requirejs": "^2.2.0",
+    "bootstrap": "^3.3.6"
+  }
 }
