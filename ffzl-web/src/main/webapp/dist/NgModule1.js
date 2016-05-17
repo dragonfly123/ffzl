@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var counter=0;for(var p in angular)counter++,angular.isFunction(angular[p]);var helloModdule=angular.module("HelloAngular",[]);helloModdule.controller("helloNgCtrl",["$scope",function(a){a.greeting={text:"Hello"}}]);

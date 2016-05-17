@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.controller("LoadDataCtrl",["$scope","$http",function(a,b){b({method:"GET",url:"data.json"}).success(function(b,c,d,e){a.users=b}).error(function(a,b,c,d){})}]);

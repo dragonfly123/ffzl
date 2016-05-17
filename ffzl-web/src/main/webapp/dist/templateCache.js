@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.run(function(a){a.put("hello.html","<div>Hi everyone</div>")}),myModule.directive("hello",function(a){return{restrict:"AECM",template:a.get("hello.html"),replace:!0}});

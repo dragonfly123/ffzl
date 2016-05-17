@@ -1,0 +1,28 @@
+  <!-- navbar -->
+  <!--<div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div>-->
+  <div ui-view="app_header"></div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div ui-view="app_menu"></div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+    <div class="app-content-body fade-in-up" ui-view="app_content"></div>
+  </div>
+  <!-- /content -->
+
+  <!-- aside right -->
+  <div ui-view="app_aside"></div>
+  <!-- / aside right -->
+
+  <!-- footer -->
+  <div ui-view="app_footer"></div>
+
+  <!-- / footer -->
+  <div ui-view="app_settings"></div>
+

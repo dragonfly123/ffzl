@@ -9,10 +9,10 @@ myModule.factory('AngelloHelper',function(){
             tempArray[source[i][property]] = source[i];
         }
         return tempArray;
-    }
+    };
     return {
         buildIndex:buildIndex
-    }
+    };
 });
 myModule.service('AngelloModel',function(){
     var service = this,
@@ -43,7 +43,7 @@ myModule.service('AngelloModel',function(){
         }];
     service.getStories = function(){
         return stories;
-    }
+    };
 });
 myModule.controller('MainCtrl',function(AngelloModel){
     var main = this;
@@ -57,8 +57,8 @@ myModule.controller('MainCtrl',function(AngelloModel){
             type:"Feature",
             reporter:"Lukas Ruebbelke",
             assignee:"Brian Ford"
-        })
-    }
+        });
+    };
 });
 myModule.directive('story',function(){
     alert("aadsaddsaddsdjkltestfdsfdsad");
@@ -66,5 +66,5 @@ myModule.directive('story',function(){
         scope:true,
         replace:true,
         template:"<div><h4>{{story.title}}</h4><p>{{story.description}}</p></div>"
-    }
+    };
 });

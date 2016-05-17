@@ -7,5 +7,5 @@ myModule.directive("hello",function () {
         restrict:"E",
         template:"<div>Hi everyone!</div>",
         replace:true
-    }
-})
+    };
+});

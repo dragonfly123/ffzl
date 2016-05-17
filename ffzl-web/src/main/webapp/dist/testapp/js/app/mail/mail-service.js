@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+app.factory("mails",["$http",function(a){var b="js/app/mail/mails.json",c=a.get(b).then(function(a){return a.data.mails}),d={};return d.all=function(){return c},d.get=function(a){return c.then(function(b){for(var c=0;c<b.length;c++)if(b[c].id==a)return b[c];return null})},d}]);

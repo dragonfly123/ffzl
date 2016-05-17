@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myServiceApp=angular.module("MyServiceApp",[]);myServiceApp.factory("userListService",["$http",function(a){var b=function(b,c){return a({method:"GET",url:"users.json"})};return{userList:function(a){return b(a,"userList")}}}]),myServiceApp.controller("ServiceController",["$scope","$timeout","userListService",function(a,b,c){var d;a.$watch("username",function(e){e&&(d&&b.cancel(d),d=b(function(){c.userList(e).success(function(b,c){a.users=b})},350))})}]);

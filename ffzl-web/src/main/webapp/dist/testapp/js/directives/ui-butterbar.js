@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+angular.module("app").directive("uiButterbar",["$rootScope","$anchorScroll",function(a,b){return{restrict:"AC",template:'<span class="bar"></span>',link:function(a,c,d){c.addClass("butterbar hide"),a.$on("$stateChangeStart",function(a){b(),c.removeClass("hide").addClass("active")}),a.$on("$stateChangeSuccess",function(a,b,d,e){a.targetScope.$watch("$viewContentLoaded",function(){c.addClass("hide").removeClass("active")})})}}}]);

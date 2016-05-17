@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../scripts/lib/angular/angular.js"></script>
+    <script src="HttpBasic.js"></script>
+    <style>
+        @import "../scripts/lib/bootstrap/dist/css/bootstrap.css";
+    </style>
+</head>
+<body>
+<div ng-controller="LoadDataCtrl">
+    <ul>
+       <li ng-repeat="user in users">
+           {{user.name}}
+       </li>
+    </ul>
+</div>
+</body>
+</html>

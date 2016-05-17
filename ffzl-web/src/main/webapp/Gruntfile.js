@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             },
             dist:{
                 src:['src/**/*.js'],
-                dest:'dist/<%= pkg.name %>'
+                dest:'dist/<%= pkg.name %>.js'
             }
         },
         uglify: {
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                 files:[{
                     expand:true,
                     cwd:"src",
-                    src:"**!/!*.js",
+                    src:"**/*.js",
                     dest:"dist"
                 }]
             },
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
         watch:{
             scripts:{
                 files:["src/**/*.js"],
-                tasks:["compile","minall"],
+                tasks:["compileall","minall"],
                 options:{
                     spawn:true,
                     interrupt:true
@@ -89,8 +89,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
 
     // 默认被执行的任务列表。
-    grunt.registerTask('compile', ['jshint:compile']);
     grunt.registerTask('minall', ['uglify:buildall']);
-    grunt.registerTask('default', ['concat','uglify']);
+    grunt.registerTask('compileall', ['jshint:compile']);
+    grunt.registerTask('default', ['concat','buildall']);
 
 };

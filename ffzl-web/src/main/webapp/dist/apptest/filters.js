@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var bookStoreFilters=angular.module("bookStoreFilters",[]);bookStoreFilters.directive("bookStoreFilter_1",["$scope",function(a){}]),bookStoreFilters.directive("bookStoreFilter_2",["$scope",function(a){}]);

@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.directive("hello",function(){return{restrict:"AE",template:"<div>Hi  everyOne <div ng-transclude></div></div>",transclude:!0}});

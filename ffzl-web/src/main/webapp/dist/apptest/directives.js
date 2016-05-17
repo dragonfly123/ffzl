@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var bookStoreDirectives=angular.module("bookStoreDirectives",[]);bookStoreDirectives.directive("bookStireDirective_1",["$scope",function(a){}]),bookStoreDirectives.directive("bookStireDirective_2",["$scope",function(a){}]);

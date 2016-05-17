@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var bookStoreServices=angular.module("bookStoreServices",[]);bookStoreServices.directive("bookStoreService_1",["$scope",function(a){}]),bookStoreServices.directive("bookStoreService_2",["$scope",function(a){}]);

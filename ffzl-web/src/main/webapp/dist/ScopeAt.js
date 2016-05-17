@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.controller("MyCtrl",["$scope",function(a){a.ctrlFlavor="百威",a.sayHello=function(a){alert("Hello "+a)}}]),myModule.directive("drink",function(){return{restroct:"AE",scope:{flavor:"="},template:"<input type='text' ng-model='flavor'>"}}),myModule.directive("greeting",function(){return{restrict:"AE",scope:{greet:"&"},template:"<br/><input  type='text' ng-model='userName'/><br/><button  class='btn btn-default' ng-click='greet({name:userName})'>greet</button>"}});

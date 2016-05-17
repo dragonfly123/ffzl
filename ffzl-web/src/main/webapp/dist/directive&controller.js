@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.controller("MyCtrl",["$scope",function(a){a.loadData=function(){}}]),myModule.controller("MyCtrl2",["$scope",function(a){a.loadData2=function(){}}]),myModule.directive("loader",function(){return{restrict:"AE",link:function(a,b,c){b.bind("mouseenter",function(){a.$apply(c.howtoload)})}}});

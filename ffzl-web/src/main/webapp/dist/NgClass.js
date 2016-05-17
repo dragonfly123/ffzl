@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myCssModule=angular.module("MyCSSModule",[]);myCssModule.controller("HeaderController",["$scope",function(a){a.isError=!1,a.isWarning=!1,a.showError=function(){a.messageText="This is an error!",a.isError=!0,a.isWarning=!1},a.showError=function(){a.messageText="This is an error!",a.isError=!0,a.isWarning=!1},a.showWarning=function(){a.messageText="This is an isWarning!",a.isError=!1,a.isWarning=!0}}]);

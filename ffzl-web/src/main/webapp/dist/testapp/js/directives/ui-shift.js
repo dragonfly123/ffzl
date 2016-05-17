@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+angular.module("app").directive("uiShift",["$timeout",function(a){return{restrict:"A",link:function(b,c,d){function e(){a(function(){var a=d.uiShift,b=d.target;h.hasClass("in")||h[a](b).addClass("in")})}function f(){g&&g.prepend(c),!g&&h.insertAfter(j),h.removeClass("in")}var g,h=$(c),i=$(window),j=h.prev(),k=i.width();!j.length&&(g=h.parent()),768>k&&e()||f(),i.resize(function(){k!==i.width()&&a(function(){i.width()<768&&e()||f(),k=i.width()})})}}}]);

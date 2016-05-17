@@ -1,0 +1,2 @@
+/*! ffzl 2016-05-16 */
+var myModule=angular.module("MyModule",[]);myModule.controller("MyCtrl",["$scope",function(a){a.getName="longfei test"}]),angular.element(document).ready(function(){angular.bootstrap(document,["MyModule"])});

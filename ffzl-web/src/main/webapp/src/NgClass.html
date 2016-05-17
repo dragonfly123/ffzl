@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyCSSModule">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../scripts/lib/angular/angular.js"></script>
+    <script src="NgClass.js"></script>
+    <style>
+        @import "../scripts/lib/bootstrap/dist/css/bootstrap.css";
+        .error{
+            background-color: red;
+        }
+        .warning{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="HeaderController">
+    <div ng-class="{error:isError,warning:isWarning}">{{messageText}}</div>
+    <button  ng-click="showError()">Simulate Error</button>
+    <button  ng-click="showWarning()">Simulate Warning</button>
+</div>
+</body>
+</html>
