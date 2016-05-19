@@ -1,10 +1,11 @@
 /**
  * Created by longfei on 16-5-16.
  */
-define(["app","angular"],function (app,angular) {
+define(["require"],function (require) {
     "use strict";
     /* Controllers */
-        return app.controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
+    require(["app","angular"],function (app,angular) {
+        app.controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
             function($scope,   $translate,   $localStorage,   $window ) {
                 // add 'ie' classes to html
                 var isIE = !!navigator.userAgent.match(/MSIE/i);
@@ -75,4 +76,5 @@ define(["app","angular"],function (app,angular) {
                 }
 
             }]);
+    })
 })

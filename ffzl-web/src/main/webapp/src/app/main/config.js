@@ -17,6 +17,7 @@
             // js/lib/jquery-1.9.0.js, relative to
             // the HTML page.
             "angular":'scripts/lib/angular/angular',
+            "jquery":"scripts/lib/jquery/dist/jquery",
             "angularAMD":"scripts/lib/angularAMD/angularAMD.js",
             "angular-animate":'scripts/lib/angular-animate/angular-animate',
             "angular-ui-router":"scripts/lib/angular-ui-router/release/angular-ui-router",
@@ -25,11 +26,10 @@
             "angular-cookies":"scripts/lib/angular-cookies/angular-cookies",
             "angular-storage-cookies":"scripts/lib/angular-translate-storage-cookie/angular-translate-storage-cookie",
             "angular-translate-storage-local":"scripts/lib/angular-translate-storage-local/angular-translate-storage-local",
+            "angular-ui-jq":"scripts/lib/angular-ui-jq/ui-jq",
             "ngStorage":"scripts/lib/ngstorage/ngStorage",
             "domReady":"scripts/lib/domReady/domReady",
-            "app":"src/app/main/app",
-            "app-controller":"src/app/main/controllers/appcontroller",
-            "app-router":"src/app/main/routers/router"
+            "app":"src/app/main/app"
 
         } ,
         shim:{
@@ -67,6 +67,10 @@
             "ngStorage":{
                 deps:["angular"],
                 exports:"ngStorage"
+            },
+            "angular-ui-jq":{
+                deps:["angular","jquery"],
+                exports:"ui_jq"
             }
         },
         deps:["src/app/main/boot"]
