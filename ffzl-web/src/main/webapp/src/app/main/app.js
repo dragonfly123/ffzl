@@ -4,12 +4,19 @@
 define(["angular","ngStorage","angular-animate",
     "angular-ui-router","angular-translate",
     "angular-translate-loader-static-files",
-    "angular-translate-storage-local","angular-cookies"],function (angular) {
+    "angular-translate-storage-local","angular-cookies",
+    "angualr-ui-load","angular-ui-jq","ffzl-ui","ui-nav",
+    "ui-bootstrap-tpls","ng-fullscreen","ffzl-common"],function (angular) {
     'use strict';
     return angular.module('app', [
         'ui.router',
         "ngCookies",
         "ngStorage",
-        "pascalprecht.translate"
+        "pascalprecht.translate",
+        "ui.load",
+        "ui.jq",
+        "ffzl.ui",
+        "ui.bootstrap",
+        "ngFullscreen"
     ]);
 });

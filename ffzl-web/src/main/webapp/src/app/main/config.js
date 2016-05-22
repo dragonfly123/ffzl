@@ -20,6 +20,8 @@
             "jquery":"scripts/lib/jquery/dist/jquery",
             "angularAMD":"scripts/lib/angularAMD/angularAMD.js",
             "angular-animate":'scripts/lib/angular-animate/angular-animate',
+            'ui-bootstrap':"scripts/lib/angular-bootstrap/ui-bootstrap",
+            "ui-bootstrap-tpls":"scripts/lib/angular-bootstrap/ui-bootstrap-tpls",
             "angular-ui-router":"scripts/lib/angular-ui-router/release/angular-ui-router",
             "angular-translate":"scripts/lib/angular-translate/angular-translate",
             "angular-translate-loader-static-files":"scripts/lib/angular-translate-loader-static-files/angular-translate-loader-static-files",
@@ -27,18 +29,36 @@
             "angular-storage-cookies":"scripts/lib/angular-translate-storage-cookie/angular-translate-storage-cookie",
             "angular-translate-storage-local":"scripts/lib/angular-translate-storage-local/angular-translate-storage-local",
             "angular-ui-jq":"scripts/lib/angular-ui-jq/ui-jq",
+            "angualr-ui-load":"scripts/lib/angular-ui-load/ui-load",
             "ngStorage":"scripts/lib/ngstorage/ngStorage",
+            "ng-fullscreen":"scripts/lib/ng-fullscreen/ng-fullscreen",
+            "app":"src/app/main/app",
+            "ffzl-ui":"src/app/ui/ffzl-ui",
+            "ffzl-common":"src/app/ui/directives/common",
+            "ui-nav":"src/app/ui/directives/ui-nav",
             "domReady":"scripts/lib/domReady/domReady",
-            "app":"src/app/main/app"
 
         } ,
         shim:{
             "angular":{
+                deps:["jquery"],
                 exports:"angular"
             },
             'angular-animate': {
                 deps: ['angular'],   //依赖什么模块
                 exports: 'ngAnimateModule'
+            },
+            "ng-fullscreen":{
+                deps:["angular"],
+                exports:"fullscreen"
+            },
+            "ui-bootstrap":{
+                deps:['angular'],
+                exports:"ui_bootstrap"
+            },
+            "ui-bootstrap-tpls":{
+                deps:['angular'],
+                exports:"ui_bootstrap_tpls"
             },
             'angular-ui-router':{
                 deps:["angular"],
@@ -71,7 +91,11 @@
             "angular-ui-jq":{
                 deps:["angular","jquery"],
                 exports:"ui_jq"
-            }
+            },
+            "angualr-ui-load":{
+                deps:["angular"],
+                exports:"ui_load"
+            },
         },
         deps:["src/app/main/boot"]
     });

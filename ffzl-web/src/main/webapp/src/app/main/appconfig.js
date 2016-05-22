@@ -27,10 +27,10 @@ define(["require"],function (require) {
             $translateProvider.preferredLanguage('en');
             // Tell the module to store the language in the local storage
             $translateProvider.useLocalStorage();
-        }]); 
-    }).constant({
-        "JQ_CONFIG":{
-            slimScroll:     ['vendor/jquery/slimscroll/jquery.slimscroll.min.js'],
-        }
-    })
-})
+        }]);
+        app.constant('JQ_CONFIG',{
+            slimScroll:     ['../../scripts/lib/slimScroll/jquery.slimscroll.js'],
+        });
+    });
+
+});

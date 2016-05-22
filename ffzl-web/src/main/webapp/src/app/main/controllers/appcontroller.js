@@ -38,8 +38,65 @@ define(["require"],function (require) {
                         asideDock: false,
                         container: false
                     }
-                }
-
+                };
+                $scope.tree = [
+                    {
+                        "name":"Navigation",
+                        "translate":"aside.nav.HEADER",
+                        "items":[
+                            {
+                                icon:"glyphicon-stats",
+                                "translate":"aside.nav.DASHBOARD",
+                                "text":"Dashboard",
+                                "router":"",
+                                "subitems":[
+                                    {
+                                        router:"app.dashboard-v1",
+                                        pullright:"",
+                                        text:"Dashboard v1",
+                                    },{
+                                        router:"app.dashboard-v2",
+                                        pullright:"N",
+                                        text:"Dashboard v2",
+                                    },
+                                ]
+                            }, {
+                                icon:"glyphicon-calendar",
+                                "translate":"aside.nav.CALENDAR",
+                                "text":"Calendar",
+                                "router":"app.calendar"
+                            }
+                        ]
+                    },{
+                        "name":"Navigation1",
+                        "translate":"aside.nav.HEADER",
+                        "items":[
+                            {
+                                icon:"glyphicon-stats",
+                                "translate":"aside.nav.DASHBOARD",
+                                "text":"Dashboard",
+                                "router":"",
+                                "subitems":[
+                                    {
+                                        router:"app.dashboard-v1",
+                                        pullright:"",
+                                        text:"Dashboard v1",
+                                    },{
+                                        router:"app.dashboard-v2",
+                                        pullright:"N",
+                                        text:"Dashboard v2",
+                                    },
+                                ]
+                            }, {
+                                icon:"glyphicon-calendar",
+                                "translate":"aside.nav.CALENDAR",
+                                "text":"Calendar",
+                                "router":"app.calendar"
+                            }
+                        ]
+                    }
+                ]
+                
                 // save settings to local storage
                 if ( angular.isDefined($localStorage.settings) ) {
                     $scope.app.settings = $localStorage.settings;

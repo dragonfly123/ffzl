@@ -33,8 +33,8 @@
 
         <!-- link and dropdown -->
         <ul class="nav navbar-nav hidden-sm">
-            <li class="dropdown pos-stc" dropdown>
-                <a href class="dropdown-toggle" dropdown-toggle>
+            <li class="dropdown pos-stc" uib-dropdown>
+                <a href class="dropdown-toggle" uib-dropdown-toggle>
                     <span>Mega</span>
                     <span class="caret"></span>
                 </a>
@@ -136,8 +136,8 @@
                     </div>
                 </div>
             </li>
-            <li class="dropdown" dropdown>
-                <a href class="dropdown-toggle" dropdown-toggle>
+            <li class="dropdown" uib-dropdown>
+                <a href class="dropdown-toggle" uib-dropdown-toggle>
                     <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
                     <span translate="header.navbar.new.NEW">New</span> <span class="caret"></span>
                 </a>
@@ -163,7 +163,7 @@
         <!-- / link and dropdown -->
 
         <!-- search form -->
-        <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+        <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search">
             <div class="form-group">
                 <div class="input-group">
                     <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
@@ -177,8 +177,8 @@
 
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown>
-                <a href class="dropdown-toggle" dropdown-toggle>
+            <li class="dropdown hidden-sm" is-open="lang.isopen" uib-dropdown>
+                <a href class="dropdown-toggle" uib-dropdown-toggle>
                     {{selectLang}} <b class="caret"></b>
                 </a>
                 <!-- dropdown -->
@@ -190,10 +190,10 @@
                 <!-- / dropdown -->
             </li>
             <li class="hidden-xs">
-                <a ui-fullscreen></a>
+                <a ffzl-full></a>
             </li>
-            <li class="dropdown" dropdown>
-                <a href class="dropdown-toggle" dropdown-toggle>
+            <li class="dropdown" uib-dropdown>
+                <a href class="dropdown-toggle" uib-dropdown-toggle>
                     <i class="icon-bell fa-fw"></i>
                     <span class="visible-xs-inline">Notifications</span>
                     <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
@@ -229,8 +229,8 @@
                 </div>
                 <!-- / dropdown -->
             </li>
-            <li class="dropdown" dropdown>
-                <a href class="dropdown-toggle clear" dropdown-toggle>
+            <li class="dropdown" uib-dropdown>
+                <a href class="dropdown-toggle clear" uib-dropdown-toggle>
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="img/a0.jpg" alt="...">
                 <i class="on md b-white bottom"></i>
