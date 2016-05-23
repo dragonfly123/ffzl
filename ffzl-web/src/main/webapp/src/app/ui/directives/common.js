@@ -6,7 +6,7 @@ define(["require"],function (require) {
         ui.directive("ffzlFull",["$document",'Fullscreen',function ($document,Fullscreen) {
             return {
                 restrict: 'AC',
-                template:'<i class="fa fa-expand fa-fw text"></i><i class="fa fa-compress fa-fw text-active"></i>',
+                template:'<i class="icon-size-fullscreen text"></i><i class="icon-size-actual  text-active"></i>',
                 link: function(scope, el, attr) {
                     el.on('click', function (ev) {
                         if(Fullscreen.isSupported()){

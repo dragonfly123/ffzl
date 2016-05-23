@@ -68,18 +68,19 @@
                                 <i class='fa fa-fw fa-angle-down text-active'></i>
                             </span>
                             <i class='glyphicon {{item.icon}} icon text-primary-dker'></i>
-                            <span class='font-bold' translate='{{item.translate}}'>{{item.text}}</span>
+                            <span class='font-bold hidden-folded' translate='{{item.translate}}'>{{item.text}}</span>
                         </a>
                         <ul class='nav nav-sub dk'>
                             <li class='nav-sub-header'>
                                 <a href>
-                                    <span translate='{{item.translate}}'>{{item.text}}</span>
+                                    <i class='glyphicon {{item.icon}} icon text-primary-dker'></i>
+                                    <span class="hidden-folded" translate='{{item.translate}}'>{{item.text}}</span>
                                 </a>
                             </li>
                             <li ng-repeat='subitem in item.subitems' ui-sref-active='active'>
                                 <a ui-sref='{{subitem.router}}'>
-                                    <b class='label bg-info pull-right' ng-if='subitem.pullright'>{{subitem.pullright}}</b>
-                                    <span>{{subitem.text}}</span>
+                                    <b class='label bg-info pull-right hidden-folded' ng-if='subitem.pullright'>{{subitem.pullright}}</b>
+                                    <span class="hidden-folded">{{subitem.text}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -87,7 +88,7 @@
                     <li  ng-repeat="item in group.items" ng-if='!item.subitems || item.subitems.length == 0' ui-sref-active='active'>
                                 <a ui-sref='{{item.router}}'>
                                     <i class='glyphicon icon text-info-dker {{item.icon}}'></i>
-                                    <span class='font-bold' translate='{{item.translate}}'>{{item.text}}</span>
+                                    <span class='font-bold hidden-folded' translate='{{item.translate}}'>{{item.text}}</span>
                                 </a>
                             </li>
 
