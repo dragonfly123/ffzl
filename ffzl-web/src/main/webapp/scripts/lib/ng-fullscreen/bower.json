@@ -1,0 +1,20 @@
+{
+  "name": "ng-fullscreen",
+  "description": "An AngularJS service and a directive to quickly use the HTML5 fullscreen API",
+  "version": "1.0.1",
+  "homepage": "https://github.com/shader/ng-fullscreen",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shader/ng-fullscreen"
+  },
+  "main": "./ng-fullscreen.js",
+  "keywords": [
+    "fullscreen api",
+    "html5",
+    "angularjs"
+  ],
+  "dependencies": {
+    "angular": "~1.2.1"
+  },
+  "license": "MIT"
+}

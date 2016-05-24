@@ -1,0 +1,25 @@
+{
+  "name": "angular-ui-jq",
+  "version": "0.1.1",
+  "main": "ui-jq.js",
+  "license": "MIT",
+  "homepage": "https://github.com/leadstec/angular-ui-jq",
+  "ignore": [
+    "src",
+    "example"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7",
+    "angular": ">=1.2.0"
+  },
+  "_release": "0.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.1",
+    "commit": "f161f64a4f8f84aac628d738bda01501406d176f"
+  },
+  "_source": "https://github.com/puxos/angular-ui-jq.git",
+  "_target": "^0.1.1",
+  "_originalSource": "angular-ui-jq",
+  "_direct": true
+}
