@@ -9,14 +9,11 @@
 
     <context:component-scan base-package="org.dragonfei.ffzl.main"/>
     <mvc:annotation-driven></mvc:annotation-driven>
-    <mvc:resources mapping="/bootstrap/**" location="/bootstrap"></mvc:resources>
-    <mvc:resources mapping="/build/**" location="/build"></mvc:resources>
-    <mvc:resources mapping="/dist/**" location="/dist"></mvc:resources>
-    <mvc:resources mapping="/documentation/**" location="/documentation"></mvc:resources>
-    <mvc:resources mapping="/pages/**" location="/pages"></mvc:resources>
-    <mvc:resources mapping="/plugins/**" location="/plugins"></mvc:resources>
+    <mvc:resources location="/src/app/img/" mapping="/src/app/img/**"/>
+    <mvc:resources location="/scripts/" mapping="/scripts/**"/>
+    <mvc:resources location="/dist/" mapping="/dist/**"/>
     <mvc:view-resolvers>
-        <mvc:jsp cache-views="true" prefix="/WEB-INF/jsp/"/>
+        <mvc:jsp cache-views="true" prefix="/"/>
     </mvc:view-resolvers>
     <bean id="taskpThreadPool" class="org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean">
         <property name="corePoolSize" value="20"/>

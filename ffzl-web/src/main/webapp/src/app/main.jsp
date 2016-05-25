@@ -23,6 +23,7 @@
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";
+        var MENU = ${menu};
     </script>
     <script data-main="<%=request.getContextPath()%>/src/app/main/config.js" src="<%=request.getContextPath()%>/scripts/lib/requirejs/require.js"></script>
 </head>

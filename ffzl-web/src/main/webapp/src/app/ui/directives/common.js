@@ -22,7 +22,77 @@ define(["require"],function (require) {
                 }
             };
         }]);
-
+       
+        ui.directive("menuItem",["$document",function ($document) {
+            return {
+                restrict: 'E',
+                scope:{
+                    item:"="
+                },
+                replace:true,
+                template:'<a href class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
+                link: function(scope, el, attr) {
+                    el.on('click', function (ev) {
+                        var itemArray = [];
+                        angular.forEach(scope.item.children,function (e) {
+                            var subArray = [];
+                            if(e.children){
+                                angular.forEach(e.children,function (ec) {
+                                    subArray.push({
+                                        router:"",
+                                        pullright:"",
+                                        text:ec.text
+                                    });
+                                });
+                            }
+                            itemArray.push({
+                                icon: "glyphicon-stats",
+                                "translate": "aside.nav.DASHBOARD",
+                                "text":e.text,
+                                router:"",
+                                subitems:subArray
+                            });
+                        });
+                        $scope.tree = [
+                            {
+                                "name": "Navigation",
+                                "translate": "aside.nav.HEADER",
+                                items:itemArray
+                            }
+                        ];
+             /*           $scope.tree = [
+                            {
+                                "name": "Navigation",
+                                "translate": "aside.nav.HEADER",
+                                "items": [
+                                    {
+                                        icon: "glyphicon-stats",
+                                        "translate": "aside.nav.DASHBOARD",
+                                        "text": "Dashboard",
+                                        "router": "",
+                                        "subitems": [
+                                            {
+                                                router: "app.dashboard-v1",
+                                                pullright: "",
+                                                text: "Dashboard v1",
+                                            }, {
+                                                router: "app.dashboard-v2",
+                                                pullright: "N",
+                                                text: "Dashboard v2",
+                                            },
+                                        ]
+                                    }, {
+                                        icon: "glyphicon-calendar",
+                                        "translate": "aside.nav.CALENDAR",
+                                        "text": "Calendar",
+                                        "router": "app.calendar"
+                                    }
+                                ]
+                            }];*/
+                    });
+                }
+            };
+        }]);
         ui.directive('uiToggleClass', ['$timeout', '$document', function ($timeout, $document) {
             return {
                 restrict: 'AC',

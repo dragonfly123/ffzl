@@ -36,7 +36,7 @@ public class MainController {
 
     @Autowired private ServiceDelegate serviceDelegate;
     @Autowired private CommonService commonService;
-    @RequestMapping("/dashboard")
+    //@RequestMapping("/dashboard")
     public String main(@RequestParam Map<String,String> map, Model model){
         ParamWrap pw = new ParamWrap();
         pw.setServicename("ffzl_base_menu");
@@ -45,7 +45,7 @@ public class MainController {
             model.addAttribute("children",rs.getData().get(0));
         }
         model.addAttribute("menu",rs);
-        return "main";
+        return "src/app/main";
     }
 
     @RequestMapping("/dashboard/{menuId}")

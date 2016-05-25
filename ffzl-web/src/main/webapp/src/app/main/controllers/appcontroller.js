@@ -39,6 +39,7 @@ define(["require"],function (require) {
                         container: false
                     }
                 };
+                $scope.menu = MENU;
                 $scope.tree = [
                     {
                         "name":"Navigation",

@@ -106,7 +106,7 @@ public class RecordSet implements Serializable {
         this.e = e;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "RecordSet{" +
                 "page=" + page +
@@ -120,5 +120,5 @@ public class RecordSet implements Serializable {
                 ", msg='" + msg + '\'' +
                 ", e=" + e +
                 '}';
-    }
+    }*/
 }
