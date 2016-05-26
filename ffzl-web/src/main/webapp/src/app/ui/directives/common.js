@@ -23,7 +23,7 @@ define(["require"],function (require) {
             };
         }]);
        
-        ui.directive("menuItem",["$document",function ($document) {
+        ui.directive("menuItem",["$document","$location","$compile","$rootScope",function ($document,$location,$compile,$rootScope) {
             return {
                 restrict: 'E',
                 scope:{
@@ -33,33 +33,36 @@ define(["require"],function (require) {
                 template:'<a href class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
                 link: function(scope, el, attr) {
                     el.on('click', function (ev) {
+
                         var itemArray = [];
-                        angular.forEach(scope.item.children,function (e) {
+                        angular.forEach(scope.item.children,function (value) {
                             var subArray = [];
-                            if(e.children){
-                                angular.forEach(e.children,function (ec) {
+                            if(value.children){
+                                angular.forEach(value.children,function (value2) {
                                     subArray.push({
                                         router:"",
                                         pullright:"",
-                                        text:ec.text
+                                        text:value2.text
                                     });
                                 });
                             }
                             itemArray.push({
                                 icon: "glyphicon-stats",
-                                "translate": "aside.nav.DASHBOARD",
-                                "text":e.text,
+                                "translate": "",
+                                "text":value.text,
                                 router:"",
                                 subitems:subArray
                             });
                         });
-                        $scope.tree = [
+
+                        $rootScope.tree = [
                             {
                                 "name": "Navigation",
                                 "translate": "aside.nav.HEADER",
                                 items:itemArray
                             }
                         ];
+                        $compile(angular.element("nav"));
              /*           $scope.tree = [
                             {
                                 "name": "Navigation",

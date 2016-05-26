@@ -39,8 +39,8 @@ define(["require"],function (require) {
                         container: false
                     }
                 };
-                $scope.menu = MENU;
-                $scope.tree = [
+                
+                /*$scope.tree = [
                     {
                         "name":"Navigation",
                         "translate":"aside.nav.HEADER",
@@ -97,7 +97,7 @@ define(["require"],function (require) {
                         ]
                     }
                 ]
-                
+                */
                 // save settings to local storage
                 if ( angular.isDefined($localStorage.settings) ) {
                     $scope.app.settings = $localStorage.settings;

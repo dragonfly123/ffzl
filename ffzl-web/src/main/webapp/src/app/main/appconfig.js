@@ -2,7 +2,7 @@
  * Created by longfei on 16-5-19.
  */
 define(["require"],function (require) {
-    require(["app"],function (app) {
+    require(["app","angular"],function (app,angular) {
         app./*config(
             ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
                 function ($controllerProvider,   $compileProvider,   $filterProvider,   $provide) {
@@ -30,7 +30,54 @@ define(["require"],function (require) {
         }]);
         app.constant('JQ_CONFIG',{
             slimScroll:     ['../../scripts/lib/slimScroll/jquery.slimscroll.js'],
+            contextPath:CONTEXTPATH
         });
+
+        app.run(["$rootScope","$http","JQ_CONFIG",function ($rootScope,$http,config) {
+            $http.get(config.contextPath+"ffzl/common/execute?servicename=ffzl_base_menu",{
+                responseType:"json",
+                cache:true
+            }).then(function (data) {
+                if(data.status == 200) {
+                    $rootScope.menu = data.data.data;
+                }
+            },function (error) {
+                
+            });
+
+            var itemArray = [];
+
+            angular.forEach(ITEMS,function (value) {
+                var subArray = [];
+                if(value.children){
+                    angular.forEach(value.children,function (value2) {
+                        subArray.push({
+                            router:"",
+                            pullright:"",
+                            text:value2.text
+                        });
+                    });
+                }
+                itemArray.push({
+                    icon: "glyphicon-stats",
+                    "translate": "",
+                    "text":value.text,
+                    router:"",
+                    subitems:subArray
+                });
+            });
+
+            $rootScope.tree = [
+                {
+                    "name": "Navigation",
+                    "translate": "aside.nav.HEADER",
+                    items:itemArray
+                }
+            ];
+
+
+        }]);
+
     });
 
 });
