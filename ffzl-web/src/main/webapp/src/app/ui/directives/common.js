@@ -30,70 +30,7 @@ define(["require"],function (require) {
                     item:"="
                 },
                 replace:true,
-                template:'<a href class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
-                link: function(scope, el, attr) {
-                    el.on('click', function (ev) {
-
-                        var itemArray = [];
-                        angular.forEach(scope.item.children,function (value) {
-                            var subArray = [];
-                            if(value.children){
-                                angular.forEach(value.children,function (value2) {
-                                    subArray.push({
-                                        router:"",
-                                        pullright:"",
-                                        text:value2.text
-                                    });
-                                });
-                            }
-                            itemArray.push({
-                                icon: "glyphicon-stats",
-                                "translate": "",
-                                "text":value.text,
-                                router:"",
-                                subitems:subArray
-                            });
-                        });
-
-                        $rootScope.tree = [
-                            {
-                                "name": "Navigation",
-                                "translate": "aside.nav.HEADER",
-                                items:itemArray
-                            }
-                        ];
-                        $compile(angular.element("nav"));
-             /*           $scope.tree = [
-                            {
-                                "name": "Navigation",
-                                "translate": "aside.nav.HEADER",
-                                "items": [
-                                    {
-                                        icon: "glyphicon-stats",
-                                        "translate": "aside.nav.DASHBOARD",
-                                        "text": "Dashboard",
-                                        "router": "",
-                                        "subitems": [
-                                            {
-                                                router: "app.dashboard-v1",
-                                                pullright: "",
-                                                text: "Dashboard v1",
-                                            }, {
-                                                router: "app.dashboard-v2",
-                                                pullright: "N",
-                                                text: "Dashboard v2",
-                                            },
-                                        ]
-                                    }, {
-                                        icon: "glyphicon-calendar",
-                                        "translate": "aside.nav.CALENDAR",
-                                        "text": "Calendar",
-                                        "router": "app.calendar"
-                                    }
-                                ]
-                            }];*/
-                    });
-                }
+                template:'<a ui-sref="app.dashboard({menuId:item.id,id:0})" class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
             };
         }]);
         ui.directive('uiToggleClass', ['$timeout', '$document', function ($timeout, $document) {

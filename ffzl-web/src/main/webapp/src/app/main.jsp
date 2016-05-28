@@ -23,7 +23,7 @@
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";
-        var ITEMS  = ${children.children};
+       /* var ITEMS  = ${children.children};*/
     </script>
     <script data-main="<%=request.getContextPath()%>/src/app/main/config.js" src="<%=request.getContextPath()%>/scripts/lib/requirejs/require.js"></script>
 </head>

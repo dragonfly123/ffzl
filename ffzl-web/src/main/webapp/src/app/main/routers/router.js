@@ -1,7 +1,7 @@
 /**
  * Created by longfei on 16-5-16.
  */
-define(["app"],function (app) {
+define(["app","angular"],function (app,angular) {
     'use strict';
 
     var relatevePath  = CONTEXTPATH+"src/app/main/tpl/"
@@ -18,26 +18,110 @@ define(["app"],function (app) {
             ]
         ).config(
             [          '$stateProvider', '$urlRouterProvider',
-                function ($stateProvider,   $urlRouterProvider) {
+                function ($stateProvider,$urlRouterProvider) {
 
                     $urlRouterProvider
-                        .otherwise('/app/dashboard-v1');
+                        .otherwise('/app/dashboard/0/0');
                     $stateProvider
                         .state('app', {
                             abstract: true,
                             url: '/app',
                             templateUrl: relatevePath+'app.html'
                         })
-                        .state('app.dashboard-v1', {
-                            url: '/dashboard-v1',
+                        .state('app.dashboard', {
+                            url: '/dashboard/{menuId}/{id}',
                             views: {
-                                "app_header":{templateUrl: relatevePath+'header.html'},
-                                "app_menu":{templateUrl:relatevePath+"menu.html"},
-                                "app_content":{templateUrl:relatevePath+"dashboard_v1.html"},
+                                "app_header":{
+                                    templateUrl: relatevePath+'header.html',
+                                    controller:function ($stateParams,$scope,$rootScope) {
+                                        var menu = {};
+                                        if($stateParams.menuId == 0) {
+                                            menu = $rootScope.menu[0];
+                                        } else{
+                                            angular.forEach($rootScope.menu,function(item){
+                                                if($stateParams.menuId == item.id){
+                                                    menu = item;
+                                                }
+                                            });
+                                        }
+                                        while(menu.children && menu.children.length > 0){
+                                            menu = menu.children[0];
+                                        }
+                                        if(menu.id) {
+                                            $stateParams.menuId = menu.id;
+                                        }
+                                    }
+                                },
+                                "app_menu":{
+                                    templateUrl:relatevePath+"menu.html",
+                                    controller:function ($stateParams,$scope,$rootScope) {
+                                        function isContain(item) {
+                                            if(item.id == $stateParams.menuId){
+                                                return true;
+                                            } else if(item.children&&item.children.length>0){
+                                                for(var iitem in item.children){
+                                                    if(isContain(item.children[iitem])){
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        $rootScope.tree = [];
+                                        var item = {};
+
+                                        for(var group in $rootScope.menu){
+                                            if(isContain($rootScope.menu[group])){
+                                                item = $rootScope.menu[group];
+                                                break;
+                                            }
+                                        }
+
+                                         var itemArray = [];
+                                         angular.forEach(item.children,function (value,i) {
+                                             var subArray = [];
+                                             var active = false;
+                                             if(value.children){
+                                                 angular.forEach(value.children,function (value2,j) {
+                                                     subArray.push({
+                                                         router:"app.dashboard({menuId:"+value2.id+",id:"+j+"})",
+                                                         pullright:"",
+                                                         text:value2.text
+                                                     });
+                                                     if(value2.id == $stateParams.menuId){
+                                                         active = true;
+                                                     }
+                                                 });
+                                             }
+                                             itemArray.push({
+                                                 active:active,
+                                                 icon: "glyphicon-stats",
+                                                 "translate": "",
+                                                 "text":value.text,
+                                                 router:"app.dashboard({menuId:"+value.id+",id:"+i+"})",
+                                                 subitems:subArray
+                                             });
+                                         });
+                                         $rootScope.tree.push({
+                                             "name": item.text,
+                                             "translate": "",
+                                             items:itemArray
+                                         });
+                                    }
+                                },
+                                "app_content":{
+                                    templateUrl:relatevePath+"dashboard_v1.html",
+                                    controller:function ($stateParams,$scope) {
+                                        if($stateParams.id == 1){
+                                            $scope.name = "zhansan";
+                                        } else if($stateParams.id == 2){
+                                            $scope.name = "lisi";
+                                        }
+                                    }
+                                },
                                 "app_aside":{templateUrl:relatevePath+"asideright.html"},
                                 "app_footer":{templateUrl:relatevePath+"footer.html"},
-                                "app_settings":{templateUrl:relatevePath+"settings.html"},
-
+                                "app_settings":{templateUrl:relatevePath+"settings.html"}
                             }
                         })
                         .state('app.dashboard-v2', {

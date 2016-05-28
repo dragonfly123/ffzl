@@ -61,7 +61,7 @@
                     <li class='hidden-folded padder m-t m-b-sm text-muted text-xs'>
                         <span translate='{{group.translate}}'>{{group.name}}</span>
                     </li>
-                    <li ng-repeat="item in group.items" ng-if='item.subitems && item.subitems.length > 0'>
+                    <li ng-repeat="item in group.items" ng-class="{active:item.active}" ng-if='item.subitems && item.subitems.length > 0'>
                         <a href class='auto'>
                             <span class='pull-right text-muted'>
                                 <i class='fa fa-fw fa-angle-right text'></i>
@@ -85,7 +85,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li  ng-repeat="item in group.items" ng-if='!item.subitems || item.subitems.length == 0' ui-sref-active='active'>
+                    <li  ng-repeat="item in group.items" ng-class="{active:item.active}" ng-if='!item.subitems || item.subitems.length == 0' ui-sref-active='active'>
                                 <a ui-sref='{{item.router}}'>
                                     <i class='glyphicon icon text-info-dker {{item.icon}}'></i>
                                     <span class='font-bold hidden-folded' translate='{{item.translate}}'>{{item.text}}</span>

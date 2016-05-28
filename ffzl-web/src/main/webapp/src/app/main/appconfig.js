@@ -45,35 +45,7 @@ define(["require"],function (require) {
                 
             });
 
-            var itemArray = [];
 
-            angular.forEach(ITEMS,function (value) {
-                var subArray = [];
-                if(value.children){
-                    angular.forEach(value.children,function (value2) {
-                        subArray.push({
-                            router:"",
-                            pullright:"",
-                            text:value2.text
-                        });
-                    });
-                }
-                itemArray.push({
-                    icon: "glyphicon-stats",
-                    "translate": "",
-                    "text":value.text,
-                    router:"",
-                    subitems:subArray
-                });
-            });
-
-            $rootScope.tree = [
-                {
-                    "name": "Navigation",
-                    "translate": "aside.nav.HEADER",
-                    items:itemArray
-                }
-            ];
 
 
         }]);
