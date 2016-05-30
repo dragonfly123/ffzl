@@ -30,7 +30,7 @@ define(["require"],function (require) {
                     item:"="
                 },
                 replace:true,
-                template:'<a ui-sref="app.dashboard({menuId:item.id,id:0})" class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
+                template:'<a ui-sref="app.dashboard({menuId:item.id})" class="dropdown-toggle"><i class="glyphicon {{item.icon}} icon text-primary-dker"></i><span font-bold hidden-folded>{{item.text}}</span></a>',
             };
         }]);
         ui.directive('uiToggleClass', ['$timeout', '$document', function ($timeout, $document) {
@@ -76,7 +76,24 @@ define(["require"],function (require) {
                     });
                 }
             };
-        }])
+        }]);
+
+        ui.directive("condition",["$compile","layoutCondition",function ($compile,layoutCondition) {
+            return{
+                restrict:"EA",
+                scope:{
+                    input:"="
+                },
+                replace:"false",
+                link:function (scope,element,attr) {
+                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    $compile(element.contents())(scope);
+                }
+            }
+        }]);
         
     });
 });

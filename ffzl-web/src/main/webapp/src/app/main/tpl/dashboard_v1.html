@@ -5,8 +5,8 @@
   <!-- main -->
   <div class="col">
     <!-- main header -->
-    <div class="bg-light lter b-b wrapper-md">
-      <div class="row">
+    <form class="bg-light lter b-b wrapper-md form-inline">
+      <!--<div class="row">
         <div class="col-sm-6 col-xs-12">
           <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
           <small class="text-muted">Welcome to angulr application</small>
@@ -30,7 +30,25 @@
           </div>
         </div>
       </div>
-    </div>
+      -->
+      <div class="row form-group">
+        <div class="col-sm-12 col-xs-6 text-center">
+          <condition ng-repeat="input in layout.input" input="input"></condition>
+          <div class="col-sm-2 col-xs-4 text-right">
+            <div class="inline m-r text-left">
+              <a class="btn btn-primary">
+                <i class='glyphicon icon text-default-dker glyphicon-search'></i>
+                <span class="hidden-folded">查询</span>
+              </a>
+              <a class="btn btn-primary">
+                <i class='glyphicon icon text-default-dker glyphicon-export'></i>
+                <span class="hidden-folded">导出</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     <!-- / main header -->
     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
       <!-- stats -->

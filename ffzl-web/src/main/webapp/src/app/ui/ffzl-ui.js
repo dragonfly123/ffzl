@@ -1,8 +1,8 @@
 /**
  * Created by longfei on 16-5-21.
  */
-define(["angular"],function (angular) {
-    var ui = angular.module("ffzl.ui",[]);
+define(["angular","ui-calendar","fullcalendar"],function (angular,calendar,fullcalendar) {
+    var ui = angular.module("ffzl.ui",["ui.calendar"]);
     ui.run(["$templateCache", function($templateCache) {
         $templateCache.put("template/ffzl_ui_menu_groups","<group ng-repeat='group in tree' group='group'></group>");
         

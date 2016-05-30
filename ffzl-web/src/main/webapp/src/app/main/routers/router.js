@@ -10,10 +10,12 @@ define(["app","angular"],function (app,angular) {
      * Config for the router
      */
     app.run(
-            [          '$rootScope', '$state', '$stateParams',
-                function ($rootScope,   $state,   $stateParams) {
+            [          '$rootScope', '$state', '$stateParams',"$http",
+                function ($rootScope,$state,$stateParams,$http) {
                     $rootScope.$state = $state;
                     $rootScope.$stateParams = $stateParams;
+                    $rootScope.$http = $http;
+
                 }
             ]
         ).config(
@@ -21,7 +23,7 @@ define(["app","angular"],function (app,angular) {
                 function ($stateProvider,$urlRouterProvider) {
 
                     $urlRouterProvider
-                        .otherwise('/app/dashboard/0/0');
+                        .otherwise("/app/dashboard/0/");
                     $stateProvider
                         .state('app', {
                             abstract: true,
@@ -29,7 +31,7 @@ define(["app","angular"],function (app,angular) {
                             templateUrl: relatevePath+'app.html'
                         })
                         .state('app.dashboard', {
-                            url: '/dashboard/{menuId}/{id}',
+                            url: '/dashboard/{menuId}/{serviceName}',
                             views: {
                                 "app_header":{
                                     templateUrl: relatevePath+'header.html',
@@ -49,6 +51,7 @@ define(["app","angular"],function (app,angular) {
                                         }
                                         if(menu.id) {
                                             $stateParams.menuId = menu.id;
+                                            $stateParams.serviceName = menu.servicename;
                                         }
                                     }
                                 },
@@ -84,7 +87,7 @@ define(["app","angular"],function (app,angular) {
                                              if(value.children){
                                                  angular.forEach(value.children,function (value2,j) {
                                                      subArray.push({
-                                                         router:"app.dashboard({menuId:"+value2.id+",id:"+j+"})",
+                                                         router:"app.dashboard({menuId:"+value2.id+",serviceName:'"+(value2.servicename||'')+"'})",
                                                          pullright:"",
                                                          text:value2.text
                                                      });
@@ -98,7 +101,7 @@ define(["app","angular"],function (app,angular) {
                                                  icon: "glyphicon-stats",
                                                  "translate": "",
                                                  "text":value.text,
-                                                 router:"app.dashboard({menuId:"+value.id+",id:"+i+"})",
+                                                 router:"app.dashboard({menuId:"+value.id+",serviceName:'"+(value.servicename||'')+"'})",
                                                  subitems:subArray
                                              });
                                          });
@@ -111,12 +114,17 @@ define(["app","angular"],function (app,angular) {
                                 },
                                 "app_content":{
                                     templateUrl:relatevePath+"dashboard_v1.html",
-                                    controller:function ($stateParams,$scope) {
-                                        if($stateParams.id == 1){
-                                            $scope.name = "zhansan";
-                                        } else if($stateParams.id == 2){
-                                            $scope.name = "lisi";
-                                        }
+                                    controller:function ($stateParams,$scope,$http) {
+                                        $http.get(CONTEXTPATH+"ffzl/common/layout?servicename="+$stateParams.serviceName,{
+                                            responseType:"json",
+                                            cache:true
+                                        }).then(function (response) {
+                                            if(response.status == 200) {
+                                                $scope.layout = response.data;
+                                            }
+                                        },function (error) {
+
+                                        });
                                     }
                                 },
                                 "app_aside":{templateUrl:relatevePath+"asideright.html"},

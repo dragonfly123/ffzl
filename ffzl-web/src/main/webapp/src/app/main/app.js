@@ -6,7 +6,7 @@ define(["angular","ngStorage","angular-animate",
     "angular-translate-loader-static-files",
     "angular-translate-storage-local","angular-cookies",
     "angualr-ui-load","angular-ui-jq","ffzl-ui","ui-nav",
-    "ui-bootstrap-tpls","ng-fullscreen","ffzl-common"],function (angular) {
+    "ui-bootstrap-tpls","ng-fullscreen","ffzl-common-directive","ffzl-common-service"],function (angular) {
     'use strict';
     return angular.module('app', [
         'ui.router',

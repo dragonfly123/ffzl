@@ -34,9 +34,13 @@
             "ng-fullscreen":"scripts/lib/ng-fullscreen/ng-fullscreen",
             "app":"src/app/main/app",
             "ffzl-ui":"src/app/ui/ffzl-ui",
-            "ffzl-common":"src/app/ui/directives/common",
+            "ffzl-common-directive":"src/app/ui/directives/common",
+            "ffzl-common-service":"src/app/ui/services/common",
             "ui-nav":"src/app/ui/directives/ui-nav",
+            "ui-calendar":"scripts/lib/angular-ui-calendar/src/calendar",
+            "fullcalendar":"scripts/lib/fullcalendar/dist/fullcalendar",
             "domReady":"scripts/lib/domReady/domReady",
+            "moment":"scripts/lib/moment/min/moment.min"
 
         } ,
         shim:{

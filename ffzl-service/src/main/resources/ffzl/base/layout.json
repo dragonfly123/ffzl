@@ -1,0 +1,19 @@
+{
+  "menu":{
+    "input":[
+      {"name":"createtime","desc":"时间","type":"D","cond":"bt"},
+      {"name":"id","desc":"ID","type":"F","cond":"="}
+    ],
+    "components":[
+      {
+        "class":"col-lg-8",
+        "component":"test1",
+        "height":"1000"
+      },{
+        "class":"col-lg-4",
+        "component":"test1",
+        "height":"1000"
+      }
+    ]
+  }
+}

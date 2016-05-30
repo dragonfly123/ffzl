@@ -20,10 +20,11 @@
         @import "<%=request.getContextPath()%>/src/app/css/simple-line-icons.css";
         @import "<%=request.getContextPath()%>/src/app/css/font.css";
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.print.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.min.css";
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";
-       /* var ITEMS  = ${children.children};*/
     </script>
     <script data-main="<%=request.getContextPath()%>/src/app/main/config.js" src="<%=request.getContextPath()%>/scripts/lib/requirejs/require.js"></script>
 </head>
