@@ -8,17 +8,8 @@
     require.config({
         baseUrl: CONTEXTPATH,
         paths: {
-            // the left side is the module ID,
-            // the right side is the path to
-            // the jQuery file, relative to baseUrl.
-            // Also, the path should NOT include
-            // the '.js' file extension. This example
-            // is using jQuery 1.9.0 located at
-            // js/lib/jquery-1.9.0.js, relative to
-            // the HTML page.
             "angular":'scripts/lib/angular/angular',
             "jquery":"scripts/lib/jquery/dist/jquery",
-            "angularAMD":"scripts/lib/angularAMD/angularAMD.js",
             "angular-animate":'scripts/lib/angular-animate/angular-animate',
             'ui-bootstrap':"scripts/lib/angular-bootstrap/ui-bootstrap",
             "ui-bootstrap-tpls":"scripts/lib/angular-bootstrap/ui-bootstrap-tpls",
@@ -37,11 +28,8 @@
             "ffzl-common-directive":"src/app/ui/directives/common",
             "ffzl-common-service":"src/app/ui/services/common",
             "ui-nav":"src/app/ui/directives/ui-nav",
-            "ui-calendar":"scripts/lib/angular-ui-calendar/src/calendar",
-            "fullcalendar":"scripts/lib/fullcalendar/dist/fullcalendar",
             "domReady":"scripts/lib/domReady/domReady",
-            "moment":"scripts/lib/moment/min/moment.min"
-
+            "datepicker":"scripts/lib/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker"
         } ,
         shim:{
             "angular":{
@@ -100,6 +88,11 @@
                 deps:["angular"],
                 exports:"ui_load"
             },
+            "datepicker":{
+                deps:["angular","jquery"],
+                exports:"datepicker"
+            }
+
         },
         deps:["src/app/main/boot"]
     });

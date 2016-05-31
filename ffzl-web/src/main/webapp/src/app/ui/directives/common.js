@@ -90,6 +90,14 @@ define(["require"],function (require) {
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    scope.datepickerOptions = {
+                        format: 'yyyy-mm-dd',
+                        language: 'zh',
+                        startDate: "2012-10-01",
+                        endDate: "2012-10-31",
+                        autoclose: true,
+                        weekStart: 0
+                    }
                     $compile(element.contents())(scope);
                 }
             }

@@ -24,6 +24,8 @@
     "domReady": "^2.0.1",
     "requirejs": "^2.2.0",
     "bootstrap": "^3.3.6",
-    "ui-navbar": "^0.4.3"
+    "ui-navbar": "^0.4.3",
+    "angular-bootstrap-datetimepicker": "^1.0.1",
+    "angular-bootstrap-datepicker": "^0.3.1"
   }
 }

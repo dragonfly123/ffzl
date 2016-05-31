@@ -27,14 +27,16 @@ define(["require"],function (require) {
             var buildDateTemplate = function (names,input){
                 var htmls = [];
                 angular.forEach(names,function (value,i) {
-                    /*var $input  = angular.element("<input>");
+                    var $input  = angular.element("<input>");
                     $input.attr("placeholder",value.desc);
                     $input.attr("ng-model",value.name);
-                    $input.addClass("form-control")*/
+                    $input.attr("ng-datepicker","");
+                    $input.attr("ng-optionsd","datepickerOptions");
                     var $div = angular.element("<div>");
                     $div.addClass("col-sm-2 col-xs-4 text-center m-r");
                     $div.attr("ui-calendar","");
                     $div.attr("ng-model",value.name);
+                    $div.append($input);
                     $div.height(50);
                     htmls.push($div);
                 });
@@ -47,7 +49,6 @@ define(["require"],function (require) {
                     var $input  = angular.element("<input>");
                     $input.attr("placeholder",value.desc);
                     $input.attr("ng-model",value.name);
-                    $input.addClass("form-control")
                     var $div = angular.element("<div>");
                     $div.addClass("col-sm-2 col-xs-4 text-center m-r");
                     $div.append($input);

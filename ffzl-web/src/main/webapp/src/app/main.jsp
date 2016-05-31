@@ -22,6 +22,7 @@
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
         @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.print.css";
         @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.min.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css";
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";
