@@ -28,15 +28,19 @@ define(["require"],function (require) {
                 var htmls = [];
                 angular.forEach(names,function (value,i) {
                     var $input  = angular.element("<input>");
-                    $input.attr("placeholder",value.desc);
                     $input.attr("ng-model",value.name);
-                    $input.attr("ng-datepicker","");
-                    $input.attr("ng-optionsd","datepickerOptions");
+                    $input.attr("placeholder",value.desc);
+                    var $datepicker = $("<datepicker>");
+                    $datepicker.attr("button-prev","<i class='fa fa-arrow-left'></i>");
+                    $datepicker.attr("button-next","<i class='fa fa-arrow-right'></i>");
+                    $datepicker.attr("date-format","yyyy-MM-dd");
+                    $datepicker.attr("date-max-limit",new Date());
+                    $datepicker.append($input);
                     var $div = angular.element("<div>");
                     $div.addClass("col-sm-2 col-xs-4 text-center m-r");
                     $div.attr("ui-calendar","");
                     $div.attr("ng-model",value.name);
-                    $div.append($input);
+                    $div.append($datepicker);
                     $div.height(50);
                     htmls.push($div);
                 });

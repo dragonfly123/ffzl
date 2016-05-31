@@ -29,7 +29,7 @@
             "ffzl-common-service":"src/app/ui/services/common",
             "ui-nav":"src/app/ui/directives/ui-nav",
             "domReady":"scripts/lib/domReady/domReady",
-            "datepicker":"scripts/lib/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker"
+            "datepicker":"scripts/lib/angularjs-datepicker/src/js/angular-datepicker"
         } ,
         shim:{
             "angular":{
@@ -89,8 +89,7 @@
                 exports:"ui_load"
             },
             "datepicker":{
-                deps:["angular","jquery"],
-                exports:"datepicker"
+                deps:["angular"]
             }
 
         },

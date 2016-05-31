@@ -20,9 +20,7 @@
         @import "<%=request.getContextPath()%>/src/app/css/simple-line-icons.css";
         @import "<%=request.getContextPath()%>/src/app/css/font.css";
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
-        @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.print.css";
-        @import "<%=request.getContextPath()%>/scripts/lib/fullcalendar/dist/fullcalendar.min.css";
-        @import "<%=request.getContextPath()%>/scripts/lib/angular-bootstrap-datepicker/dist/angular-bootstrap-datepicker.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/angularjs-datepicker/dist/angular-datepicker.min.css";
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";

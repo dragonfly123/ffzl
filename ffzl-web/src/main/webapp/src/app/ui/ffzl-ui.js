@@ -1,8 +1,8 @@
 /**
  * Created by longfei on 16-5-21.
  */
-define(["angular","datepicker"],function (angular,datepicker) {
-    var ui = angular.module("ffzl.ui",["ng-bootstrap-datepicker"]);
+define(["angular","datepicker"],function (angular) {
+    var ui = angular.module("ffzl.ui",["720kb.datepicker"]);
     ui.run(["$templateCache", function($templateCache) {
         $templateCache.put("template/ffzl_ui_menu_groups","<group ng-repeat='group in tree' group='group'></group>");
         
