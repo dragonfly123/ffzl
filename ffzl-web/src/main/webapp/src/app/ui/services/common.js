@@ -84,9 +84,50 @@ define(["require"],function (require) {
                 });
                 return htmls;
             };
-            
+
+            var getDateOptions = function (obj) {
+                return angular.extend({},obj)
+            };
+
+            var getOtherOptions = function(obj){
+
+                return angular.extend({},obj);
+
+            };
+
+            var getCommonOptions=function(input,func){
+                if(input.cond == "b" || input.cond == "bt"){
+                    var result = [];
+                    var date = new Date();
+                    date.setMonth(date.getMonth()-1);
+                    result.push(func({
+                        desc:input.desc+"-起",
+                        name:input.name+"b",
+                    }));
+
+                    result.push(func({
+                        desc:input.desc+"-止",
+                        name:input.name+"e"
+                    }));
+                    return result;
+                } else {
+                    return [func({name:input.name,desc:input.desc})];
+                }
+
+            };
+
+            var getOptions = function(input){
+                if(input.type == "D"){
+                    return getCommonOptions(input,getDateOptions);
+                } else {
+                    return getCommonOptions(input,getOtherOptions);
+                }
+            };
+
+
             return {
-                getTemplate:buildTemplate
+                getTemplate:buildTemplate,
+                getOptions:getOptions
             }
         }]);
     });

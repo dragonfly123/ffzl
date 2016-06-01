@@ -18,7 +18,24 @@
           <div class="box-body">
             <div class="row form-group">
               <div class="col-sm-12 col-xs-6 text-center">
-                <condition ng-repeat="input in layout.input" input="input"></condition>
+
+                <condition ng-repeat="input in layout.input" input="input">
+                  <div class="col-sm-3 col-sm-6" ng-repeat="options in OptionArrays" options="options">
+                    <label class="col-sm-4">{{options.desc}}</label>
+                    <div class="col-sm-8" ng-if="options.type!='D'">
+                      <input class="col-sm-12" placeholder="{{options.desc}}" ng-model="options.name">
+                    </div>
+                    <datepicker class="col-sm-8" ng-if="options.type == 'D'" button-prev="<i class='fa fa-arrow-left'></i>"
+                                button-next="<i class='fa fa-arrow-right'></i>" date-format="yyyy-MM-dd"
+                                date-max-limit="{{options.maxDate}}" date-set="{{options.init}}">
+                      <input class="col-sm-12" placeholder="{{options.desc}}" ng-model="options.name">
+                    </datepicker>
+                    <!--<simple-input ng-if="options.type!='D'"></simple-input>
+                    <simple-input ng-if="options.type == 'D'"></simple-input>-->
+                  </div>
+                </condition>
+
+
                 <div class="col-lg-2 col-xs-4 text-left">
                   <div class="inline m-r text-left">
                     <a class="btn btn-dropbox btn-primary">

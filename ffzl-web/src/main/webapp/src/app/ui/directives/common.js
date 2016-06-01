@@ -78,15 +78,19 @@ define(["require"],function (require) {
             };
         }]);
 
-        ui.directive("condition",["$compile","layoutCondition",function ($compile,layoutCondition) {
+        ui.directive("condition",["layoutCondition",function (layoutCondition) {
             return{
                 restrict:"EA",
                 scope:{
                     input:"="
                 },
-                replace:"false",
+                transclude:true,
+                replace:false,
+                template:"<span ng-transclude></span>",
                 link:function (scope,element,attr) {
-                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
+                    scope.OptionArrays = layoutCondition.getOptions(scope.input);
+
+                    /*angular.element(element).append(layoutCondition.getTemplate(scope.input));
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
                     angular.element(element).append(layoutCondition.getTemplate(scope.input));
@@ -98,7 +102,7 @@ define(["require"],function (require) {
                         autoclose: true,
                         weekStart: 0
                     }
-                    $compile(element.contents())(scope);
+                    $compile(element.contents())(scope);*/
                 }
             }
         }]);
