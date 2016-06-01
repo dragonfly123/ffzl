@@ -3,7 +3,7 @@
  */
 define(["require"],function (require) {
     require(["app","angular"],function (app,angular) {
-        app./*config(
+       /* app./!*config(
             ['$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
                 function ($controllerProvider,   $compileProvider,   $filterProvider,   $provide) {
                     // lazy controller, directive and service
@@ -15,7 +15,7 @@ define(["require"],function (require) {
                     app.constant   = $provide.constant;
                     app.value      = $provide.value;
                 }
-            ])*/config(['$translateProvider', function($translateProvider){
+            ])*!/config(['$translateProvider', function($translateProvider){
             // Register a loader for the static files
             // So, the module will search missing translation tables under the specified urls.
             // Those urls are [prefix][langKey][suffix].
@@ -27,7 +27,7 @@ define(["require"],function (require) {
             $translateProvider.preferredLanguage('en');
             // Tell the module to store the language in the local storage
             $translateProvider.useLocalStorage();
-        }]);
+        }]);*/
         app.constant('JQ_CONFIG',{
             slimScroll:     ['../../scripts/lib/slimScroll/jquery.slimscroll.js'],
             contextPath:CONTEXTPATH

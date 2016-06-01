@@ -20,6 +20,7 @@
         @import "<%=request.getContextPath()%>/src/app/css/simple-line-icons.css";
         @import "<%=request.getContextPath()%>/src/app/css/font.css";
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
+        @import "<%=request.getContextPath()%>/src/app/css/appext.css";
         @import "<%=request.getContextPath()%>/scripts/lib/angularjs-datepicker/dist/angular-datepicker.min.css";
     </style>
     <script>

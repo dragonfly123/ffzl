@@ -5,8 +5,8 @@ define(["require"],function (require) {
     "use strict";
     /* Controllers */
     require(["app","angular"],function (app,angular) {
-        app.controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
-            function($scope,   $translate,   $localStorage,   $window ) {
+        app.controller('AppCtrl', ['$scope', '$localStorage', '$window',
+            function($scope,   $localStorage,   $window ) {
                 // add 'ie' classes to html
                 var isIE = !!navigator.userAgent.match(/MSIE/i);
                 isIE && angular.element($window.document.body).addClass('ie');
@@ -40,64 +40,7 @@ define(["require"],function (require) {
                     }
                 };
                 
-                /*$scope.tree = [
-                    {
-                        "name":"Navigation",
-                        "translate":"aside.nav.HEADER",
-                        "items":[
-                            {
-                                icon:"glyphicon-stats",
-                                "translate":"aside.nav.DASHBOARD",
-                                "text":"Dashboard",
-                                "router":"",
-                                "subitems":[
-                                    {
-                                        router:"app.dashboard-v1",
-                                        pullright:"",
-                                        text:"Dashboard v1",
-                                    },{
-                                        router:"app.dashboard-v2",
-                                        pullright:"N",
-                                        text:"Dashboard v2",
-                                    },
-                                ]
-                            }, {
-                                icon:"glyphicon-calendar",
-                                "translate":"aside.nav.CALENDAR",
-                                "text":"Calendar",
-                                "router":"app.calendar"
-                            }
-                        ]
-                    },{
-                        "name":"Navigation1",
-                        "translate":"aside.nav.HEADER",
-                        "items":[
-                            {
-                                icon:"glyphicon-stats",
-                                "translate":"aside.nav.DASHBOARD",
-                                "text":"Dashboard",
-                                "router":"",
-                                "subitems":[
-                                    {
-                                        router:"app.dashboard-v1",
-                                        pullright:"",
-                                        text:"Dashboard v1",
-                                    },{
-                                        router:"app.dashboard-v2",
-                                        pullright:"N",
-                                        text:"Dashboard v2",
-                                    },
-                                ]
-                            }, {
-                                icon:"glyphicon-calendar",
-                                "translate":"aside.nav.CALENDAR",
-                                "text":"Calendar",
-                                "router":"app.calendar"
-                            }
-                        ]
-                    }
-                ]
-                */
+
                 // save settings to local storage
                 if ( angular.isDefined($localStorage.settings) ) {
                     $scope.app.settings = $localStorage.settings;
@@ -112,19 +55,6 @@ define(["require"],function (require) {
                     // save to local storage
                     $localStorage.settings = $scope.app.settings;
                 }, true);
-
-                // angular translate
-                $scope.lang = { isopen: false };
-                $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
-                $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
-                $scope.setLang = function(langKey, $event) {
-                    // set the current lang
-                    $scope.selectLang = $scope.langs[langKey];
-                    // You can change the language during runtime
-                    $translate.use(langKey);
-                    $scope.lang.isopen = !$scope.lang.isopen;
-                };
-
                 function isSmartDevice( $window )
                 {
                     // Adapted from http://www.detectmobilebrowsers.com
