@@ -78,34 +78,34 @@ define(["require"],function (require) {
             };
         }]);
 
-        ui.directive("condition",["layoutCondition",function (layoutCondition) {
+        ui.directive("condition",["$scope","layoutCondition",,function ($scope,layoutCondition) {
             return{
                 restrict:"EA",
                 scope:{
                     input:"="
                 },
-                transclude:true,
                 replace:false,
-                template:"<span ng-transclude></span>",
+                transclude:true,
+                template:"<ng-transclude></ng-transclude>",
                 link:function (scope,element,attr) {
-                    scope.OptionArrays = layoutCondition.getOptions(scope.input);
-
-                    /*angular.element(element).append(layoutCondition.getTemplate(scope.input));
-                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
-                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
-                    angular.element(element).append(layoutCondition.getTemplate(scope.input));
-                    scope.datepickerOptions = {
-                        format: 'yyyy-mm-dd',
-                        language: 'zh',
-                        startDate: "2012-10-01",
-                        endDate: "2012-10-31",
-                        autoclose: true,
-                        weekStart: 0
-                    }
-                    $compile(element.contents())(scope);*/
                 }
             }
         }]);
-        
+        ui.directive("conditionInput",["$compile",function($compile){
+            return {
+                restrict:"EA",
+                scope:{
+                    options:"="
+                },
+                link:function(scope,element,attr){
+                    var $input = angular.element("<input>");
+                    $input.attr("placeholder",scope.options.desc);
+                    $input.attr("ng-model",scope.options.name);
+                    $input.addClass("col-sm-12");
+                    element.replaceWith($input);
+                    $compile($input)(scope);
+                }
+            }
+        }])
     });
 });

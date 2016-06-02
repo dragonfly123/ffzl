@@ -4,7 +4,7 @@
 define(["require"],function (require) {
     "use strict";
     /* Controllers */
-    require(["app","angular"],function (app,angular) {
+    require(["app","angular","ffzl-ui"],function (app,angular) {
         app.controller('AppCtrl', ['$scope', '$localStorage', '$window',
             function($scope,   $localStorage,   $window ) {
                 // add 'ie' classes to html
@@ -64,6 +64,8 @@ define(["require"],function (require) {
                 }
 
             }]);
-       
+        app.controller("ConditionController",["$scope","layoutCondition",function($scope,layoutCondition){
+            $scope.getOptions=layoutCondition.getOptions;
+        }])
     })
 })
