@@ -5,7 +5,10 @@
       {"name":"id","desc":"ID","type":"F","cond":"="}
     ],
     "buttons":{
-      "top":[],
+      "top":[
+        {"name":"search","text":"查询","class":"","i":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""}
+      ],
       "bottom":[
         {"name":"search","text":"查询","class":"","i":"","function":""},
         {"name":"export","text":"导出","class":"","":"","function":""},

@@ -101,11 +101,95 @@ define(["require"],function (require) {
                     var $input = angular.element("<input>");
                     $input.attr("placeholder",scope.options.desc);
                     $input.attr("ng-model",scope.options.name);
+                    $input.addClass("form-control");
                     $input.addClass("col-sm-12");
                     element.replaceWith($input);
                     $compile($input)(scope);
                 }
             }
-        }])
+        }]);
+
+        ui.directive("ffzlBox",[function(){
+            return {
+                restrict:"EA",
+                scope:{
+                    layout:"=",
+                    title:"@"
+                },
+                transclude:true,
+                template:"<div class='box box-info'>" +
+                "<ffzl-box-header></ffzl-box-header>" +
+                "<ffzl-box-body><ng-transclude/></ffzl-box-body>" +
+                "<ffzl-box-footer></ffzl-box-footer>" +
+                "</div>"
+            }
+        }]);
+
+        ui.directive("ffzlBoxHeader",[function () {
+            return {
+                restrict:"EA",
+                require:"?^ffzlBox",
+                scope:{
+                    buttons:"="
+                },
+                template:"<div class='box-header with-border'>" +
+                "<h3 class='box-title'>{{title}}</h3>" +
+                "<div class='box-tools pull-right'>" +
+                "<ffzl-box-header-button ng-repeat='button in layout.buttons.top' button='button'/>"+
+                '<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>'+
+                '<button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> '+
+                "</div></div>"
+
+            }
+        }]);
+        ui.directive("ffzlBoxHeaderButton",[function(){
+            return {
+                restrict:"EA",
+                require:"?^ffzlBoxHeader",
+                replace:"true",
+                scope:{
+                    button:"="
+                },
+                template:"<button class='btn btn-box-tool' title='{{button.text}}'><i class='{{button.i}}'></i></button>"
+            }
+        }]);
+
+        ui.directive("ffzlBoxBody",[function(){
+            return {
+                restrict:"E",
+                scope:{
+
+                },
+                transclude:true,
+                template:'<div class="box-body"><ng-transclude/></div>'
+            }
+        }]);
+        ui.directive("ffzlBoxFooter",[function(){
+            return {
+                restrict:"EA",
+                require:"?^ffzlBox",
+                scope:{
+                    buttons:"=",
+                },
+                template:'<div class="box-footer">' +
+                '<div ng-repeat="button in buttons">' +
+                '<ffzl-box-footer-button button="button"/>' +
+                '</div>' +
+                '</div>'
+            }
+
+        }]);
+        ui.directive("ffzlBoxFooterButton",[function(){
+            return {
+                restrict:"E",
+                require:"?^ffzlBoxFooter",
+                scope:{
+                    button:"=",
+                },
+                template:'<a class="{{button.class}}"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>',
+
+            }
+        }]);
+
     });
 });
