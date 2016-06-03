@@ -5,6 +5,8 @@ import org.dragonfei.ffzl.params.ParamUtils;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
+import org.dragonfei.ffzl.utils.collections.CollectionUtils;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,7 +41,36 @@ public class CommonDataAction {
     public Map<String,?> layout(@RequestParam Map<String,String> map){
         ParamWrap pw  =  ParamUtils.buildParams(map);
         ServiceResource layoutSr = ServiceResource.getServiceResource(pw.getFullservicename(),"layout", StringUtils.BLANK);
-        return layoutSr.getResourceMap(pw.getServicename());
+        Map<String,?> result = layoutSr.getResourceMap(pw.getServicename());
+        Map<String,?> buttonsMap = (Map<String,?>)result.get("buttons");
+        if(!ObjectUtils.isEmpty(buttonsMap)){
+            List<Map<String,?>> listTop = (List<Map<String,?>>) buttonsMap.get("top");
+            parseButton(listTop,pw);
+            List<Map<String,?>> listBottom = (List<Map<String,?>>) buttonsMap.get("bottom");
+            parseButton(listBottom,pw);
+        }
+        return result;
+    }
 
+    private void parseButton(List<Map<String,?>> list,ParamWrap pw){
+        if(!ObjectUtils.isEmpty(list)){
+            Iterator<Map<String,?>> iterator = list.iterator();
+            while (iterator.hasNext()){
+                Map<String,Object> map = (Map<String, Object>) iterator.next();
+                String name = (String) map.get("name");
+                if(ObjectUtils.isEmpty(name)){
+                    iterator.remove();
+                    continue;
+                } else {
+                    ServiceResource buttonsResource = ServiceResource.getServiceResource(name,"buttons",pw.getFullservicename());
+                    Map<String,?> button =  buttonsResource.getResourceMap(name);
+                    button.forEach((k,v)->{
+                        if(!map.containsKey(k) || ObjectUtils.isEmpty(map.get(k))){
+                            map.put(k,v);
+                        }
+                    });
+                }
+            }
+        }
     }
 }

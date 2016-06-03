@@ -27,7 +27,7 @@
     <orderEntry type="module" module-name="ffzl-service" />
     <orderEntry type="module" module-name="ffzl-annotation" />
     <orderEntry type="module" module-name="ffzl-utils" />
-    <orderEntry type="library" name="Maven: org.dragonfei:ffzl-exception:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="ffzl-exception" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:4.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:4.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.0.4.RELEASE" level="project" />

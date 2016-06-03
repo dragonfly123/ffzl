@@ -36,7 +36,15 @@
             </div>
           </div>
           <div class="box-footer">
-            <div class="pull-right">
+            <div class="pull-right box-tools">
+              <div ng-repeat="button in layout.buttons.bottom" class="col-sm-1 m-r-sm">
+                <a class="{{button.class}}">
+                <i class="{{button.i}}"></i>
+                <span class="hidden-xs">{{button.text}}</span>
+              </a>
+              </div>
+            </div>
+           <!-- <div class="pull-right">
                   <a class="btn btn-dropbox btn-primary">
                     <i class='glyphicon icon text-default-dker glyphicon-search'></i>
                     <span class="hidden-sm">查询</span>
@@ -45,7 +53,7 @@
                     <i class='glyphicon icon text-default-dker glyphicon-export'></i>
                     <span class="hidden-sm">导出</span>
                   </a>
-            </div>
+            </div>-->
           </div><!-- /.box-footer-->
         </div>
       </div>

@@ -4,6 +4,18 @@
       {"name":"createtime","desc":"时间","type":"D","cond":"bt"},
       {"name":"id","desc":"ID","type":"F","cond":"="}
     ],
+    "buttons":{
+      "top":[],
+      "bottom":[
+        {"name":"search","text":"查询","class":"","i":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"export","text":"导出","class":"","":"","function":""}
+      ]
+    },
     "components":[
       {
         "class":"col-lg-8",

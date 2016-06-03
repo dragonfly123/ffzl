@@ -38,7 +38,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.dragonfei:ffzl-exception:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="ffzl-exception" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet.jsp:jsp-api:2.2" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />

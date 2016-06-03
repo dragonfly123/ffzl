@@ -1,0 +1,32 @@
+{
+  "search":{
+    "class":"btn btn-dropbox btn-primary",
+    "i":"glyphicon icon text-default-dker glyphicon-search",
+    "text":"查询",
+    "function":""
+  },
+  "export":{
+    "class":"btn btn-primary",
+    "i":"glyphicon icon text-default-dker glyphicon-export",
+    "text":"导出",
+    "function":""
+  },
+  "add":{
+    "class":"",
+    "i":"",
+    "text":"新增",
+    "function":""
+  },
+  "delete":{
+    "i":"",
+    "class":"",
+    "text":"修改",
+    "function":""
+  },
+  "modify":{
+    "i":"",
+    "class":"",
+    "text":"修改",
+    "function":""
+  }
+}
