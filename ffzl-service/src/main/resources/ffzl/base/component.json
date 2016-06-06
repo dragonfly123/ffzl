@@ -1,0 +1,11 @@
+{
+  "menu":{
+    "input":[
+      {"name":"createtime","column":"createtime","desc":"时间","type":"D","cond":"bt"},
+      {"name":"id","column":"id","desc":"ID","type":"F","cond":"="}
+    ],
+    "type":"grid",
+    "servicename":"ffzl_base_menulist"
+
+  }
+}

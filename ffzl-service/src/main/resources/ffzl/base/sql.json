@@ -6,5 +6,13 @@
       "@B" :"createtime"
     },
     "desc":"菜单"
+  },
+  "menulist":{
+    "sql":"select @column from T_MENU WHERE 1=1 @A",
+    "param":{
+      "@A" :"createtime",
+      "@B" :"createtime"
+    },
+    "desc":"菜单"
   }
 }
