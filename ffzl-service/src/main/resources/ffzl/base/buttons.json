@@ -28,5 +28,15 @@
     "class":"",
     "text":"修改",
     "function":""
+  },
+  "remove":{
+    "class":"btn btn-box-tool",
+    "i":"fa fa-times",
+    "function":"remove"
+  },
+  "collapse":{
+    "class":"btn btn-box-tool",
+    "i":"fa fa-minus",
+    "function":"collapse"
   }
 }

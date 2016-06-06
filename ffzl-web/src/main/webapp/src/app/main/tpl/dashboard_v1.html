@@ -7,19 +7,7 @@
     <!-- main header -->
     <form class="bg-light lter b-b wrapper-md form-inline">
       <div class="col-sm-12">
-        <ffzl-box layout="layout">
-
-        </ffzl-box>
-        <div class="box box-info">
-          <div class="box-header with-border">
-            <h3 class="box-title">全局搜索</h3>
-            <div class="box-tools pull-right">
-              <button class="btn btn-box-tool" ng-repeat="button in layout.buttons.top" title="{{button.text}}"><i class="{{button.i}}"></i></button>
-              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-              <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body">
+        <ffzl-box layout="layout" title="全局搜索" bottom-buttons="layout.buttons.bottom" top-buttons="layout.buttons.top">
             <div class="row form-group">
               <div class="col-sm-12 col-xs-6 text-center" ng-controller="ConditionController">
                 <condition ng-repeat="input in layout.input" input="input" ng-init="optionsarray=getOptions(input)">
@@ -37,27 +25,7 @@
                 </condition>
               </div>
             </div>
-          </div>
-          <div class="box-footer">
-              <div ng-repeat="button in layout.buttons.bottom" class="col-sm-1 m-r-sm">
-                <a class="{{button.class}}">
-                <i class="{{button.i}}"></i>
-                <span class="hidden-xs">{{button.text}}</span>
-              </a>
-              </div>
-
-           <!-- <div class="pull-right">
-                  <a class="btn btn-dropbox btn-primary">
-                    <i class='glyphicon icon text-default-dker glyphicon-search'></i>
-                    <span class="hidden-sm">查询</span>
-                  </a>
-                  <a class="btn btn-primary">
-                    <i class='glyphicon icon text-default-dker glyphicon-export'></i>
-                    <span class="hidden-sm">导出</span>
-                  </a>
-            </div>-->
-          </div><!-- /.box-footer-->
-        </div>
+        </ffzl-box>
       </div>
     <!-- / main header -->
     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">

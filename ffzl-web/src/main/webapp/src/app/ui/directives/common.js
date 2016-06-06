@@ -113,15 +113,41 @@ define(["require"],function (require) {
             return {
                 restrict:"EA",
                 scope:{
-                    layout:"=",
+                    topButtons:"=",
+                    bottomButtons:"=",
                     title:"@"
                 },
                 transclude:true,
+                replace:true,
                 template:"<div class='box box-info'>" +
-                "<ffzl-box-header></ffzl-box-header>" +
+                "<ffzl-box-header title='title' buttons='topButtons'></ffzl-box-header>" +
                 "<ffzl-box-body><ng-transclude/></ffzl-box-body>" +
-                "<ffzl-box-footer></ffzl-box-footer>" +
-                "</div>"
+                "<ffzl-box-footer buttons='bottomButtons'></ffzl-box-footer>" +
+                "</div>",
+                controller:function($scope,$element){
+                    this.collapse = function (childScope,childElement,childAddr) {
+                        var box_contents = $element.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
+                        if($element.hasClass("collapsed-box")){
+                            if(childElement.children(":first").hasClass("fa-plus")){
+                                childElement.children(":first").addClass("fa-minus");
+                                childElement.children(":first").removeClass("fa-plus");
+                            }
+                            box_contents.slideDown(500,function () {
+                                $element.removeClass("collapsed-box");
+                            });
+                        }  else {
+                            if(!childElement.children(":first").hasClass("fa-plus")){
+                                childElement.children(":first").removeClass("fa-minus");
+                                childElement.children(":first").addClass("fa-plus");
+                            }
+
+                            box_contents.slideUp(500,function () {
+                                $element.addClass("collapsed-box");
+                            })
+                        }
+
+                    }
+                }
             }
         }]);
 
@@ -130,14 +156,14 @@ define(["require"],function (require) {
                 restrict:"EA",
                 require:"?^ffzlBox",
                 scope:{
-                    buttons:"="
+                    buttons:"=",
+                    title:"="
                 },
+                replace:true,
                 template:"<div class='box-header with-border'>" +
                 "<h3 class='box-title'>{{title}}</h3>" +
                 "<div class='box-tools pull-right'>" +
-                "<ffzl-box-header-button ng-repeat='button in layout.buttons.top' button='button'/>"+
-                '<button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>'+
-                '<button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button> '+
+                "<ffzl-box-header-button ng-repeat='button in buttons' button='button'/>"+
                 "</div></div>"
 
             }
@@ -145,12 +171,31 @@ define(["require"],function (require) {
         ui.directive("ffzlBoxHeaderButton",[function(){
             return {
                 restrict:"EA",
-                require:"?^ffzlBoxHeader",
+                require:"?^ffzlBox",
                 replace:"true",
                 scope:{
                     button:"="
                 },
-                template:"<button class='btn btn-box-tool' title='{{button.text}}'><i class='{{button.i}}'></i></button>"
+                replace:true,
+                template:"<button class='btn btn-box-tool' title='{{button.text}}' data-widget='{{button.function}}'><i class='{{button.i}}'></i></button>",
+                controller:function ($scope,$element) {
+
+                },
+                link:function (scope,element,attr,ffzlboxheader) {
+                    var func = attr.widget;
+                    var self ={
+
+                    };
+
+                    element.unbind("click").bind("click",function(e){
+                        if(self[func] && typeof self[func] === "function" ){
+                          self[func]();
+                        }
+                        else if(ffzlboxheader[func] && typeof ffzlboxheader[func]) {
+                            ffzlboxheader[func](scope,element,attr);
+                        }
+                    });
+                }
             }
         }]);
 
@@ -158,10 +203,10 @@ define(["require"],function (require) {
             return {
                 restrict:"E",
                 scope:{
-
                 },
                 transclude:true,
-                template:'<div class="box-body"><ng-transclude/></div>'
+                replace:true,
+                template:'<div class="box-body animated fade-in-down"><ng-transclude/></div>'
             }
         }]);
         ui.directive("ffzlBoxFooter",[function(){
@@ -171,8 +216,9 @@ define(["require"],function (require) {
                 scope:{
                     buttons:"=",
                 },
+                replace:true,
                 template:'<div class="box-footer">' +
-                '<div ng-repeat="button in buttons">' +
+                '<div ng-repeat="button in buttons" class="m-r-sm pull-right">' +
                 '<ffzl-box-footer-button button="button"/>' +
                 '</div>' +
                 '</div>'
@@ -186,6 +232,7 @@ define(["require"],function (require) {
                 scope:{
                     button:"=",
                 },
+                replace:true,
                 template:'<a class="{{button.class}}"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>',
 
             }

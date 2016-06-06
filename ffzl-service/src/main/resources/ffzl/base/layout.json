@@ -7,7 +7,8 @@
     "buttons":{
       "top":[
         {"name":"search","text":"查询","class":"","i":"","function":""},
-        {"name":"export","text":"导出","class":"","":"","function":""}
+        {"name":"export","text":"导出","class":"","":"","function":""},
+        {"name":"collapse","text":"collapse","class":"","":"","function":""}
       ],
       "bottom":[
         {"name":"search","text":"查询","class":"","i":"","function":""},
