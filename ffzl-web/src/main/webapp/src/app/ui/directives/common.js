@@ -78,7 +78,7 @@ define(["require"],function (require) {
             };
         }]);
 
-        ui.directive("condition",["$scope","layoutCondition",,function ($scope,layoutCondition) {
+        ui.directive("condition",["$scope","layoutCondition",function ($scope,layoutCondition) {
             return{
                 restrict:"EA",
                 scope:{
@@ -122,7 +122,7 @@ define(["require"],function (require) {
                 template:"<div class='box box-info'>" +
                 "<ffzl-box-header title='title' buttons='topButtons'></ffzl-box-header>" +
                 "<ffzl-box-body><ng-transclude/></ffzl-box-body>" +
-                "<ffzl-box-footer buttons='bottomButtons'></ffzl-box-footer>" +
+                "<ffzl-box-footer ng-show='bottomButtons && bottomButtons.length>0' buttons='bottomButtons'></ffzl-box-footer>" +
                 "</div>",
                 controller:function($scope,$element){
                     this.collapse = function (childScope,childElement,childAddr) {
@@ -218,7 +218,7 @@ define(["require"],function (require) {
                 },
                 replace:true,
                 template:'<div class="box-footer">' +
-                '<div ng-repeat="button in buttons" class="m-r-sm pull-right">' +
+                '<div ng-repeat="button in buttons"  class="m-r-sm pull-right" >' +
                 '<ffzl-box-footer-button button="button"/>' +
                 '</div>' +
                 '</div>'
@@ -237,6 +237,29 @@ define(["require"],function (require) {
 
             }
         }]);
+        
+        ui.directive("ffzlComponent",["$http","$compile","httpService",function ($http,$compile,httpService) {
+            return {
+                restrict:"E",
+                scope:{
+                    cmp:"=",
+                    servicename:"@"
+                },
+                replace:false,
+                template:'<ffzl-box title="{{cmp.name}}"></ffzl-box>',
+                link:function (scope,element,attr) {
+                    alert(scope.title);
+                    httpService.asyn($http.get(CONTEXTPATH+"ffzl/common/component?servicename="+scope.cmp.component,{
+                        responseType:"json",
+                        cache:true
+                    })).then(function (data) {
+                        scope.topButtons = data.top;
+                    },function (error) {
 
+                    });
+                    $compile(element.contents())(scope);
+                }
+            }
+        }]);
     });
 });

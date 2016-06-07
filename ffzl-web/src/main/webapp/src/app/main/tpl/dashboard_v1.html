@@ -27,6 +27,14 @@
             </div>
         </ffzl-box>
       </div>
+      <div ng-repeat="component in layout.components" class="{{component.class}}">
+        <ffzl-component cmp="component">
+          testsdsad
+        </ffzl-component>
+<!--
+        <ffzl-box title="{{component.name}}"></ffzl-box>
+-->
+      </div>
     <!-- / main header -->
     <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
       <!-- stats -->

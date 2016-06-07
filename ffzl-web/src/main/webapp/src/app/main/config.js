@@ -25,7 +25,9 @@
             "ffzl-ui/service/common":"src/app/ui/services/common",
             "ffzl-ui/directive/ui-nav":"src/app/ui/directives/ui-nav",
             "domReady":"scripts/lib/domReady/domReady",
-            "datepicker":"scripts/lib/angularjs-datepicker/src/js/angular-datepicker"
+            "datepicker":"scripts/lib/angularjs-datepicker/src/js/angular-datepicker",
+            "ffzl-http":"src/http/ffzl-http",
+            "ffzl-http/service/common":"src/http/ffzl-http-service"
         } ,
         shim:{
             "angular":{

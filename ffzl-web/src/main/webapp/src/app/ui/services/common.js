@@ -59,34 +59,7 @@ define(["require"],function (require) {
                     return getSingleOptions;
                 }
             }
-
-           /* var getCommonOptions=function(func,input){
-                if(input.cond == "b" || input.cond == "bt"){
-                    var result = [];
-                    var date = new Date();
-                    date.setMonth(date.getMonth()-1);
-                    result.push(func({
-                        type:input.type,
-                        desc:input.desc+"-起",
-                        name:input.name+"b",
-                    }));
-
-                    result.push(func({
-                        type:input.type,
-                        desc:input.desc+"-止",
-                        name:input.name+"e"
-                    }));
-                    return result;
-                } else {
-                    return [func({
-                        name:input.name,
-                        desc:input.desc,
-                        type:input.type
-                    })];
-                }
-
-            };*/
-
+            
             var getOptions = function(input){
                 if(input.type == "D"){
                     return getCommonOptions(input)(getDateOptions,input);

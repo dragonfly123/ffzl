@@ -52,6 +52,15 @@ public class CommonDataAction {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("component")
+    public Map<String,?> component(@RequestParam Map<String,String> map){
+        ParamWrap pw  =  ParamUtils.buildParams(map);
+        ServiceResource layoutSr = ServiceResource.getServiceResource(pw.getFullservicename(),"component", StringUtils.BLANK);
+        Map<String,?> result = layoutSr.getResourceMap(pw.getServicename());
+        return result;
+    }
+
     private void parseButton(List<Map<String,?>> list,ParamWrap pw){
         if(!ObjectUtils.isEmpty(list)){
             Iterator<Map<String,?>> iterator = list.iterator();
