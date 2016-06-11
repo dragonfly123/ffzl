@@ -7,6 +7,7 @@ import org.dragonfei.ffzl.params.sql.query.FFzlSqlQueryFactory;
 import org.dragonfei.ffzl.params.sql.query.FfzlSqlQuery;
 import org.dragonfei.ffzl.params.sql.query.FfzlSqlQueryTotal;
 import org.dragonfei.ffzl.utils.collections.Lists;
+import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringHandle;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.slf4j.Logger;
@@ -85,6 +86,9 @@ public class SqlSeed implements DataService {
             sb.append("fullservicename:").append(fullservicename).
                     append(",page:").append(page).append(",pageSize").
                     append(pageSize).append(",ignorepage").append(ignorePage);
+            if(!ObjectUtils.isEmpty(pw.getOrder())){
+                sb.append(",order:").append(pw.getOrder()).append(",reverse").append(pw.isAsc());
+            }
             for(Map<String,String> input:inputs){
                 sb.append("#");
                 if(pw.containParam(input.get("name"))){

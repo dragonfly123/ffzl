@@ -21,15 +21,26 @@
       {"name":"createtime","type":"D","cond":"bt","column":"CREATETIME","default":"m"}
     ],
     "output":[
-      {"name":"id","column":"ID","desc":"序号"},
+      {"name":"id","column":"ID","desc":"序号","type":"F"},
       {"name":"text","column":"TEXT","desc":"名称"},
       {"name":"addr","column":"ADDR","desc":"地址"},
       {"name":"servicename","column":"SERVICENAME","desc":"服务名称"},
-      {"name":"pid","column":"PID","desc":"PID"},
+      {"name":"pid","column":"PID","desc":"PID","type":"F"},
       {"name":"createtime","column":"CREATETIME","desc":"创建时间","format":"D"},
       {"name":"lastmodifytime","column":"LASTMODIFYTIME","desc":"最后修改时间","fomat":"D"}
     ],
     "orderby":"id",
     "sqlsource":"menu"
+  },
+  "userlist":{
+    "input":[
+      {"name":"id","type":"F","cond":"=","column":"ID"}
+    ],
+    "output":[
+      {"name":"id","column":"ID","desc":"序号","type":"F"},
+      {"name":"username","column":"USERNAME","desc":"用户名"},
+      {"name":"password","column":"PASSWORD","desc":"密码"}
+    ],
+    "sqlsource":"userlist"
   }
 }

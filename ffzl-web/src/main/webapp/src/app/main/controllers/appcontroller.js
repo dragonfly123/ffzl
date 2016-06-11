@@ -5,8 +5,8 @@ define(["require"],function (require) {
     "use strict";
     /* Controllers */
     require(["app","angular","ffzl-ui"],function (app,angular) {
-        app.controller('AppCtrl', ['$scope', '$localStorage', '$window',
-            function($scope,   $localStorage,   $window ) {
+        app.controller('AppCtrl', ['$scope', '$localStorage', '$window',"$http","httpService",
+            function($scope,   $localStorage,   $window ,$http,httpService) {
                 // add 'ie' classes to html
                 var isIE = !!navigator.userAgent.match(/MSIE/i);
                 isIE && angular.element($window.document.body).addClass('ie');
@@ -62,10 +62,31 @@ define(["require"],function (require) {
                     // Checks for iOs, Android, Blackberry, Opera Mini, and Windows mobile devices
                     return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
                 }
-
             }]);
         app.controller("ConditionController",["$scope","layoutCondition",function($scope,layoutCondition){
             $scope.getOptions=layoutCondition.getOptions;
+        }]);
+
+        app.controller("mc",["$scope","$http","httpService",function ($scope,$http,httpService) {
+            var ctrl = this;
+            $scope.displayed = [];
+
+            $scope.callServer = function callServer(tableState){
+                $scope.isLoading = true;
+                var pagination = tableState.pagination;
+
+                var start = pagination.start || 0;
+                var number = pagination.number ||10;
+
+                httpService.asyn($http.get(CONTEXTPATH+"ffzl/common/execute?servicename=ffzl_base_menulist",{
+                    responseType:"json",
+                    cache:true
+                })).then(function (recordset) {
+                    $scope.displayed = recordset.data;
+                    tableState.pagination.numberOfPages = 10
+                    $scope.isLoading  = false;
+                })
+            };
         }])
     })
 })

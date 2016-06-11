@@ -78,19 +78,7 @@ define(["require"],function (require) {
             };
         }]);
 
-        ui.directive("condition",["$scope","layoutCondition",function ($scope,layoutCondition) {
-            return{
-                restrict:"EA",
-                scope:{
-                    input:"="
-                },
-                replace:false,
-                transclude:true,
-                template:"<ng-transclude></ng-transclude>",
-                link:function (scope,element,attr) {
-                }
-            }
-        }]);
+
         ui.directive("conditionInput",["$compile",function($compile){
             return {
                 restrict:"EA",
@@ -120,7 +108,7 @@ define(["require"],function (require) {
                 transclude:true,
                 replace:true,
                 template:"<div class='box box-info'>" +
-                "<ffzl-box-header title='title' buttons='topButtons'></ffzl-box-header>" +
+                "<ffzl-box-header titles='title' buttons='topButtons'></ffzl-box-header>" +
                 "<ffzl-box-body><ng-transclude/></ffzl-box-body>" +
                 "<ffzl-box-footer ng-show='bottomButtons && bottomButtons.length>0' buttons='bottomButtons'></ffzl-box-footer>" +
                 "</div>",
@@ -157,11 +145,11 @@ define(["require"],function (require) {
                 require:"?^ffzlBox",
                 scope:{
                     buttons:"=",
-                    title:"="
+                    titles:"="
                 },
                 replace:true,
                 template:"<div class='box-header with-border'>" +
-                "<h3 class='box-title'>{{title}}</h3>" +
+                "<h3 class='box-title'>{{titles}}</h3>" +
                 "<div class='box-tools pull-right'>" +
                 "<ffzl-box-header-button ng-repeat='button in buttons' button='button'/>"+
                 "</div></div>"
@@ -245,21 +233,119 @@ define(["require"],function (require) {
                     cmp:"=",
                     servicename:"@"
                 },
-                replace:false,
-                template:'<ffzl-box title="{{cmp.name}}"></ffzl-box>',
+                controller:function ($scope) {
+                  $scope.getAA = function () {
+                      alert("AA");
+                  }
+                },
                 link:function (scope,element,attr) {
-                    alert(scope.title);
+                    scope.mc = {};
+                    scope.mc.displayed = [];
+                    scope.mc.isLoading = false;
+                    scope.mc.callServer = function callServer(tableState){
+                        scope.mc.isLoading = true;
+                        var pagination = tableState.pagination;
+
+                        var start = pagination.start || 0;
+                        var number = pagination.number ||10;
+
+                        httpService.asyn($http.get(CONTEXTPATH+"ffzl/common/execute?servicename=ffzl_base_menulist",{
+                            responseType:"json",
+                            cache:true
+                        })).then(function (recordset) {
+                            scope.mc.displayed = recordset.data;
+                            tableState.pagination.numberOfPages = Math.ceil(recordset.total/recordset.pageSize);
+                            scope.mc.isLoading  = false;
+                        })
+                    };
+
                     httpService.asyn($http.get(CONTEXTPATH+"ffzl/common/component?servicename="+scope.cmp.component,{
                         responseType:"json",
                         cache:true
                     })).then(function (data) {
-                        scope.topButtons = data.top;
+                        scope.topButtons  = data.top;
+                        var $appendContents =  element.contents();
+                        var $ffzlBox = angular.element("<ffzl-box>");
+                        $ffzlBox.attr("title",scope.cmp.name);
+                        $ffzlBox.attr("top-buttons","topButtons");
+                        $ffzlBox.appendTo(element);
+                        var $ffzlMutiReport = angular.element("<ffzl-muti-report>");
+                        $ffzlMutiReport.attr("type",data.type);
+                        $ffzlMutiReport.attr("servicename",data.servicename);
+                        $ffzlMutiReport.appendTo($ffzlBox);
+                        $ffzlMutiReport.append($appendContents);
+                        $compile(element.contents())(scope);
                     },function (error) {
 
                     });
-                    $compile(element.contents())(scope);
                 }
             }
         }]);
+
+        ui.directive("ffzlMutiReport",["$http","httpService",function ($http,httpService) {
+            return {
+                restrict:"E",
+                scope:{
+                    type:"@",
+                    servicename:"@"
+                },
+                templateUrl:CONTEXTPATH+'src/app/ui/tpl/table.html',
+                link:{pre:function (scope,element,attr) {
+                    scope.mc = {};
+                    scope.mc.displayed = [];
+                    scope.mc.isLoading = false;
+                    scope.mc.columns = [];
+                    scope.mc.callServer = function callServer(tableState) {
+                        scope.mc.isLoading = true;
+                        var pagination = tableState.pagination;
+                        var sort = tableState.sort;
+                        var start = pagination.start || 0;
+                        var number = pagination.number || 2;
+
+                        var data = {
+                            servicename:scope.servicename,
+                            page:(start/number)+1,
+                            pageSize:number,
+                            };
+                        if(sort.predicate !== undefined && sort.reverse !== undefined){
+                            data.order = sort.predicate;
+                            data.reverse = sort.reverse;
+                        }
+                        var param = "";
+                        angular.forEach(data,function (value,key) {
+                            param = param+key+"="+value+"&";
+                        });
+                        httpService.asyn($http.get(CONTEXTPATH + "ffzl/common/execute?"+param,{
+                            responseType: "json",
+                            cache: false
+                        })).then(function (recordset) {
+                            scope.mc.columns = recordset.columns;
+                            scope.mc.displayed = recordset.data;
+                            tableState.pagination.numberOfPages = Math.ceil(recordset.total/number);
+                            tableState.pagination.totalItemCount = recordset.total;
+                            scope.mc.isLoading = false;
+                        })
+                    };
+                }
+
+                }
+            }
+        }]);
+
+        ui.directive('pageSelect', function() {
+            return {
+                restrict: 'E',
+                template: '<input type="text" class="select-page" ng-model="inputPage" ng-change="selectPage(inputPage)">',
+                link: function(scope, element, attrs) {
+                    scope.$watch('currentPage', function(c) {
+                        scope.inputPage = c;
+
+                    });
+                }
+            }
+        });
+        
+
+
     });
 });

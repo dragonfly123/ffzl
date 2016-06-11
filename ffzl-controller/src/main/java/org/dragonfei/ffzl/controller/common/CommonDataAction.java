@@ -31,8 +31,8 @@ public class CommonDataAction {
     @Autowired ServiceDelegate serviceDelegate;
     @ResponseBody
     @RequestMapping("execute")
-    public <T> T execute(HttpServletRequest request){
-        ParamWrap pw = ParamUtils.buildParams(request);
+    public <T> T execute(@RequestParam Map<String,String> map){
+        ParamWrap pw = ParamUtils.buildParams(map);
         return (T)serviceDelegate.execute(pw);
     }
 
@@ -58,6 +58,8 @@ public class CommonDataAction {
         ParamWrap pw  =  ParamUtils.buildParams(map);
         ServiceResource layoutSr = ServiceResource.getServiceResource(pw.getFullservicename(),"component", StringUtils.BLANK);
         Map<String,?> result = layoutSr.getResourceMap(pw.getServicename());
+        List<Map<String,?>> listTop = (List<Map<String,?>>) result.get("top");
+        parseButton(listTop,pw);
         return result;
     }
 

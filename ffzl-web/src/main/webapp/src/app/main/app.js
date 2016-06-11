@@ -2,7 +2,7 @@
  * Created by longfei on 16-5-16.
  */
 define(["angular","ngStorage","./angular/animate",
-    "./angular/ui/router",
+    "./angular/ui/router","smart-table",
     /*"./angular/translate/loader/static/files",
     "./angular/translate/storage/local",*/"./angular/cookies",
     "angualr/ui/load","angular/ui/jq","ffzl-ui",
@@ -19,6 +19,7 @@ define(["angular","ngStorage","./angular/animate",
         "ui.jq",
         "ffzl.ui",
         "ui.bootstrap",
-        "ngFullscreen"
+        "ngFullscreen",
+        "smart-table"
     ]);
 });

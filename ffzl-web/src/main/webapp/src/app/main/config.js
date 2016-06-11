@@ -27,7 +27,9 @@
             "domReady":"scripts/lib/domReady/domReady",
             "datepicker":"scripts/lib/angularjs-datepicker/src/js/angular-datepicker",
             "ffzl-http":"src/http/ffzl-http",
-            "ffzl-http/service/common":"src/http/ffzl-http-service"
+            "ffzl-http/service/common":"src/http/ffzl-http-service",
+            "ag-grid":"scripts/lib/ag-grid/dist/ag-grid",
+            "smart-table":"scripts/lib/angular-smart-table/dist/smart-table"
         } ,
         shim:{
             "angular":{
@@ -86,6 +88,10 @@
             },
             "datepicker":{
                 deps:["angular"]
+            },
+            "smart-table":{
+                deps:["angular"],
+                exports:"smart-table"
             }
 
         },

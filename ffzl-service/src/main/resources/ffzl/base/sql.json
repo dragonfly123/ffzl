@@ -14,5 +14,12 @@
       "@B" :"createtime"
     },
     "desc":"菜单"
+  },
+  "userlist":{
+    "sql":"select @column from T_Users where 1=1 @A",
+    "param":{
+      "@A":"ID"
+    },
+    "desc":"用户列表"
   }
 }

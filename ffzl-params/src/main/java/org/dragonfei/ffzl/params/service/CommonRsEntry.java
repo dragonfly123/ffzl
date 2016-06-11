@@ -68,7 +68,7 @@ public class CommonRsEntry extends AbstractRsEntry {
             paramsNames.addAll(ObjectUtils.nvl((List<ParameterEntry>) sqlParam.get(m.group()).get("sqlparams"),Lists.newArrayList(0)));
 
         }
-        final String pageSql = buildPageSql(preSql);
+        final String pageSql = buildPageSql(preSql,mapServiceInterface,pw);
         final String totalSql = buildTotalSql(preSql);
 
         entry.querySql = pageSql;

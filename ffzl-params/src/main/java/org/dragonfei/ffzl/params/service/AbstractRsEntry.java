@@ -69,8 +69,22 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
      * @param preSql
      * @return
      */
-    public String buildPageSql(String preSql){
-        return preSql + StringUtils.BLANK + "limit ?,?";
+    public String buildPageSql(String preSql,Map<String,?> mapServiceInterface,ParamWrap pw){
+        String column = pw.getOrder();
+        boolean isAsc = pw.isAsc();
+        if(!ObjectUtils.isEmpty(column)) {
+            List<Map<String, String>> list = (List<Map<String, String>>) mapServiceInterface.get("output");
+            for (Map<String, String> map : list) {
+                if (StringUtils.equals(column, map.get("name"))) {
+                    column = ObjectUtils.nvl(map.get("column"), column.toUpperCase());
+                    break;
+                }
+            }
+            return preSql + StringUtils.BLANK +"order by"+StringUtils.BLANK
+                    +column+ StringUtils.BLANK+ (isAsc?"desc":"asc") + StringUtils.BLANK + "limit ?,?";
+        }
+
+        return preSql +  StringUtils.BLANK + "limit ?,?";
     }
 
     /**

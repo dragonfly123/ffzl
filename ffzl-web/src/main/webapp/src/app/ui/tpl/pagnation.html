@@ -1,0 +1,38 @@
+<div class="nav navbar-nav navbar-left" ng-if="pages.length >= 2">
+    <ul class="pagination">
+        <li>
+            <span>showing {{(currentPage-1)*stItemsByPage +1}} to {{currentPage*stItemsByPage>=totalItemCount ?totalItemCount:currentPage*stItemsByPage}} of {{totalItemCount}} entries</span>
+        </li>
+      <!--  <li>
+            <select>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </li>-->
+    </ul>
+</div>
+<div class="nav navbar-nav navbar-right" ng-if="pages.length >= 2">
+    <ul class="pagination">
+        <li>
+            <a ng-click="selectPage(1)">
+                <i class="fa fa-backward"></i>
+            </a>
+        </li>
+        <li>
+            <a ng-click="selectPage(currentPage - 1)"><i class='fa fa-chevron-left'></i></a>
+        </li>
+        <li>
+            <a><page-select></page-select> of {{numPages}}</a>
+        </li>
+        <li>
+            <a ng-click="selectPage(currentPage + 1)"><i class='fa fa-chevron-right'></i></a>
+        </li>
+        <li><a ng-click="selectPage(numPages)">
+            <i class="fa fa-forward"></i>
+        </a></li>
+
+    </ul>
+
+</div>
