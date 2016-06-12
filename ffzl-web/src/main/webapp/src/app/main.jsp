@@ -15,8 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <style type="text/css">
         @import "<%=request.getContextPath()%>/scripts/lib/bootstrap/dist/css/bootstrap.css";
+/*
         @import "<%=request.getContextPath()%>/src/app/css/animate.css";
-        @import "<%=request.getContextPath()%>/src/app/css/font-awesome.min.css";
+*/
+        @import "<%=request.getContextPath()%>/scripts/lib/font-awesome/css/font-awesome.css";
         @import "<%=request.getContextPath()%>/src/app/css/simple-line-icons.css";
         @import "<%=request.getContextPath()%>/src/app/css/font.css";
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
@@ -38,15 +40,6 @@
             background-color: #46b8da;
             color: white;
         }
-
-        .st-sort-ascent:before{
-            content: '\25B2';
-        }
-
-        .st-sort-descent:before{
-            content: '\25BC';
-        }
-
     </style>
     <script>
         var CONTEXTPATH = "<%=request.getContextPath()%>/";

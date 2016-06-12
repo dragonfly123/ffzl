@@ -471,3 +471,9 @@ table.text-center th {
     background-color: #d2d6de;
     color: #444;
 }
+
+.loading-content{
+    background-color:grey;
+    color: whitesmoke;
+    font-weight: bold;
+}
