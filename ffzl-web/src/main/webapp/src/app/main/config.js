@@ -23,6 +23,7 @@
             "ffzl-ui":"src/app/ui/ffzl-ui",
             "ffzl-ui/directive/common":"src/app/ui/directives/common",
             "ffzl-ui/service/common":"src/app/ui/services/common",
+            "ffzl-ui/service/dialog":"src/app/ui/services/dialogService",
             "ffzl-ui/directive/ui-nav":"src/app/ui/directives/ui-nav",
             "domReady":"scripts/lib/domReady/domReady",
             "datepicker":"scripts/lib/angularjs-datepicker/src/js/angular-datepicker",
@@ -30,7 +31,6 @@
             "ffzl-http/service/common":"src/http/ffzl-http-service",
             "ag-grid":"scripts/lib/ag-grid/dist/ag-grid",
             "smart-table":"scripts/lib/angular-smart-table/dist/smart-table",
-            "ng-dialog":"scripts/lib/ng-dialog/js/ngDialog",
             "art-dialog":"scripts/lib/artDialog/dist/dialog-plus",
         } ,
         shim:{
