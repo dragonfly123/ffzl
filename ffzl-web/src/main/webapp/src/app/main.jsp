@@ -24,6 +24,11 @@
         @import "<%=request.getContextPath()%>/src/app/css/app.css";
         @import "<%=request.getContextPath()%>/src/app/css/appext.css";
         @import "<%=request.getContextPath()%>/scripts/lib/angularjs-datepicker/dist/angular-datepicker.min.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/ng-dialog/css/ngDialog.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/ng-dialog/css/ngDialog-custom-width.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/ng-dialog/css/ngDialog-theme-default.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/ng-dialog/css/ngDialog-theme-plain.css";
+        @import "<%=request.getContextPath()%>/scripts/lib/artDialog/css/ui-dialog.css";
 /*       @import "<%=request.getContextPath()%>>/scripts/lib/ag-grid/dist/styles/ag-grid.css";
         @import "<%=request.getContextPath()%>>/scripts/lib/ag-grid/dist/styles/theme-blue.css";*/
 
@@ -39,6 +44,10 @@
         .st-selected {
             background-color: #46b8da;
             color: white;
+        }
+
+        .bootstrap-dialog .modal-header.bootstrap-dialog-draggable {
+            cursor: move;
         }
     </style>
     <script>

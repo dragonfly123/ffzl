@@ -2,7 +2,7 @@
  * Created by longfei on 16-5-21.
  */
 define(["require"],function (require) {
-    require(["ffzl-ui","angular"],function (ui,angular) {
+    require(["ffzl-ui","angular","art-dialog"],function (ui,angular,dialog) {
         ui.directive("ffzlFull",["$document",'Fullscreen',function ($document,Fullscreen) {
             return {
                 restrict: 'AC',
@@ -345,7 +345,39 @@ define(["require"],function (require) {
             }
         });
         
+        ui.directive("ffzlTableOption",["ngDialog",function (ngDialog) {
+            return{
+                restrict:"E",
+                template:'<a class="btn btn-dropbox btn-primary"><i class="glyphicon icon text-default-dker glyphicon-search"></i><span class="hidden-xs">Test</span></a>',
+                require: '^stTable',
+                scope:{
+                    row:"="
+                },
+                link:function (scope,element,attr,ctrl) {
+                    element.bind('click', function (e) {
+                        e.stopPropagation();
+                        var d = dialog({
+                            title: '消息',
+                            content: '风吹起的青色衣衫，夕阳里的温暖容颜，你比以前更加美丽，像盛开的花<br>——许巍《难忘的一天》',
+                            okValue: '确 定',
+                            ok: function () {
+                                var that = this;
+                                setTimeout(function () {
+                                    that.title('提交中..');
+                                }, 2000);
+                                return false;
+                            },
+                            cancelValue: '取消',
+                            cancel: function () {}
+                        });
 
+                        d.showModal();
+
+                    });
+                }
+
+            }
+        }]);
 
     });
 });

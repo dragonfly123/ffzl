@@ -29,7 +29,9 @@
             "ffzl-http":"src/http/ffzl-http",
             "ffzl-http/service/common":"src/http/ffzl-http-service",
             "ag-grid":"scripts/lib/ag-grid/dist/ag-grid",
-            "smart-table":"scripts/lib/angular-smart-table/dist/smart-table"
+            "smart-table":"scripts/lib/angular-smart-table/dist/smart-table",
+            "ng-dialog":"scripts/lib/ng-dialog/js/ngDialog",
+            "art-dialog":"scripts/lib/artDialog/dist/dialog-plus",
         } ,
         shim:{
             "angular":{
@@ -92,6 +94,9 @@
             "smart-table":{
                 deps:["angular"],
                 exports:"smart-table"
+            },
+            "art-dialog":{
+                exports:"dialog"
             }
 
         },

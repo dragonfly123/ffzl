@@ -34,6 +34,7 @@ define(["require"],function (require) {
         });
 
         app.run(["$rootScope","$http","JQ_CONFIG",function ($rootScope,$http,config) {
+
             $http.get(config.contextPath+"ffzl/common/execute?servicename=ffzl_base_menu",{
                 responseType:"json",
                 cache:true
@@ -42,12 +43,9 @@ define(["require"],function (require) {
                     $rootScope.menu = data.data.data;
                 }
             },function (error) {
-                
+                alert(error);
             });
-
-
-
-
+            
         }]);
 
     });

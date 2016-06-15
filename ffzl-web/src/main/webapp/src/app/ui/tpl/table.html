@@ -1,28 +1,30 @@
 <table class="table table-bordered row-border table-hover" st-pipe="mc.callServer" st-table="mc.displayed">
-                  <thead>
-                  <tr>
-                      <th ng-repeat="column in mc.columns"
-                          st-sort="{{column.name}}"
-                          st-class-ascent="fa fa-sort-asc" st-class-descent="fa fa-sort-desc">{{column.desc}}</th>
-                  </tr>
-                  </thead>
-                  <tbody ng-show="!mc.isLoading" >
-                  <tr ng-repeat="row in mc.displayed" st-select-row="row">
-                      <td ng-repeat="column in mc.columns">{{row[column.name]}}</td>
-                  </tr>
-                  </tbody>
-                  <tbody ng-show="mc.isLoading">
-                  <tr>
-                      <td colspan="{{mc.columns.length}}" class="text-center icon-spinner loading-content">
-                          <i class="fa fa-spin fa-spinner"></i>
-                          Loading ... </td>
-                  </tr>
-                  </tbody>
-                  <tfoot>
-                  <tr class="text-center">
-                      <td colspan="10" class="text-center">
-                          <div st-items-by-page="20" st-pagination="" st-template="/src/app/ui/tpl/pagnation.html"></div>
-                      </td>
-                  </tr>
-                  </tfoot>
-              </table>
+    <thead>
+    <tr>
+        <th ng-repeat="column in mc.columns"
+            st-sort="{{column.name}}"
+            st-class-ascent="fa fa-sort-asc" st-class-descent="fa fa-sort-desc">{{column.desc}}</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody ng-show="!mc.isLoading" >
+    <tr ng-repeat="row in mc.displayed" st-select-row="row">
+        <td ng-repeat="column in mc.columns">{{row[column.name]}}</td>
+        <td><ffzl-table-option row="row"></ffzl-table-option></td>
+    </tr>
+    </tbody>
+    <tbody ng-show="mc.isLoading">
+    <tr>
+        <td colspan="{{mc.columns.length}}" class="text-center icon-spinner loading-content">
+            <i class="fa fa-spin fa-spinner"></i>
+            Loading ... </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr class="text-center">
+        <td colspan="{{mc.columns.length}}" class="text-center">
+            <div st-items-by-page="20" st-pagination="" st-template="/src/app/ui/tpl/pagnation.html"></div>
+        </td>
+    </tr>
+    </tfoot>
+</table>

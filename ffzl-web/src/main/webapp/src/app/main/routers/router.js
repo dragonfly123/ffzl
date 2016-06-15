@@ -72,7 +72,9 @@ define(["app","angular"],function (app,angular) {
 
                                         $rootScope.tree = [];
                                         var item = {};
-
+                                        if($rootScope.menu === undefined){
+                                            return;
+                                        }
                                         for(var group in $rootScope.menu){
                                             if(isContain($rootScope.menu[group])){
                                                 item = $rootScope.menu[group];
