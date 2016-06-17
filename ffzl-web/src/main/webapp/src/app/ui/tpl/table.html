@@ -1,3 +1,11 @@
+<div class="container">
+    <div class="col-md-12">
+        <div class="row">
+            <a ng-repeat="button in operation.global"  class="{{button.class}} pull-left m-r-sm"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered row-border table-hover" st-pipe="mc.callServer" st-table="mc.displayed">
     <thead>
     <tr>
@@ -23,7 +31,7 @@
     <tfoot>
     <tr class="text-center">
         <td colspan="{{mc.columns.length}}" class="text-center">
-            <div st-items-by-page="20" st-pagination="" st-template="/src/app/ui/tpl/pagnation.html"></div>
+            <div st-items-by-page="20" st-pagination st-template="/src/app/ui/tpl/pagnation.html"></div>
         </td>
     </tr>
     </tfoot>

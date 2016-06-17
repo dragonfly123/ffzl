@@ -12,20 +12,20 @@
     "function":""
   },
   "add":{
-    "class":"",
-    "i":"",
+    "class":"btn btn-info",
+    "i":"fa fa-plus",
     "text":"新增",
     "function":""
   },
   "delete":{
-    "i":"",
+    "i":"fa fa-minus",
     "class":"",
     "text":"修改",
     "function":""
   },
   "modify":{
-    "i":"",
-    "class":"",
+    "class":"btn btn-primary",
+    "i":"fa fa-pencil-square-o",
     "text":"修改",
     "function":""
   },

@@ -6,6 +6,23 @@
     ],
     "type":"grid",
     "servicename":"ffzl_base_menulist",
+    "operation":{
+      "global":[
+        {"name":"add","select":"multi","servicename":"test"},
+        {"name":"add","select":"multi","servicename":"test"},
+        {"name":"add","select":"multi","servicename":"test"},
+        {"name":"add","select":"multi","servicename":"test"},
+        {"name":"add","select":"multi","servicename":"test"},
+      ],
+      "row":[
+        {"name":"modify"},
+        {"name":"modify"},
+        {"name":"modify"},
+        {"name":"modify"},
+        {"name":"modify"},
+        {"name":"modify"}
+      ]
+    },
     "top":[
       {"name":"collapse","text":"collapse","class":"","":"","function":""}
     ]

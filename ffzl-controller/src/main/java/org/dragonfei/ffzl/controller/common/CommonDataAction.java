@@ -58,8 +58,21 @@ public class CommonDataAction {
         ParamWrap pw  =  ParamUtils.buildParams(map);
         ServiceResource layoutSr = ServiceResource.getServiceResource(pw.getFullservicename(),"component", StringUtils.BLANK);
         Map<String,?> result = layoutSr.getResourceMap(pw.getServicename());
+
+        Map<String,Object> operationMap = (Map<String, Object>) result.get("operation");
+
+        if(!ObjectUtils.isEmpty(operationMap)) {
+            List<Map<String, ?>> listGlobal = (List<Map<String, ?>>) operationMap.get("global");
+            parseButton(listGlobal,pw);
+
+            List<Map<String, ?>> listRow = (List<Map<String, ?>>) operationMap.get("row");
+            parseButton(listRow,pw);
+        }
+
         List<Map<String,?>> listTop = (List<Map<String,?>>) result.get("top");
         parseButton(listTop,pw);
+
+
         return result;
     }
 

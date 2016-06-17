@@ -272,6 +272,7 @@ define(["require"],function (require) {
                         var $ffzlMutiReport = angular.element("<ffzl-muti-report>");
                         $ffzlMutiReport.attr("type",data.type);
                         $ffzlMutiReport.attr("servicename",data.servicename);
+                        $ffzlMutiReport.attr("operation",JSON.stringify(data.operation));
                         $ffzlMutiReport.appendTo($ffzlBox);
                         $ffzlMutiReport.append($appendContents);
                         $compile(element.contents())(scope);
@@ -287,10 +288,12 @@ define(["require"],function (require) {
                 restrict:"E",
                 scope:{
                     type:"@",
-                    servicename:"@"
+                    servicename:"@",
+                    operation:"="
                 },
                 templateUrl:CONTEXTPATH+'src/app/ui/tpl/table.html',
                 link:{pre:function (scope,element,attr) {
+
                     scope.mc = {};
                     scope.mc.displayed = [];
                     scope.mc.isLoading = false;
@@ -356,8 +359,12 @@ define(["require"],function (require) {
                 link:function (scope,element,attr,ctrl) {
                     element.bind('click', function (e) {
                         e.stopPropagation();
-                        dialogService.info(scope.row.text);
-
+                        //dialogService.warning(scope.row.text);
+                        dialogService.confirm(scope.row.text).then(function(succ){
+                           alert(succ);
+                        },function(error){
+                            alert(error);
+                        });
                     });
                 }
 

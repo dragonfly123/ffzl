@@ -25,11 +25,12 @@
               </div>
             </div>
         </ffzl-box>
+        <div ng-repeat="component in layout.components" class="{{component.class}}">
+          <ffzl-component cmp="component"></ffzl-component>
+        </div>
       </div>
-      <div ng-repeat="component in layout.components" class="{{component.class}}">
-        <ffzl-component cmp="component"></ffzl-component>
 
-      </div>
+
     <!-- / main header -->
   </div>
 
