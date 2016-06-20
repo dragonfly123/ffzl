@@ -28,15 +28,15 @@ public abstract class AbstractFFzlSqlFactory  implements FFzlSqlFactory {
     }
 
     @Override
-    public SqlOperation getSqlSeed(OperationEntry entry) {
-        if(support(entry)){
-            return getSupportSqlSeed(entry);
+    public SqlOperation getSqlOperation(OperationEntry entry,SqlEntry sqlEntry) {
+        if(support(entry,sqlEntry)){
+            return getSupportSqlSeed(entry,sqlEntry);
         }
         throw new RuntimeException("不支持");
     }
 
     abstract protected boolean support(SqlEntry entry);
     abstract protected OperationEntry getSupportSqlEntry(SqlEntry sqlEntry);
-    abstract protected boolean support(OperationEntry entry);
-    abstract protected SqlOperation getSupportSqlSeed(OperationEntry entry);
+    abstract protected boolean support(OperationEntry entry,SqlEntry sqlEntry);
+    abstract protected SqlOperation getSupportSqlSeed(OperationEntry entry,SqlEntry sqlEntry);
 }

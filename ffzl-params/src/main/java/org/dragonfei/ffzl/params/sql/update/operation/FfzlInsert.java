@@ -22,6 +22,10 @@ public class FfzlInsert extends SqlUpdate {
         setMaxRowsAffected(1);
     }
 
+    public Long getLastInsert(){
+        String sql = "SELECT LAST_INSERT_ID()";
+        return getJdbcTemplate().queryForObject(sql,Long.TYPE);
+    }
     public void setType(List parameters){
         if(!haveSetType) {
             synchronized (this) {

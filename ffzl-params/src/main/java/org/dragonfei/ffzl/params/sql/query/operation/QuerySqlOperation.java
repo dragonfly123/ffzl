@@ -19,12 +19,10 @@ import java.util.Map;
 public class QuerySqlOperation implements QueryDataService,SqlOperation {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private List<ParameterEntry> params = Lists.newArrayList();
-    private FfzlSqlQuery pageSqlQuery;
-    private FfzlSqlQueryTotal totalSqlQuery;
+    private QueryOperationEntry entry;
 
     public QuerySqlOperation(QueryOperationEntry entry){
-        this.pageSqlQuery = entry.ffzlSqlQuery;
-        this.totalSqlQuery = entry.ffzlSqlQueryTotal;
+        this.entry = entry;
     }
     public void setParams(List<ParameterEntry> params) {
         this.params = params;
@@ -36,16 +34,16 @@ public class QuerySqlOperation implements QueryDataService,SqlOperation {
         int pageSize = pw.getPageSize();
         list.add((page-1)*pageSize);
         list.add(pageSize);
-        pageSqlQuery.setType(list);
+        this.entry.ffzlSqlQuery.setType(list);
         logger.info("page param {}",list.toString());
-        return pageSqlQuery.execute(list.toArray());
+        return this.entry.ffzlSqlQuery.execute(list.toArray());
     }
 
     public Integer executeTotal(ParamWrap pw){
         List list = caculateParams(pw);
-        totalSqlQuery.setType(list);
+        this.entry.ffzlSqlQueryTotal.setType(list);
         logger.info("total param {}",list.toString());
-        return totalSqlQuery.findObject(list.toArray());
+        return this.entry.ffzlSqlQueryTotal.findObject(list.toArray());
     }
 
     private List<String> caculateParams(ParamWrap pw){

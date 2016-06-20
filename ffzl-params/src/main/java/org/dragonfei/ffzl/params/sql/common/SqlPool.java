@@ -3,6 +3,7 @@ package org.dragonfei.ffzl.params.sql.common;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.sql.common.inter.OperationEntry;
 import org.dragonfei.ffzl.params.sql.common.inter.SqlEntry;
+import org.dragonfei.ffzl.params.sql.common.inter.SqlOperation;
 import org.dragonfei.ffzl.params.sql.query.operation.QuerySqlOperation;
 import org.dragonfei.ffzl.utils.collections.Maps;
 
@@ -25,17 +26,19 @@ public class SqlPool {
         }
         return sqlPool;
     }
-    private Map<String,QuerySqlOperation> queryPools = Maps.newHashMap();
+    private Map<String,SqlOperation> queryPools = Maps.newHashMap();
 
-    public QuerySqlOperation getQuerySqlSeed(ParamWrap pw, SqlEntry entry){
+    public SqlOperation getSqlOperation(ParamWrap pw,SqlEntry entry,boolean create){
         String key = entry.buildKey(pw);
-        if(!queryPools.containsKey(key)){
-            synchronized (this){
-                if(!queryPools.containsKey(key)){
-                    OperationEntry queryEntry = SqlFactoryUtils.getFactory(entry).getSqlEntry(entry);
-                    QuerySqlOperation sqlSeed = (QuerySqlOperation) SqlFactoryUtils.getFactory(entry).getSqlSeed(queryEntry);
-                    queryPools.put(key,sqlSeed);
-                    return sqlSeed;
+        if(create) {
+            if (!queryPools.containsKey(key)) {
+                synchronized (this) {
+                    if (!queryPools.containsKey(key)) {
+                        OperationEntry queryEntry = SqlFactoryUtils.getFactory(entry).getSqlEntry(entry);
+                        SqlOperation sqlOperation =  SqlFactoryUtils.getFactory(entry).getSqlOperation(queryEntry,entry);
+                        queryPools.put(key,sqlOperation);
+                        return sqlOperation;
+                    }
                 }
             }
         }

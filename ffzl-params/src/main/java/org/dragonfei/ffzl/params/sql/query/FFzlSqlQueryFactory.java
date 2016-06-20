@@ -36,12 +36,12 @@ public class FFzlSqlQueryFactory extends AbstractFFzlSqlFactory {
     }
 
     @Override
-    protected boolean support(OperationEntry entry) {
+    protected boolean support(OperationEntry entry,SqlEntry sqlEntry) {
         return entry instanceof QueryOperationEntry;
     }
 
     @Override
-    protected SqlOperation getSupportSqlSeed(OperationEntry entry) {
+    protected SqlOperation getSupportSqlSeed(OperationEntry entry,SqlEntry sqlEntry) {
         return new QuerySqlOperation((QueryOperationEntry) entry);
     }
 

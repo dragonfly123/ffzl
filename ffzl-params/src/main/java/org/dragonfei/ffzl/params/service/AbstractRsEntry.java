@@ -140,7 +140,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
                 list = (List)map.get("output");
             }
         }
-        rs.setColumns(ObjectUtils.nvl(list,Lists.newArrayList()));
+        rs.setColumns((List<Map<String,String>>) ObjectUtils.nvl(list, Lists.newArrayList()));
     }
 
     /**

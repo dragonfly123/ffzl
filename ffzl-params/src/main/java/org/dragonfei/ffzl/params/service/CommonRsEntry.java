@@ -47,8 +47,8 @@ public class CommonRsEntry extends AbstractRsEntry {
         List<Map<String,String>> resultInputs =  getRealyInputs(pw,inputs);
         QuerySqlEntry entry = new QuerySqlEntry();
         entry.inputs = resultInputs;
-        if(SqlPool.getInstance().getQuerySqlSeed(pw,entry) != null){
-            return SqlPool.getInstance().getQuerySqlSeed(pw,entry);
+        if(SqlPool.getInstance().getSqlOperation(pw,entry,false) != null){
+            return (QueryDataService) SqlPool.getInstance().getSqlOperation(pw,entry,false);
         }
         entry.outputs = getColumns(mapServiceInterface);
         String sqlsourcename =  (String)mapServiceInterface.get("sqlsource");
@@ -74,15 +74,15 @@ public class CommonRsEntry extends AbstractRsEntry {
         entry.querySql = pageSql;
         entry.totalSql = totalSql;
 
-        QuerySqlOperation sqlSeed = SqlPool.getInstance().getQuerySqlSeed(pw,entry);
-        sqlSeed.setParams(paramsNames);
+        QuerySqlOperation querySqlOperation = (QuerySqlOperation) SqlPool.getInstance().getSqlOperation(pw,entry,true);
+        querySqlOperation.setParams(paramsNames);
 
-        return sqlSeed;
+        return querySqlOperation;
 
     }
 
     private List<Map<String,String>> getRealyInputs(ParamWrap pw,List<Map<String,String>> inputs){
-        return ObjectUtils.nvl(inputs.stream().
+        return (List<Map<String,String>>) ObjectUtils.nvl(inputs.stream().
                 filter(input->!ConditionSqlFactory.getByType(input.get("cond")).shouldSkip(pw,input)).
                 collect(Collectors.toList()),Lists.newArrayList());
     }
@@ -101,7 +101,7 @@ public class CommonRsEntry extends AbstractRsEntry {
     }
 
     private List<Map<String,String>> getColumns(Map<String,?> mapServiceInterface){
-        return ObjectUtils.nvl((List<Map<String,String>>)mapServiceInterface.get("output"),Lists.newArrayList());
+        return (List<Map<String,String>>) ObjectUtils.nvl((List<Map<String,String>>)mapServiceInterface.get("output"),Lists.newArrayList());
     }
 
     /**

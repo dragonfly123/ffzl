@@ -10,6 +10,6 @@ import javax.sql.DataSource;
 public interface FFzlSqlFactory {
     DataSource dataSource = SpringContextUtils.getBean(DataSource.class);
     OperationEntry getSqlEntry(SqlEntry entry);
-    SqlOperation getSqlSeed(OperationEntry entry);
+    SqlOperation getSqlOperation(OperationEntry entry,SqlEntry sqlEntry);
 
 }
