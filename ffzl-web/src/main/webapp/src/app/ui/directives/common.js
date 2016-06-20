@@ -351,10 +351,11 @@ define(["require"],function (require) {
         ui.directive("ffzlTableOption",["dialogService",function (dialogService) {
             return{
                 restrict:"E",
-                template:'<a class="btn btn-dropbox btn-primary"><i class="glyphicon icon text-default-dker glyphicon-search"></i><span class="hidden-xs">Test</span></a>',
+                template:'<a ng-repeat="button in buttons"  class="{{button.class}} m-r-sm"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>',
                 require: '^stTable',
                 scope:{
-                    row:"="
+                    row:"=",
+                    buttons:"="
                 },
                 link:function (scope,element,attr,ctrl) {
                     element.bind('click', function (e) {

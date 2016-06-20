@@ -1,0 +1,13 @@
+{
+  "T_MENU":{
+    "columns":[
+      {"name":"id","column":"ID","desc":"序号","type":"F","pk":"1"},
+      {"name":"text","column":"TEXT","desc":"名称"},
+      {"name":"addr","column":"ADDR","desc":"地址"},
+      {"name":"servicename","column":"SERVICENAME","desc":"服务名称","bk":"1","modify":"false"},
+      {"name":"pid","column":"PID","desc":"PID","type":"F"},
+      {"name":"createtime","column":"CREATETIME","desc":"创建时间","format":"D","modify":"false"},
+      {"name":"lastmodifytime","column":"LASTMODIFYTIME","desc":"最后修改时间","fomat":"D"}
+    ]
+  },
+}

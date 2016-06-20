@@ -1,14 +1,14 @@
 package org.dragonfei.ffzl.params.service;
 
-import com.google.common.base.Throwables;
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.params.sql.condition.ConditionSql;
 import org.dragonfei.ffzl.params.sql.condition.ConditionSqlFactory;
 import org.dragonfei.ffzl.params.sql.condition.ParameterEntry;
-import org.dragonfei.ffzl.params.sql.query.SqlPool;
-import org.dragonfei.ffzl.params.sql.query.SqlSeed;
+import org.dragonfei.ffzl.params.sql.common.SqlPool;
+import org.dragonfei.ffzl.params.sql.query.entry.QuerySqlEntry;
+import org.dragonfei.ffzl.params.sql.query.operation.QuerySqlOperation;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
@@ -37,7 +37,7 @@ public class CommonRsEntry extends AbstractRsEntry {
      * @return
      */
     @Override
-    public DataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
+    public QueryDataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
         String serviceName = pw.getServicename();
         Map<String,?> mapServiceInterface = ObjectUtils.nvl(serviceResource.getResourceMap(serviceName),Maps.newHashMap());
         List<Map<String,String>> inputs = Lists.newArrayList();
@@ -45,10 +45,10 @@ public class CommonRsEntry extends AbstractRsEntry {
             inputs.addAll(ObjectUtils.nvl((List)mapServiceInterface.get("input"),Lists.newArrayList()));
         }
         List<Map<String,String>> resultInputs =  getRealyInputs(pw,inputs);
-        SqlSeed.Entry entry = SqlSeed.getEntry();
+        QuerySqlEntry entry = new QuerySqlEntry();
         entry.inputs = resultInputs;
-        if(SqlPool.getInstance().getSqlSeed(pw,null,entry) != null){
-            return SqlPool.getInstance().getSqlSeed(pw,null,entry);
+        if(SqlPool.getInstance().getQuerySqlSeed(pw,entry) != null){
+            return SqlPool.getInstance().getQuerySqlSeed(pw,entry);
         }
         entry.outputs = getColumns(mapServiceInterface);
         String sqlsourcename =  (String)mapServiceInterface.get("sqlsource");
@@ -74,7 +74,10 @@ public class CommonRsEntry extends AbstractRsEntry {
         entry.querySql = pageSql;
         entry.totalSql = totalSql;
 
-        return SqlPool.getInstance().getSqlSeed(pw,paramsNames,entry);
+        QuerySqlOperation sqlSeed = SqlPool.getInstance().getQuerySqlSeed(pw,entry);
+        sqlSeed.setParams(paramsNames);
+
+        return sqlSeed;
 
     }
 

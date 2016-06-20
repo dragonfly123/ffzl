@@ -2,11 +2,8 @@ package org.dragonfei.ffzl.params.service;
 
 import org.dragonfei.ffzl.params.ParamWrap;
 import org.dragonfei.ffzl.params.RecordSet;
-import org.dragonfei.ffzl.params.resource.ResourceLoader;
-import org.dragonfei.ffzl.params.resource.ResourceLoaderFactory;
 import org.dragonfei.ffzl.params.resource.ServiceResource;
 import org.dragonfei.ffzl.utils.collections.Lists;
-import org.dragonfei.ffzl.utils.collections.Maps;
 import org.dragonfei.ffzl.utils.objects.ObjectUtils;
 import org.dragonfei.ffzl.utils.string.StringUtils;
 import org.slf4j.Logger;
@@ -34,11 +31,11 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
         try {
             wrapPage(rs, pw);
             wrapColumn(rs, pw, serviceResource);
-            DataService dataService = buildDataService(rs,pw,serviceResource,sqlResource);
-            logger.debug("dataservice is {}",dataService);
-            wrapData(rs, pw, serviceResource,sqlResource,dataService);
+            QueryDataService queryDataService = buildDataService(rs,pw,serviceResource,sqlResource);
+            logger.debug("dataservice is {}",queryDataService);
+            wrapData(rs, pw, serviceResource,sqlResource,queryDataService);
             wrapTotalRecords(rs, pw, serviceResource,sqlResource);
-            wrapTotal(rs, pw, serviceResource,sqlResource,dataService);
+            wrapTotal(rs, pw, serviceResource,sqlResource,queryDataService);
             rs.setCode(RecordSet.SUCCE_CODE);
         } catch (Exception e){
             rs.setE(e);
@@ -59,7 +56,7 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
      * @return
      * 数据服务
      */
-    protected DataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
+    protected QueryDataService buildDataService(RecordSet rs, ParamWrap pw, ServiceResource serviceResource, ServiceResource sqlresource){
 
         return null;
     }
@@ -152,12 +149,12 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
      * @param pw
      * @param serviceResource
      * @param sqlresource
-     * @param dataService
+     * @param queryDataService
      */
-    protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,DataService dataService){
+    protected void wrapData(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,QueryDataService queryDataService){
         List<Map<String,?>> list  =Lists.newArrayList(pw.getPageSize());
-        if(dataService != null){
-            list.addAll(ObjectUtils.nvl(dataService.executeQuery(pw),Lists.newArrayList()));
+        if(queryDataService != null){
+            list.addAll(ObjectUtils.nvl(queryDataService.executeQuery(pw),Lists.newArrayList()));
         }
         logger.info("then result is {}",list);
 
@@ -170,10 +167,10 @@ public abstract class AbstractRsEntry implements ServiceEntry<RecordSet> {
     protected void wrapTotalRecords(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource){
         rs.setTotalRecords(rs.getData().size());
     }
-    protected void wrapTotal(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,DataService dataService){
+    protected void wrapTotal(RecordSet rs,ParamWrap pw,ServiceResource serviceResource,ServiceResource sqlresource,QueryDataService queryDataService){
         int total = 0;
-        if(dataService != null){
-            total = dataService.executeTotal(pw);
+        if(queryDataService != null){
+            total = queryDataService.executeTotal(pw);
         }
         rs.setTotal(total);
     }

@@ -13,4 +13,5 @@ import java.util.List;
 
 public interface CommonDao {
     <T> List<T> select(String sql,List params);
+
 }

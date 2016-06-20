@@ -1,5 +1,10 @@
 {
   "menu":{
     "serviceclass":"treeRsEntry"
+  },
+  "menuupdate":{
+    "serviceclass":"",
+    "table":"T_MENU",
+    "namespace":"ffzl.base"
   }
 }

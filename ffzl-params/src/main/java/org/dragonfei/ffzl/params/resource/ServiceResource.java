@@ -123,8 +123,12 @@ public class ServiceResource {
         String[] paths = StringUtils.split(servicename, "_");
         String namespace = StringUtils.toCommaDelimitedString(paths, ".");
         String reallyNamespace = namespace.substring(0, namespace.lastIndexOf("."));
+        return getServiceResource(reallyNamespace,resourceName);
+    }
+
+    public static ServiceResource getServiceResource(String namespace,String resourceName){
         ResourceLoader resourceLoader = ResourceLoaderFactory.getResourceLoader("json", resourceName);
-        return resourceLoader.load(reallyNamespace);
+        return resourceLoader.load(namespace);
     }
 
 }

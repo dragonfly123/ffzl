@@ -1,10 +1,8 @@
-<div class="container">
-    <div class="col-md-12">
-        <div class="row">
+
+<div>
             <a ng-repeat="button in operation.global"  class="{{button.class}} pull-left m-r-sm"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>
-        </div>
-    </div>
 </div>
+
 
 <table class="table table-bordered row-border table-hover" st-pipe="mc.callServer" st-table="mc.displayed">
     <thead>
@@ -18,7 +16,7 @@
     <tbody ng-show="!mc.isLoading" >
     <tr ng-repeat="row in mc.displayed" st-select-row="row">
         <td ng-repeat="column in mc.columns">{{row[column.name]}}</td>
-        <td><ffzl-table-option row="row"></ffzl-table-option></td>
+        <td><ffzl-table-option row="row" buttons="operation.row"></ffzl-table-option></td>
     </tr>
     </tbody>
     <tbody ng-show="mc.isLoading">

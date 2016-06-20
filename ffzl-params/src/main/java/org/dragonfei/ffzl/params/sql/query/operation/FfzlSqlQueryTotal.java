@@ -1,14 +1,12 @@
-package org.dragonfei.ffzl.params.sql.query;
+package org.dragonfei.ffzl.params.sql.query.operation;
 
+import org.dragonfei.ffzl.params.sql.common.TypeGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.object.SqlQuery;
 
 import javax.sql.DataSource;
-import java.sql.JDBCType;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -33,11 +31,7 @@ public class FfzlSqlQueryTotal extends SqlQuery<Integer> {
         if(!haveSetType) {
             synchronized (this) {
                 if (!haveSetType) {
-                    int[] types = new int[parameters.size()];
-                    for (int i = 0; i < parameters.size(); i++) {
-                        types[i] = JDBCType.VARCHAR.getVendorTypeNumber();
-                    }
-                    super.setTypes(types);
+                    super.setTypes(TypeGenerator.commonTypes(parameters));
                     haveSetType =  true;
                 }
             }

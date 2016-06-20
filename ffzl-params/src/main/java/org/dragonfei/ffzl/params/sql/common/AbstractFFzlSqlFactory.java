@@ -1,0 +1,42 @@
+package org.dragonfei.ffzl.params.sql.common;
+
+import org.dragonfei.ffzl.params.sql.common.inter.FFzlSqlFactory;
+import org.dragonfei.ffzl.params.sql.common.inter.OperationEntry;
+import org.dragonfei.ffzl.params.sql.common.inter.SqlEntry;
+import org.dragonfei.ffzl.params.sql.common.inter.SqlOperation;
+import org.dragonfei.ffzl.utils.collections.Maps;
+
+import java.util.Map;
+
+/**
+ * Created by longfei on 16-6-19.
+ */
+public abstract class AbstractFFzlSqlFactory  implements FFzlSqlFactory {
+    private static Map<Class,FFzlSqlFactory> map = Maps.newConcurrentHashMap();
+    public static FFzlSqlFactory getInstance(Class clazz){
+        return map.get(clazz);
+    }
+    public static void register(Class clazz,FFzlSqlFactory fFzlSqlFactory){
+        map.put(clazz,fFzlSqlFactory);
+    }
+    @Override
+    public OperationEntry getSqlEntry(SqlEntry entry) {
+        if(support(entry)){
+            return getSupportSqlEntry(entry);
+        }
+        throw new RuntimeException("不支持");
+    }
+
+    @Override
+    public SqlOperation getSqlSeed(OperationEntry entry) {
+        if(support(entry)){
+            return getSupportSqlSeed(entry);
+        }
+        throw new RuntimeException("不支持");
+    }
+
+    abstract protected boolean support(SqlEntry entry);
+    abstract protected OperationEntry getSupportSqlEntry(SqlEntry sqlEntry);
+    abstract protected boolean support(OperationEntry entry);
+    abstract protected SqlOperation getSupportSqlSeed(OperationEntry entry);
+}

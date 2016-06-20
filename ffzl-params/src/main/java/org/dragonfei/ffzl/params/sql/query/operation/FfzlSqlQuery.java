@@ -1,5 +1,7 @@
-package org.dragonfei.ffzl.params.sql.query;
+package org.dragonfei.ffzl.params.sql.query.operation;
 
+import org.dragonfei.ffzl.params.sql.common.RowMapperGenerator;
+import org.dragonfei.ffzl.params.sql.common.TypeGenerator;
 import org.dragonfei.ffzl.utils.collections.Lists;
 import org.dragonfei.ffzl.utils.collections.Maps;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.object.SqlQuery;
 
 import javax.sql.DataSource;
-import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
@@ -42,13 +43,7 @@ public class FfzlSqlQuery extends SqlQuery<Map<String,?>> {
         if(!haveSetType) {
             synchronized (this) {
                 if (!haveSetType) {
-                    int[] types = new int[parameters.size()];
-                    for (int i = 0; i < parameters.size() - 2; i++) {
-                        types[i] = JDBCType.VARCHAR.getVendorTypeNumber();
-                    }
-                    types[parameters.size() - 2] = JDBCType.INTEGER.getVendorTypeNumber();
-                    types[parameters.size() - 1] = JDBCType.INTEGER.getVendorTypeNumber();
-                    super.setTypes(types);
+                    super.setTypes(TypeGenerator.pageTypes(parameters));
                     haveSetType =  true;
                 }
             }
@@ -56,23 +51,7 @@ public class FfzlSqlQuery extends SqlQuery<Map<String,?>> {
     }
     @Override
     protected RowMapper<Map<String,?>> newRowMapper(Object[] parameters, Map<?, ?> context) {
-        return new RowMapper<Map<String, ?>>() {
-            private ResultSetMetaData metaData;
-            private Map<String,String> columnMap;
-            @Override
-            public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
-                if(rowNum == 0){
-                    metaData = rs.getMetaData();
-                    columnMap = buildColumMap();
-                }
-                Map<String,Object> result = Maps.newHashMap();
-                for(int i=0,j = metaData.getColumnCount();i < j;i++){
-                    String columName = metaData.getColumnName(i+1);
-                    result.put(String.valueOf(columnMap.get(columName.toUpperCase())),rs.getString(i+1));
-                }
-                return result;
-            }
-        };
+        return RowMapperGenerator.commonRowMapper(buildColumMap());
 
     }
 

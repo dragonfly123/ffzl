@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by longfei on 16/5/3.
  * 数据服务
  */
-public interface DataService {
+public interface QueryDataService {
     /**
      * 查询数据
      * @param pw

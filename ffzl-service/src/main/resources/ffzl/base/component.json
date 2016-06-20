@@ -12,7 +12,7 @@
         {"name":"add","select":"multi","servicename":"test"},
         {"name":"add","select":"multi","servicename":"test"},
         {"name":"add","select":"multi","servicename":"test"},
-        {"name":"add","select":"multi","servicename":"test"},
+        {"name":"add","select":"multi","servicename":"test"}
       ],
       "row":[
         {"name":"modify"},
@@ -24,7 +24,7 @@
       ]
     },
     "top":[
-      {"name":"collapse","text":"collapse","class":"","":"","function":""}
+      {"name":"collapse","text":"collapse"}
     ]
   },
   "user":{
