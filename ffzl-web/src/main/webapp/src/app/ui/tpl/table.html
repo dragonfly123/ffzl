@@ -1,10 +1,12 @@
 
-<div>
-            <a ng-repeat="button in operation.global"  class="{{button.class}} pull-left m-r-sm"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>
-</div>
-
-
 <table class="table table-bordered row-border table-hover" st-pipe="mc.callServer" st-table="mc.displayed">
+    <thead>
+    <tr>
+        <th colspan="{{mc.columns.length+1}}">
+            <table-global-button ng-repeat="button in operation.global" class="pull-left m-r-sm" button="button"></table-global-button>
+        </th>
+    </tr>
+    </thead>
     <thead>
     <tr>
         <th ng-repeat="column in mc.columns"

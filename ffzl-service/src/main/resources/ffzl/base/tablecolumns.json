@@ -9,5 +9,5 @@
       {"name":"createtime","column":"CREATETIME","desc":"创建时间","format":"D","modify":"false"},
       {"name":"lastmodifytime","column":"LASTMODIFYTIME","desc":"最后修改时间","fomat":"D"}
     ]
-  },
+  }
 }

@@ -8,11 +8,13 @@
     "servicename":"ffzl_base_menulist",
     "operation":{
       "global":[
-        {"name":"add","select":"multi","servicename":"test"},
-        {"name":"add","select":"multi","servicename":"test"},
-        {"name":"add","select":"multi","servicename":"test"},
-        {"name":"add","select":"multi","servicename":"test"},
-        {"name":"add","select":"multi","servicename":"test"}
+        {
+          "name":"add",
+          "select":"no",
+          "servicename":"ffzl_base_menuupdate",
+          "beforeUrl":"common",
+          "confirm":"no"
+        }
       ],
       "row":[
         {"name":"modify"},

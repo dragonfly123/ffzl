@@ -371,6 +371,29 @@ define(["require"],function (require) {
 
             }
         }]);
+        ui.directive("tableGlobalButton",["$http","httpService","dialogService",function ($http,httpService,dialogService) {
+            return {
+                restrict:"E",
+                template:'<a class="{{button.class}}"><i class="{{button.i}}"></i><span class="hidden-xs">{{button.text}}</span></a>',
+                require: '^stTable',
+                scope:{
+                    button:"="
+                },
+                link:function (scope,element,attr) {
+                    httpService.asyn($http.get(CONTEXTPATH+"ffzl/common/table?servicename="+scope.button.servicename,{
+                        responseType:"json",
+                        cache:true
+                    })).then(function (data) {
+                       alert(data);
+                    },function (error) {
+
+                    });
+                    alert(scope.button.class)
+                }
+
+            }
+        }]);
+
 
     });
 });

@@ -15,10 +15,18 @@ import org.dragonfei.ffzl.params.sql.query.operation.QuerySqlOperation;
  */
 public class FFzlSqlQueryFactory extends AbstractFFzlSqlFactory {
 
-    private FFzlSqlQueryFactory(){}
+    private FFzlSqlQueryFactory(){
 
-    static {
-        register(FFzlSqlQueryFactory.class,new FFzlSqlQueryFactory());
+    }
+
+    private static FFzlSqlQueryFactory fFzlSqlQueryFactory;
+    public static FFzlSqlQueryFactory getInstance(){
+        if(fFzlSqlQueryFactory == null){
+            synchronized (FFzlSqlQueryFactory.class){
+                fFzlSqlQueryFactory = new FFzlSqlQueryFactory();
+            }
+        }
+        return fFzlSqlQueryFactory;
     }
 
     @Override

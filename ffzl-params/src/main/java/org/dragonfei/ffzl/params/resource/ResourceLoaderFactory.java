@@ -65,7 +65,8 @@ public abstract class ResourceLoaderFactory {
 
         if ("serviceinterface".equals(resourceType) || "sql".equals(resourceType)
                 || "servicemap".equals(resourceType) ||"treeservice".equals(resourceType)
-                || "layout".equals(resourceType) || "buttons".equals(resourceType) || "component".equals(resourceType)) {
+                || "layout".equals(resourceType) || "buttons".equals(resourceType) ||
+                "component".equals(resourceType)||"tablecolumns".equals(resourceType)) {
             fileParse = new MapResourceParse(fileParse);
         }  else {
             throw new IllegalArgumentException("不支持的文件名：" + resourceType);

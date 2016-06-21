@@ -15,7 +15,7 @@
     "class":"btn btn-info",
     "i":"fa fa-plus",
     "text":"新增",
-    "function":""
+    "function":"add"
   },
   "delete":{
     "i":"fa fa-minus",

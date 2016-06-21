@@ -12,13 +12,6 @@ import java.util.Map;
  * Created by longfei on 16-6-19.
  */
 public abstract class AbstractFFzlSqlFactory  implements FFzlSqlFactory {
-    private static Map<Class,FFzlSqlFactory> map = Maps.newConcurrentHashMap();
-    public static FFzlSqlFactory getInstance(Class clazz){
-        return map.get(clazz);
-    }
-    public static void register(Class clazz,FFzlSqlFactory fFzlSqlFactory){
-        map.put(clazz,fFzlSqlFactory);
-    }
     @Override
     public OperationEntry getSqlEntry(SqlEntry entry) {
         if(support(entry)){

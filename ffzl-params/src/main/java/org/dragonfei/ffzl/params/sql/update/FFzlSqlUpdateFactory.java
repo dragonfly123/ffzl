@@ -18,10 +18,17 @@ import org.dragonfei.ffzl.params.sql.update.operation.UpdateSqlOperation;
 public class FFzlSqlUpdateFactory extends AbstractFFzlSqlFactory {
 
     private FFzlSqlUpdateFactory(){}
+    private static FFzlSqlUpdateFactory fFzlSqlUpdateFactory;
 
-    static {
-        register(FFzlSqlQueryFactory.class,new FFzlSqlUpdateFactory());
+    public static FFzlSqlUpdateFactory getInstance(){
+        if (fFzlSqlUpdateFactory == null){
+            synchronized (FFzlSqlUpdateFactory.class){
+                fFzlSqlUpdateFactory = new FFzlSqlUpdateFactory();
+            }
+        }
+        return fFzlSqlUpdateFactory;
     }
+
     @Override
     protected boolean support(SqlEntry entry) {
         return entry instanceof UpdateSqlEntry;

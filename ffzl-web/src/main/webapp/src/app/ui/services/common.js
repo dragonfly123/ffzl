@@ -73,5 +73,9 @@ define(["require"],function (require) {
                 getOptions:getOptions
             }
         }]);
+        
+        ui.service("commonfunction",[function () {
+            
+        }]);
     });
 })

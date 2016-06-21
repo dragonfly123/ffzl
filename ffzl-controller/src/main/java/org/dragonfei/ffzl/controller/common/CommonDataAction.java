@@ -76,6 +76,18 @@ public class CommonDataAction {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping("table")
+    public Map<String,?> tablecolumns(@RequestParam Map<String,String> map){
+        ParamWrap pw  =  ParamUtils.buildParams(map);
+        ServiceResource sr = ServiceResource.getServiceResource(pw.getFullservicename(),"servicemap", StringUtils.BLANK);
+        Map<String,?> serviceMap = sr.getResourceMap(pw.getServicename());
+        String table = (String)serviceMap.get("table");
+        String namespace = (String)serviceMap.get("namespace");
+        ServiceResource tablesResource = ServiceResource.getServiceResource(namespace,"tablecolumns");
+        return tablesResource.getResourceMap(table);
+    }
+
     private void parseButton(List<Map<String,?>> list,ParamWrap pw){
         if(!ObjectUtils.isEmpty(list)){
             Iterator<Map<String,?>> iterator = list.iterator();
