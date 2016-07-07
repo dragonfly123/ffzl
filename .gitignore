@@ -2,3 +2,6 @@
 *.impl
 .idea/*
 ffzl-web/target
+ffzl-netty/target
+ffzl-params/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile
+ffzl-params/target/surefire-reports
