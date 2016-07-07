@@ -1,0 +1,389 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://dragonfei.org/http/httpxml/pojo/Order" targetNamespace="http://dragonfei.org/http/httpxml/pojo/Order">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://dragonfei.org/http/httpxml/pojo/Order" xmlns:ns1="http://dragonfei.org/http/httpxml/pojo" elementFormDefault="qualified" targetNamespace="http://dragonfei.org/http/httpxml/pojo/Order">
+      <xs:import namespace="http://dragonfei.org/http/httpxml/pojo" schemaLocation="pojo.xsd"/>
+      <xs:element name="getOrderNumber">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getOrderNumberResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:long" name="return"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setOrderNumber">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:long" name="orderNumber"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setOrderNumberResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCustomer">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:customer" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setCustomer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:customer" name="customer" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setCustomerResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAddress">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAddressResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:address" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:address" name="address" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setAddressResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getShipping">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getShippingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:shipping" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setShipping">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:shipping" name="shipping" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setShippingResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getShipT0">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getShipT0Response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:address" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setShipT0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="ns1:address" name="shipT0" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setShipT0Response">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTotal">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTotalResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:float" name="return" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTotal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element type="xs:float" name="total" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTotalResponse">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getOrderNumberMessage">
+    <wsdl:part name="part" element="tns:getOrderNumber"/>
+  </wsdl:message>
+  <wsdl:message name="getOrderNumberResponseMessage">
+    <wsdl:part name="part" element="tns:getOrderNumberResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setOrderNumberMessage">
+    <wsdl:part name="part" element="tns:setOrderNumber"/>
+  </wsdl:message>
+  <wsdl:message name="setOrderNumberResponseMessage">
+    <wsdl:part name="part" element="tns:setOrderNumberResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCustomerMessage">
+    <wsdl:part name="part" element="tns:getCustomer"/>
+  </wsdl:message>
+  <wsdl:message name="getCustomerResponseMessage">
+    <wsdl:part name="part" element="tns:getCustomerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setCustomerMessage">
+    <wsdl:part name="part" element="tns:setCustomer"/>
+  </wsdl:message>
+  <wsdl:message name="setCustomerResponseMessage">
+    <wsdl:part name="part" element="tns:setCustomerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getAddressMessage">
+    <wsdl:part name="part" element="tns:getAddress"/>
+  </wsdl:message>
+  <wsdl:message name="getAddressResponseMessage">
+    <wsdl:part name="part" element="tns:getAddressResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setAddressMessage">
+    <wsdl:part name="part" element="tns:setAddress"/>
+  </wsdl:message>
+  <wsdl:message name="setAddressResponseMessage">
+    <wsdl:part name="part" element="tns:setAddressResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getShippingMessage">
+    <wsdl:part name="part" element="tns:getShipping"/>
+  </wsdl:message>
+  <wsdl:message name="getShippingResponseMessage">
+    <wsdl:part name="part" element="tns:getShippingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setShippingMessage">
+    <wsdl:part name="part" element="tns:setShipping"/>
+  </wsdl:message>
+  <wsdl:message name="setShippingResponseMessage">
+    <wsdl:part name="part" element="tns:setShippingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getShipT0Message">
+    <wsdl:part name="part" element="tns:getShipT0"/>
+  </wsdl:message>
+  <wsdl:message name="getShipT0ResponseMessage">
+    <wsdl:part name="part" element="tns:getShipT0Response"/>
+  </wsdl:message>
+  <wsdl:message name="setShipT0Message">
+    <wsdl:part name="part" element="tns:setShipT0"/>
+  </wsdl:message>
+  <wsdl:message name="setShipT0ResponseMessage">
+    <wsdl:part name="part" element="tns:setShipT0Response"/>
+  </wsdl:message>
+  <wsdl:message name="getTotalMessage">
+    <wsdl:part name="part" element="tns:getTotal"/>
+  </wsdl:message>
+  <wsdl:message name="getTotalResponseMessage">
+    <wsdl:part name="part" element="tns:getTotalResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setTotalMessage">
+    <wsdl:part name="part" element="tns:setTotal"/>
+  </wsdl:message>
+  <wsdl:message name="setTotalResponseMessage">
+    <wsdl:part name="part" element="tns:setTotalResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="OrderPortType">
+    <wsdl:operation name="getOrderNumber">
+      <wsdl:input message="tns:getOrderNumberMessage"/>
+      <wsdl:output message="tns:getOrderNumberResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setOrderNumber">
+      <wsdl:input message="tns:setOrderNumberMessage"/>
+      <wsdl:output message="tns:setOrderNumberResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomer">
+      <wsdl:input message="tns:getCustomerMessage"/>
+      <wsdl:output message="tns:getCustomerResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setCustomer">
+      <wsdl:input message="tns:setCustomerMessage"/>
+      <wsdl:output message="tns:setCustomerResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getAddress">
+      <wsdl:input message="tns:getAddressMessage"/>
+      <wsdl:output message="tns:getAddressResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setAddress">
+      <wsdl:input message="tns:setAddressMessage"/>
+      <wsdl:output message="tns:setAddressResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getShipping">
+      <wsdl:input message="tns:getShippingMessage"/>
+      <wsdl:output message="tns:getShippingResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setShipping">
+      <wsdl:input message="tns:setShippingMessage"/>
+      <wsdl:output message="tns:setShippingResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getShipT0">
+      <wsdl:input message="tns:getShipT0Message"/>
+      <wsdl:output message="tns:getShipT0ResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setShipT0">
+      <wsdl:input message="tns:setShipT0Message"/>
+      <wsdl:output message="tns:setShipT0ResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="getTotal">
+      <wsdl:input message="tns:getTotalMessage"/>
+      <wsdl:output message="tns:getTotalResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="setTotal">
+      <wsdl:input message="tns:setTotalMessage"/>
+      <wsdl:output message="tns:setTotalResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderBinding" type="tns:OrderPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getOrderNumber">
+      <soap:operation soapAction="urn:getOrderNumber"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setOrderNumber">
+      <soap:operation soapAction="urn:setOrderNumber"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomer">
+      <soap:operation soapAction="urn:getCustomer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCustomer">
+      <soap:operation soapAction="urn:setCustomer"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAddress">
+      <soap:operation soapAction="urn:getAddress"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setAddress">
+      <soap:operation soapAction="urn:setAddress"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getShipping">
+      <soap:operation soapAction="urn:getShipping"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setShipping">
+      <soap:operation soapAction="urn:setShipping"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getShipT0">
+      <soap:operation soapAction="urn:getShipT0"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setShipT0">
+      <soap:operation soapAction="urn:setShipT0"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTotal">
+      <soap:operation soapAction="urn:getTotal"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTotal">
+      <soap:operation soapAction="urn:setTotal"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Order">
+    <wsdl:port name="OrderPort" binding="tns:OrderBinding">
+      <soap:address location="http://localhost:8080/axis2/services/Order"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

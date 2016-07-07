@@ -1,0 +1,21 @@
+<binding xmlns:ns2="http://dragonfei.org/http/httpxml/pojo" name="binding" package="org.dragonfei.http.httpxml.pojo" force-classes="true" add-constructors="true">
+  <namespace uri="http://dragonfei.org/http/httpxml/pojo" default="elements"/>
+  <namespace uri="http://dragonfei.org/http/httpxml/pojo/Order" prefix="ns1"/>
+  <mapping abstract="true" type-name="ns2:customer" class="org.dragonfei.http.httpxml.pojo.Customer">
+    <value style="attribute" name="customerNumber" field="customerNumber"/>
+    <value style="element" name="firstName" field="firstName" usage="optional"/>
+    <value style="element" name="lastName" field="lastName" usage="optional"/>
+    <collection field="middleNames" usage="optional" create-type="java.util.ArrayList">
+      <value name="middleName" type="java.lang.String"/>
+    </collection>
+  </mapping>
+  <mapping abstract="true" type-name="ns2:address" class="org.dragonfei.http.httpxml.pojo.Address">
+    <value style="element" name="street1" field="street1" usage="optional"/>
+    <value style="element" name="street2" field="street2" usage="optional"/>
+    <value style="element" name="city" field="city" usage="optional"/>
+    <value style="element" name="state" field="state" usage="optional"/>
+    <value style="element" name="postcode" field="postcode" usage="optional"/>
+    <value style="element" name="country" field="country" usage="optional"/>
+  </mapping>
+  <mapping abstract="true" type-name="ns2:shipping" class="org.dragonfei.http.httpxml.pojo.Shipping"/>
+</binding>

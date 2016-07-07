@@ -1,0 +1,23 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://dragonfei.org/http/httpxml/pojo" elementFormDefault="qualified" targetNamespace="http://dragonfei.org/http/httpxml/pojo">
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element type="xs:string" name="street1" minOccurs="0"/>
+      <xs:element type="xs:string" name="street2" minOccurs="0"/>
+      <xs:element type="xs:string" name="city" minOccurs="0"/>
+      <xs:element type="xs:string" name="state" minOccurs="0"/>
+      <xs:element type="xs:string" name="postcode" minOccurs="0"/>
+      <xs:element type="xs:string" name="country" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="shipping">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="customer">
+    <xs:sequence>
+      <xs:element type="xs:string" name="firstName" minOccurs="0"/>
+      <xs:element type="xs:string" name="lastName" minOccurs="0"/>
+      <xs:element type="xs:string" name="middleName" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute type="xs:long" use="required" name="customerNumber"/>
+  </xs:complexType>
+</xs:schema>
