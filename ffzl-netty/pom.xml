@@ -23,6 +23,7 @@
             <artifactId>netty-all</artifactId>
             <version>5.0.0.Alpha2</version>
         </dependency>
+
         <dependency>
             <groupId>org.msgpack</groupId>
             <artifactId>msgpack</artifactId>
@@ -35,4 +36,43 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>org.dragonfei.netty2.echo.EchoServer</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jibx</groupId>
+                <artifactId>maven-jibx-plugin</artifactId>
+                <version>1.2.6</version>
+                <executions>
+                    <execution>
+                        <id>jibx-2-wsdl</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>jibx2wsdl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <interfaceClassNames>
+                        <interfaceClassName>org.dragonfei.http.httpxml.pojo.Order</interfaceClassName>
+                    </interfaceClassNames>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
