@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <properties>
+        <property name="logPath">/usr/local/share/tomcat/logs/</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1.}:%L - %msg%n%throwable{100}" />
+            <!-- <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" /> -->
+            <!-- <PatternLayout pattern="%-d [%t] %-5p %c{1}:%L - %m%n" /> -->
+        </Console>
+
+        <!-- <File name="LogFile" filename="${sys:catalina.home}/logs/automation.log">
+        <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+          </File> -->
+
+        <RollingFile name="RollingFile" filename="${logPath}/ffzl.log"
+                     filepattern="${logPath}/%d{yyyyMMddHHmmss}-ffzl.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1.}:%L - %msg%n%n%throwable{2}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+        <RollingFile name="errorFile" fileName="${logPath}/ffzl.error.log"
+                     filePattern="${logPath}/%d{yyyyMMddHHmmss}-ffzl.error.log">
+            <BurstFilter level="error" rate="16" maxBurst="100"/>
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c{1.}:%L - %msg%n%throwable{20} </pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="errorFile"/>
+            <!-- <AppenderRef ref="LogFile" /> -->
+            <AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>
