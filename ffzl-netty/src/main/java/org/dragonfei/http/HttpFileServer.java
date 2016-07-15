@@ -32,8 +32,7 @@ public class HttpFileServer {
                     ch.pipeline().addLast("http-decoder",new HttpRequestDecoder());
                     ch.pipeline().addLast("http-aggregator",new HttpObjectAggregator(65536));
                     ch.pipeline().addLast("http-encoder",new HttpResponseEncoder());
-                    ch.pipeline().addLast("http-chunked",new ChunkedWriteHandler());
-                    /*ch.pipeline().addLast("fileServerHandler",new HttpFileServerHandler(url));*/
+                    ch.pipeline().addLast("fileServerHandler",new HttpFileServerHandler());
                 }
             });
             ChannelFuture future = b.bind(port).sync();
