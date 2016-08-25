@@ -56,7 +56,7 @@ public class ServiceResource {
             await();
         }
         if(!ObjectUtils.isEmpty(resources) && ObjectUtils.isEmpty(serviceMap)) {
-            resources.forEach(resource -> ex.submit(() -> {
+           /* resources.forEach(resource -> ex.submit(() -> {
                 try {
                     InputStream inputStream = resource.getInputStream();
                     serviceMap.putAll(fileParse.parse(CharStreams.toString(new InputStreamReader(inputStream,UTF_8))));
@@ -64,7 +64,7 @@ public class ServiceResource {
                 } catch (IOException e) {
                     Throwables.propagate(e);
                 }
-            }));
+            }));*/
             await();
         }
     }
